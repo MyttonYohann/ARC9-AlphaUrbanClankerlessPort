@@ -199,16 +199,28 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_barrel_2")
 ----------------------------------------------------------------------------------
 ATT = {}
 
-ATT.PrintName = [[Skeleton Key]]
+ATT.PrintName = [[14\" M4 Super 90 Entry Barrel]]
 ATT.CompactName = [[B. Skeleton]]
 ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
-ATT.Description = [[
+ATT.Description = [[Short barrel intended for breaching and close quarters use. Drastically increases pellet spread, but is much easier to manuver.
 ]]
 
 ATT.SortOrder = 3
 ATT.Category = "ucalpha_1014_barrel"
 ATT.ActivateElements = {"b_3"}
 ATT.ExcludeElements = {"m_2", "m_3"}
+
+ATT.SpreadMult = 1.5
+ATT.RecoilMult = 1.25
+ATT.RangeMinMult = 0.8
+ATT.RangeMaxMult = 0.8
+
+ATT.SwayMult = 0.75
+ATT.AimDownSightsTimeMult = 0.75
+ATT.SpeedMult = 1.025
+ATT.SpeedMultShooting = 1.15
+
+ATT.BarrelLengthAdd = -4
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_barrel_3")
 

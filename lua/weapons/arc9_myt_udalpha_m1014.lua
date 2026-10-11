@@ -3,15 +3,15 @@ AddCSLuaFile()
 SWEP.Base = "arc9_base"
 
 SWEP.Spawnable = true
-SWEP.Category = "ARC9 - Urban Excavation"
-SWEP.SubCategory = "1DickGay"
+SWEP.Category = "ARC9 - Urban Redevelopment"
+--SWEP.SubCategory = "1DickGay"
 
 SWEP.PrintName = "Mozzarella"
 SWEP.TrueName = "M4 Super 90"
 
 SWEP.Class = "Shotgun"
 SWEP.Trivia = {
-	["Country of Origin"] = [[Amerika]],
+	["Country of Origin"] = [[Who the fuck read these]],
 	["Calibre"] = "12 Gauge",
 }
 
