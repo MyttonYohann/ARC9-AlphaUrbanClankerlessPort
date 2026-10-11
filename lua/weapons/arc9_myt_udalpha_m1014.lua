@@ -1,0 +1,583 @@
+AddCSLuaFile()
+
+SWEP.Base = "arc9_base"
+
+SWEP.Spawnable = true
+SWEP.Category = "ARC9 - Urban Excavation"
+SWEP.SubCategory = "1DickGay"
+
+SWEP.PrintName = "Mozzarella"
+SWEP.TrueName = "M4 Super 90"
+
+SWEP.Class = "Shotgun"
+SWEP.Trivia = {
+	["Country of Origin"] = [[Amerika]],
+	["Calibre"] = "12 Gauge",
+}
+
+SWEP.Credits = {
+}
+
+SWEP.Description = [[Semi-automatic shotgun designed for close-quarters urban warfare. Uses an innovative short-stroke gas system that eliminates complex mechanisms found on most gas-operated automatic weapons. Its main use is in destroying locked doors.".]]
+
+SWEP.ViewModel = "models/weapons/arc9/myt_uc/c_m1014.mdl"
+SWEP.WorldModel = "models/weapons/arc9/myt_uc/c_m1014.mdl"
+
+SWEP.Slot = 2
+
+SWEP.MirrorVMWM = true
+SWEP.WorldModelMirror = "models/weapons/arc9/myt_uc/c_m1014.mdl"
+SWEP.WorldModelOffset = {
+	Pos = Vector(0, 0, 0),
+	Ang = Angle(0, 0, 0),
+	TPIKPos = Vector(-7, 4, -5.8),
+	TPIKAng = Angle(-6, 0, 180),
+	TPIKPosSightOffset = Vector(1, 1, -2),
+	TPIKPosReloadOffset = Vector(5, 0, 0),
+	TPIKAngReloadOffset = Angle(0, 0, 0),
+
+	TPIKPosAlternative = Vector(-16, 4, 1.5),
+	Scale = 1
+}
+SWEP.MirrorVMWMHeldOnly = false
+
+-------------------------- DAMAGE PROFILE
+
+SWEP.DamageMax = 20 -- 5 pellets to kill
+SWEP.DamageMin = 10 -- land 10 pellets to kill
+
+SWEP.RangeMin = 4
+SWEP.RangeMax = 40
+
+SWEP.Penetration = 1 -- Units of wood that can be penetrated by this gun.
+
+-------------------------- PHYS BULLET BALLISTICS
+
+SWEP.PhysBulletMuzzleVelocity = 200
+
+-------------------------- MAGAZINE
+
+SWEP.Ammo = "buckshot" -- What ammo type this gun uses.
+
+SWEP.ChamberSize = 1 -- The amount of rounds this gun can chamber.
+SWEP.ClipSize = 6 -- Self-explanatory.
+SWEP.SupplyLimit = 3 -- Amount of magazines of ammo this gun can take from an ARC9 supply crate.
+SWEP.SecondarySupplyLimit = 2 -- Amount of reserve UBGL magazines you can take.
+
+SWEP.ReloadInSights = false -- This weapon can aim down sights while reloading.
+
+SWEP.ShotgunReload = true
+SWEP.ManualAction = false
+SWEP.ManualActionNoLastCycle = true
+SWEP.CanReloadWhileUnCycled = true
+
+-------------------------- FIREMODES
+SWEP.Num = 8
+SWEP.RPM = 500
+
+-- Works different to ArcCW
+
+-- -1: Automatic
+-- 0: Safe. Don't use this for safety.
+-- 1: Semi.
+-- 2: Two-round burst.
+-- 3: Three-round burst.
+-- n: n-round burst.
+SWEP.Firemodes = {
+	{
+		Mode = 1,
+	},
+}
+
+-------------------------- RECOIL
+
+SWEP.RecoilPatternDrift = 5
+
+-- General recoil multiplier
+SWEP.Recoil = 4
+
+-- These multipliers affect the predictible recoil by making the pattern taller, shorter, wider, or thinner.
+SWEP.RecoilUp = 1 -- Multiplier for vertical recoil
+SWEP.RecoilSide = 0.25 -- Multiplier for vertical recoil
+
+SWEP.RecoilPerShot = 0.24
+
+-------------------------- SPREAD
+
+SWEP.Spread = 1/30
+
+SWEP.SpreadAddRecoil = 0.005 -- Applied per unit of recoil.
+SWEP.RecoilModifierCap = 10
+
+SWEP.SpreadAddMove = 1/70
+SWEP.SpreadAddMidAir = 1/970
+SWEP.SpreadMultHipFire = 100/30
+SWEP.SpreadMultCrouch = 0.5
+
+SWEP.SpreadMultSights = 1
+SWEP.RecoilModifierCapSights = 2.5
+SWEP.RecoilModifierCapCrouch = 5
+
+-------------------------- HANDLING
+
+SWEP.FreeAimRadius = 6
+SWEP.FreeAimRadiusSights = 3
+SWEP.Sway = 1
+
+SWEP.SwayMultMidAir = 2
+SWEP.SwayAddMove = 0.5
+SWEP.SwayMultMove = 1
+SWEP.SwayMultCrouch = 0.5
+SWEP.SwayMultShooting = 1.5
+SWEP.SwayMultSights = 0.25
+
+SWEP.SwayMultSights = 0.4
+
+SWEP.AimDownSightsTime = 0.6
+SWEP.SprintToFireTime = 0.5
+
+SWEP.SpeedMult = 1
+SWEP.SpeedMultSights = 0.75
+SWEP.SpeedMultShooting = 0.6
+SWEP.SpeedMultMelee = 0.75
+SWEP.SpeedMultCrouch = 1
+
+-------------------------- MELEE
+
+SWEP.Bash = false
+SWEP.PrimaryBash = false
+
+SWEP.BashDamage = 100
+SWEP.BashLungeRange = 0
+SWEP.BashRange = 128
+SWEP.PreBashTime = 0.15
+SWEP.PostBashTime = 0.8
+SWEP.BashWhileSprint = true
+
+-------------------------- TRACERS
+
+SWEP.TracerNum = 1 -- Tracer every X
+SWEP.TracerColor = Color(255, 225, 200) -- Color of tracers. Only works if tracer effect supports it. For physical bullets, this is compressed down to 9-bit color.
+
+-------------------------- POSITIONS
+
+SWEP.IronSights = {
+	Pos = Vector(-2.72, -4, 1.25),
+	Ang = Angle(0,-0.25,0),
+	Midpoint = { -- Where the gun should be at the middle of it's irons
+		Pos = Vector(0, 15, -4),
+		Ang = Angle(0, 0, -45),
+	},
+	Magnification = 1.1,
+	CrosshairInSights = false
+}
+
+SWEP.Crosshair = true
+SWEP.PeekPos = Vector(1.5, -1, -1.5)
+SWEP.PeekAng = Angle(0, 0, -10)
+
+SWEP.BipodPos = Vector(-2.58, 0, 1)
+SWEP.BipodAng = Angle(0, 0, -5)
+
+SWEP.SprintAng = Angle(40, -15, -15)
+SWEP.SprintPos = Vector(3, 2, 0)
+
+SWEP.ViewModelFOVBase = 70
+SWEP.ActivePos = Vector(0, 0, 0)
+SWEP.ActiveAng = Angle(0, 0, 0)
+
+SWEP.CrouchPos = Vector(-0.2, -0.5, -1.5)
+SWEP.CrouchAng = Angle(0, 0, -7)
+
+SWEP.CustomizeAng = Angle(90, 0, 0)
+SWEP.CustomizePos = Vector(14, 45, 8)
+SWEP.CustomizeSnapshotFOV = 110
+SWEP.CustomizeNoRotate = false
+
+SWEP.CustomizeRotateAnchor = Vector(10.5, -2.55, -2.23)
+
+SWEP.StandardPresets = {
+}
+
+-------------------------- HoldTypes
+
+SWEP.HoldType = "shotgun"
+SWEP.HoldTypeSprint = "passive"
+SWEP.HoldTypeHolstered = "passive"
+SWEP.HoldTypeSights = "ar2"
+SWEP.HoldTypeCustomize = "slam"
+SWEP.HoldTypeBlindfire = "pistol"
+
+SWEP.AnimShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_AR2
+SWEP.AnimReload = false
+SWEP.AnimDraw = false
+SWEP.BarrelLength = 52
+-------------------------- EFFECTS
+
+SWEP.MuzzleParticle = "muzzleflash_shotgun"
+SWEP.MuzzleEffectQCA = 1
+
+SWEP.ShellModel = "models/weapons/shotgun_shell.mdl"
+SWEP.ShellCorrectAng = Angle(0, 0, 0)
+SWEP.ShellScale = 0.5
+SWEP.ShellPhysBox = Vector(0.5, 0.5, 2)
+SWEP.NoShellEject = true
+SWEP.NoShellEjectManualAction = true
+
+-------------------------- SOUNDS
+
+local path1 = "arc9_ucalpha/870/"
+local path = "arc9_ucalpha/m1014/"
+local common = "arc9_ucalpha/common/"
+SWEP.ShootSound = path .. "fire.ogg"
+SWEP.ShootSoundSilenced = path .. "fire_supp.ogg"
+SWEP.DistantShootSound = path .. "fire_dist.ogg"
+SWEP.DryFireSound = "weapons/clipempty_rifle.wav"
+
+SWEP.FiremodeSound = "arc9/firemode.ogg"
+
+SWEP.Animations = {
+	["idle"] = {
+		Source = "idle",
+	},
+	["idle_empty"] = {
+		Source = "idle_empty",
+	},
+	["draw"] = {
+		Source = "draw",
+		Time = 20 / 30,
+	},
+	["draw_empty"] = {
+		Source = "draw_empty",
+		Time = 20 / 30,
+	},
+	["holster"] = {
+		Source = "holster",
+		Time = 20 / 30,
+	},
+	["holster_empty"] = {
+		Source = "holster_empty",
+		Time = 20 / 30,
+	},
+	["fire"] = {
+		Source = "fire",
+		Time = 23 / 30,
+		ShellEjectAt = 0.01,
+		EventTable = {
+			{s = path .. "mech.ogg", t = 0}, -- Not temporary
+			{s = path1 .. "eject.ogg", t = 0}, -- Not temporary
+		},
+	},
+	["fire_empty"] = {
+		Source = "fire_empty",
+		Time = 23 / 30,
+		ShellEjectAt = 0.01,
+		EventTable = {
+			{s = path .. "mech_last.ogg", t = 0}, -- Not temporary
+			{s = path1 .. "eject.ogg", t = 0}, -- Not temporary
+		},
+	},
+	["cycle"] = {
+		Source = {"cycle"},
+		IKTimeLine = { { t = 0, lhik = 1, rhik = 0, }, { t = 1, lhik = 1, rhik = 0, }, },
+        EventTable = {
+            {s = common .. "cloth_3.ogg",  t = 0},
+            {s = path1 .. "rack_1.ogg",  t = 0},
+            {s = path1 .. "eject.ogg",  t = 0.075},
+            {s = path1 .. "rack_2.ogg",  t = 0.2},
+        },
+		EjectAt = 8 / 40,
+		FireASAP = true,
+		MinProgress = 24/40,
+	},  
+
+	["reload_start_empty"] = {
+		Source = "reload_1_emp",
+		IKTimeLine = { { t = 0, lhik = 1, rhik = 0, }, { t = 1, lhik = 1, rhik = 0, }, },
+		EventTable = {   
+            {s = common .. "cloth_2.ogg",  t = 0},
+            {s = path .. "breechload.ogg",  t = 20/30},
+            {s = path .. "breechclose.ogg",  t = 36/30},
+		},
+		RestoreAmmo = 1,
+		RefillProgress = 35/40,
+		MinProgress = 35/40,
+		MagSwapTime = 35/40,
+	},  
+	["reload_start_emp"] = {
+		Source = "reload_1pump_emp",
+		IKTimeLine = { { t = 0, lhik = 1, rhik = 0, }, { t = 1, lhik = 1, rhik = 0, }, },
+		EventTable = {   
+            {s = common .. "cloth_2.ogg",  t = 0},
+            {s = path1 .. "rack_1.ogg",  t = 9/30},
+            {s = path1 .. "eject.ogg",  t = 12/30},
+            {s = path1 .. "rack_2.ogg",  t = 15/30},
+            {s = common .. "shotgun_insert_3.ogg",  t = 36/30},
+		},
+		RestoreAmmo = 1,
+		ShellEjectAt = 12/30,
+	},  
+
+	["reload_start"] = {
+		Source = "reload_1",
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.3, lhik = 0, rhik = 0, },{ t = 1, lhik = 0, rhik = 0, },
+		},
+		EventTable = {   
+            {s = common .. "cloth_2.ogg",  t = 0},
+            {s = common .. "shotgun_insert_3.ogg",  t = 25/30},
+		},
+		RestoreAmmo = 1,
+		RefillProgress = 35/40,
+		MinProgress = 35/40,
+	},   
+	["reload_insert"] = {
+		Source = "reload_2",
+		IKTimeLine = { { t = 0, lhik = 0, rhik = 0, },{ t = 1, lhik = 0, rhik = 0, },  },
+		EventTable = { 
+            {s = common .. "shotgun_insert_3.ogg",  t = 18/30},
+            {s = common .. "cloth_4.ogg",  t = 0},
+		},
+		RefillProgress = 32 / 40,
+	},
+	["reload_insert_emp"] = {
+		Source = "reload_2pump_end",
+		IKTimeLine = { { t = 0, lhik = 0, rhik = 0, },{ t = 1, lhik = 0, rhik = 0, },  },
+		EventTable = { 
+            {s = path1 .. "rack_1.ogg",  t = 6/30},
+            {s = path1 .. "eject.ogg",  t = 9/30},
+            {s = path1 .. "rack_2.ogg",  t = 12/30},
+            {s = common .. "shotgun_insert_3.ogg",  t = 34/30},
+            {s = common .. "cloth_4.ogg",  t = 0},
+		},
+		ShellEjectAt = 9/30,
+		RefillProgress = 32 / 40,
+	},
+	["reload_emptoloop"] = {
+		Source = {"reload_2_emp"},
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.4, lhik = 1, rhik = 0, }, { t = 0.6, lhik = 0, rhik = 0, },{ t = 1, lhik = 0, rhik = 0, },
+		},
+		EventTable = { 
+            {s = common .. "shotgun_insert_3.ogg",  t = 18/30},
+            {s = common .. "cloth_4.ogg",  t = 0},
+		},
+		RestoreAmmo = 0, -- WHO FUCKING BROKE THIS, insert is now consider 1 + RestoreAmmo
+		RefillProgress = 60/40,
+	},
+	["reload_finish"] = {
+		Source = "reload_3",
+		IKTimeLine = {
+		{ t = 0, lhik = 0, rhik = 0, },
+		{ t = 0.3, lhik = 0, rhik = 0, }, { t = 0.9, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 0, },
+		},
+		EventTable = {
+            {s = common .. "shoulder.ogg",  t = 0.4},
+		},
+		FireASAP = true,
+		MinProgress = 24/40, 
+		RefillProgress = 24/40,
+	},  
+	["reload_finish_empty"] = {
+		Source = "reload_3pump",
+		IKTimeLine = {
+		{ t = 0, lhik = 0, rhik = 0, },
+		{ t = 0.3, lhik = 0, rhik = 0, }, { t = 0.9, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 0, },
+		},
+		EventTable = {
+            {s = path1 .. "rack_1.ogg",  t = 6/30},
+            {s = path1 .. "eject.ogg",  t = 9/30},
+            {s = path1 .. "rack_2.ogg",  t = 12/30},
+            {s = common .. "shoulder.ogg",  t = 0.6},
+		},
+		FireASAP = true,
+		MinProgress = 24/40, 
+		RefillProgress = 24/40,
+	},  
+	["reload_end_empty"] = {
+		Source = "reload_3_emp",
+		IKTimeLine = {  { t = 0, lhik = 1, rhik = 0, }, { t = 1, lhik = 1, rhik = 0, },},
+		EventTable = {
+            {s = common .. "shoulder.ogg",  t = 0.4},
+		},
+		FireASAP = true,
+		MinProgress = 32/40,
+	},  
+}
+
+SWEP.Bodge_Cycle = 0
+SWEP.Bodge_Reload = 0
+SWEP.Hook_Think = function(wep) 
+	-- for reloading when the gun is not chambered (uncycled, holding down the attack button)
+	if wep.Bodge_Cycle == 1 then
+		-- uncycled state kinda disables the whole primary attack function so i cant use Hook_PrimaryAttack
+		if wep:GetOwner():KeyPressed(IN_ATTACK) then
+			wep:SetNeedsCycle(false)
+		end
+	end
+end
+
+SWEP.Hook_BlockAnimation = function(wep, curanim)
+	if wep.Bodge_Cycle == 1 then
+		if	curanim == "cycle"	then return true end
+	end	
+end
+SWEP.Hook_TranslateAnimation = function(wep, curanim)
+	if !wep:GetUBGL() then -- only checking the gun not the off hand
+	
+	-- unclyced state
+	if wep:Clip1() == 0 then
+		if	curanim == "reload_start" or "reload_start_empty" then wep.Bodge_Reload = 1	end
+	end
+	if wep:Clip1() != 0 then
+		if	curanim == "reload_start" 	then wep.Bodge_Reload = 0	end
+	end
+	if wep:GetNeedsCycle() then
+		if	curanim == "reload_start" 	then 
+			wep.Bodge_Cycle = 1
+			wep.Bodge_Reload = 1
+		end
+	end
+	-- normal state
+	if (!wep:GetNeedsCycle() and curanim == "reload_start") or curanim == "fire" then
+		wep.Bodge_Cycle = 0
+	end
+	-- use empty reload finish IF gun is EITHER uncycled OR starts at 0 but does not ends at 5
+	if wep.Bodge_Cycle == 1 or wep.Bodge_Reload == 1 then
+		if	wep:Clip1() == wep:GetValue("ClipSize") then
+			if curanim == "reload_insert" 	then 	return "reload_insert_emp"	end	
+			if curanim == "reload_start" 	then 	return "reload_start_emp"		end	
+		end
+		if wep:HasElement("is_pumpaction") and wep:Clip1() < wep:GetValue("ClipSize") + wep:GetValue("ChamberSize")  then
+			if	curanim == "reload_finish" then	return "reload_finish_empty"	end
+		end
+	end
+
+	-- extended anim transition
+	if	wep:Clip1() == 1 and !wep:HasElement("is_pumpaction") then
+		if curanim == "reload_finish"		then return "reload_end_empty"	end	
+		if curanim == "reload_insert" 		then return "reload_emptoloop"	end	
+	end
+	
+	if wep:HasElement("is_pumpaction") then
+		if curanim == "reload_start_empty" then return "reload_start" end	
+	end
+	
+	end
+end
+
+-------------------------- ATTACHMENTS
+
+SWEP.DefaultBodygroups = "00000000000000"
+
+SWEP.AttachmentElements = {
+	["fe_pump1"] = 	{ Bodygroups = { {4, 1}, },},   
+	["fe_pump2"] = 	{ Bodygroups = { {4, 2}, },},   
+	["s_1"] = 	{ Bodygroups = { {3, 2}, },},   
+	["s_2"] = 	{ Bodygroups = { {3, 3}, },},   
+	["s_3"] = 	{ Bodygroups = { {3, 4}, },},   
+	["m_1"] = 	{ Bodygroups = { {2, 3}, },},   
+	["m_2"] = 	{ Bodygroups = { {2, 2}, },},   
+	["m_3"] = 	{ Bodygroups = { {2, 1}, },},   
+}
+ 
+SWEP.Attachments = {
+	{
+		PrintName = "Optic",
+		DefaultName = "None",
+		InstalledElements = {"rail_def", "has_optic"},
+
+		DefaultIcon = Material("arc9/def_att_icons/optic.png"),
+		Category = {"optic_css"},
+		Bone = "1014_parent",
+		Pos = Vector(0, -2, 5),
+		Ang = Angle(90, 2, -90),
+		MergeSlots = {9},
+	},
+	{
+		PrintName = "Barrel",
+		DefaultName = "Standard Barrel",
+
+		Category = "ucalpha_1014_barrel",
+		Bone = "1014_parent",
+		Pos = Vector(0, -0.5, 7),
+		Ang = Angle(90, 0, -90),
+	},
+	{
+		PrintName = "Muzzle",
+		DefaultName = "None",
+
+		DefaultIcon = Material("arc9/def_att_icons/barrel.png"),
+		ExcludeElements = {"pre_muzzed"},
+		Category = {"muzzle_css"},
+		Bone = "1014_parent",
+		Pos = Vector(0, -1.4, 47),
+		Ang = Angle(90, 0, -90),
+	},
+	{
+		PrintName = "Forend",
+		DefaultName = "Standard Forend",
+
+		Category = "ucalpha_1014_pump",
+		Bone = "1014_parent",
+		Pos = Vector(0, 0, 9.5),
+		Ang = Angle(90, 0, -90),
+	},
+	{
+		PrintName = "Stock",
+		DefaultName = "Extended Stock",
+		InstalledElements = {"has_stock"},
+
+		Category = {"ucalpha_1014_stock"},
+		Bone = "1014_parent",
+		Pos = Vector(0, 2, -9),
+		Ang = Angle(90, 0, -90),
+	},
+	{
+		PrintName = "Tube Type",
+		DefaultName = "6-Shell Tube",
+
+		Category = {"ucalpha_1014_tube"},
+		Bone = "1014_parent",
+		Pos = Vector(0, 0.5, 14.5),
+		Ang = Angle(90, 0, -90),
+	},
+	{
+		PrintName = "Foregrip",
+		DefaultName = "None",
+		InstalledElements = {"fg_def"},
+
+		DefaultIcon = Material("arc9/def_att_icons/grip.png"),
+		ExcludeElements = {"nofg"},
+		Category = {"grip_css"},
+		Bone = "1014_parent",
+		Pos = Vector(0, 1.7, 9.5),
+		Ang = Angle(90, 0, -90),
+	},
+	{
+		PrintName = "Off Hand",
+		DefaultName = "None",
+
+		ExcludeElements = {"nooh", "rh_occupied"},
+		Category = {"bf1942_dc_offhand"},
+		Bone = "1014_parent",
+		Pos = Vector(-1, 3, -12),
+		Ang = Angle(90, 0, -90),
+	},
+
+
+	{   --9 dovetail
+		PrintName = "",
+		DefaultName = "",
+		Hidden = true,
+		InstalledElements = {"blank_toprail", "dovemount"},
+		ExcludeElements = {"no_dovetail"},
+		
+		Category = {"bfc_optic_dove"},
+		Bone = "1014_parent",
+		Pos = Vector(0.8, -1.2, 2),
+		Ang = Angle(90, 0, -90),
+	}, 
+}
