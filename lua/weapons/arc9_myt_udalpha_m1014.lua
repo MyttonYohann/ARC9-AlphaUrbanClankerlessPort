@@ -481,6 +481,9 @@ SWEP.AttachmentElements = {
 	["m_1"] = 	{ Bodygroups = { {2, 3}, },},   
 	["m_2"] = 	{ Bodygroups = { {2, 2}, },},   
 	["m_3"] = 	{ Bodygroups = { {2, 1}, },},   
+	["b_1"] = 	{ Bodygroups = { {1, 3}, },},   
+	["b_2"] = 	{ Bodygroups = { {2, 2}, },},   
+	["b_3"] = 	{ Bodygroups = { {1, 1}, },},   
 }
  
 SWEP.Attachments = {

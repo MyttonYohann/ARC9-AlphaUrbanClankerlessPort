@@ -145,3 +145,51 @@ ATT.ActivateElements = {"m_3"}
 ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_mag_3")
 
 ----------------------------------------------------------------------------------
+----------------
+-- Barrel --
+----------------
+ATT = {}
+
+ATT.PrintName = [[Heatguard]]
+ATT.CompactName = [[B. Heat]]
+ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 1
+ATT.Category = "ucalpha_1014_barrel"
+ATT.ActivateElements = {"b_1"}
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_barrel_1")
+
+----------------------------------------------------------------------------------
+ATT = {}
+
+ATT.PrintName = [[Competitor]]
+ATT.CompactName = [[B. Comp]]
+ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 2
+ATT.Category = "ucalpha_1014_barrel"
+ATT.ActivateElements = {"b_2"}
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_barrel_2")
+
+----------------------------------------------------------------------------------
+ATT = {}
+
+ATT.PrintName = [[Skeleton Key]]
+ATT.CompactName = [[B. Skeleton]]
+ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 3
+ATT.Category = "ucalpha_1014_barrel"
+ATT.ActivateElements = {"b_3"}
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_barrel_3")
+
+----------------------------------------------------------------------------------
