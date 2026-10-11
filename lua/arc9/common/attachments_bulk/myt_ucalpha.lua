@@ -102,13 +102,14 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_stock_spas")
 ----------------
 ATT = {}
 
-ATT.PrintName = [[8-Round Tube]]
-ATT.CompactName = [[M. 8]]
+ATT.PrintName = [[5-Round Tube]]
+ATT.CompactName = [[M. 5]]
 ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
 ATT.Description = [[
 ]]
 
-ATT.SortOrder = 8
+ATT.SortOrder = 5
+ATT.ClipSize = 5
 ATT.Category = "ucalpha_1014_tube"
 ATT.ActivateElements = {"m_1"}
 
@@ -117,13 +118,14 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_mag_1")
 ----------------------------------------------------------------------------------
 ATT = {}
 
-ATT.PrintName = [[5-Round Tube]]
-ATT.CompactName = [[M. 5]]
+ATT.PrintName = [[6-Round Tube]]
+ATT.CompactName = [[M. 6]]
 ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
 ATT.Description = [[
 ]]
 
-ATT.SortOrder = 5
+ATT.SortOrder = 6
+ATT.ClipSize = 6
 ATT.Category = "ucalpha_1014_tube"
 ATT.ActivateElements = {"m_2"}
 
@@ -132,13 +134,14 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_mag_2")
 ----------------------------------------------------------------------------------
 ATT = {}
 
-ATT.PrintName = [[4-Round Tube]]
-ATT.CompactName = [[M. 5]]
+ATT.PrintName = [[8-Round Tube]]
+ATT.CompactName = [[M. 8]]
 ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
 ATT.Description = [[
 ]]
 
-ATT.SortOrder = 4
+ATT.SortOrder = 8
+ATT.ClipSize = 8
 ATT.Category = "ucalpha_1014_tube"
 ATT.ActivateElements = {"m_3"}
 
@@ -189,6 +192,7 @@ ATT.Description = [[
 ATT.SortOrder = 3
 ATT.Category = "ucalpha_1014_barrel"
 ATT.ActivateElements = {"b_3"}
+ATT.ExcludeElements = {"m_2", "m_3"}
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_barrel_3")
 

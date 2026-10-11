@@ -60,7 +60,7 @@ SWEP.PhysBulletMuzzleVelocity = 200
 SWEP.Ammo = "buckshot" -- What ammo type this gun uses.
 
 SWEP.ChamberSize = 1 -- The amount of rounds this gun can chamber.
-SWEP.ClipSize = 6 -- Self-explanatory.
+SWEP.ClipSize = 4 -- Self-explanatory.
 SWEP.SupplyLimit = 3 -- Amount of magazines of ammo this gun can take from an ARC9 supply crate.
 SWEP.SecondarySupplyLimit = 2 -- Amount of reserve UBGL magazines you can take.
 
@@ -411,7 +411,7 @@ SWEP.Bodge_Cycle = 0
 SWEP.Bodge_Reload = 0
 SWEP.Hook_Think = function(wep) 
 	-- for reloading when the gun is not chambered (uncycled, holding down the attack button)
-	if wep.Bodge_Cycle == 1 then
+	if wep.Bodge_Cycle == 1 and !wep:GetUBGL() then
 		-- uncycled state kinda disables the whole primary attack function so i cant use Hook_PrimaryAttack
 		if wep:GetOwner():KeyPressed(IN_ATTACK) then
 			wep:SetNeedsCycle(false)
@@ -420,7 +420,7 @@ SWEP.Hook_Think = function(wep)
 end
 
 SWEP.Hook_BlockAnimation = function(wep, curanim)
-	if wep.Bodge_Cycle == 1 then
+	if wep.Bodge_Cycle == 1 and !wep:GetUBGL() then
 		if	curanim == "cycle"	then return true end
 	end	
 end
@@ -478,9 +478,9 @@ SWEP.AttachmentElements = {
 	["s_1"] = 	{ Bodygroups = { {3, 2}, },},   
 	["s_2"] = 	{ Bodygroups = { {3, 3}, },},   
 	["s_3"] = 	{ Bodygroups = { {3, 4}, },},   
-	["m_1"] = 	{ Bodygroups = { {2, 3}, },},   
+	["m_1"] = 	{ Bodygroups = { {2, 1}, },},   
 	["m_2"] = 	{ Bodygroups = { {2, 2}, },},   
-	["m_3"] = 	{ Bodygroups = { {2, 1}, },},   
+	["m_3"] = 	{ Bodygroups = { {2, 3}, },},   
 	["b_1"] = 	{ Bodygroups = { {1, 3}, },},   
 	["b_2"] = 	{ Bodygroups = { {2, 2}, },},   
 	["b_3"] = 	{ Bodygroups = { {1, 1}, },},   
@@ -540,7 +540,7 @@ SWEP.Attachments = {
 	},
 	{
 		PrintName = "Tube Type",
-		DefaultName = "6-Shell Tube",
+		DefaultName = "4-Shell Tube",
 
 		Category = {"ucalpha_1014_tube"},
 		Bone = "1014_parent",
