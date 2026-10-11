@@ -190,7 +190,7 @@ SWEP.CrouchPos = Vector(-0.2, -0.5, -1.5)
 SWEP.CrouchAng = Angle(0, 0, -7)
 
 SWEP.CustomizeAng = Angle(90, 0, 0)
-SWEP.CustomizePos = Vector(14, 45, 8)
+SWEP.CustomizePos = Vector(14, 45, 6)
 SWEP.CustomizeSnapshotFOV = 110
 SWEP.CustomizeNoRotate = false
 
@@ -445,12 +445,12 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 		wep.Bodge_Cycle = 0
 	end
 	-- use empty reload finish IF gun is EITHER uncycled OR starts at 0 but does not ends at 5
-	if wep.Bodge_Cycle == 1 or wep.Bodge_Reload == 1 then
+	if (wep.Bodge_Cycle == 1 or wep.Bodge_Reload == 1) and wep:HasElement("is_pumpaction") then
 		if	wep:Clip1() == wep:GetValue("ClipSize") then
 			if curanim == "reload_insert" 	then 	return "reload_insert_emp"	end	
 			if curanim == "reload_start" 	then 	return "reload_start_emp"		end	
 		end
-		if wep:HasElement("is_pumpaction") and wep:Clip1() < wep:GetValue("ClipSize") + wep:GetValue("ChamberSize")  then
+		if wep:Clip1() < wep:GetValue("ClipSize") + wep:GetValue("ChamberSize")  then
 			if	curanim == "reload_finish" then	return "reload_finish_empty"	end
 		end
 	end
