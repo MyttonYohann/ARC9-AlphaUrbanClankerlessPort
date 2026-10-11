@@ -53,7 +53,10 @@ SWEP.Penetration = 1 -- Units of wood that can be penetrated by this gun.
 
 -------------------------- PHYS BULLET BALLISTICS
 
-SWEP.PhysBulletMuzzleVelocity = 200
+SWEP.PhysBulletMuzzleVelocity = 1240 * 12
+SWEP.PhysBulletGravity = 1.5
+SWEP.PhysBulletDrag = 1.15
+
 
 -------------------------- MAGAZINE
 
@@ -73,7 +76,7 @@ SWEP.CanReloadWhileUnCycled = true
 
 -------------------------- FIREMODES
 SWEP.Num = 8
-SWEP.RPM = 500
+SWEP.RPM = 220
 
 -- Works different to ArcCW
 
@@ -183,7 +186,7 @@ SWEP.SprintAng = Angle(40, -15, -15)
 SWEP.SprintPos = Vector(3, 2, 0)
 
 SWEP.ViewModelFOVBase = 70
-SWEP.ActivePos = Vector(0, 0, 0)
+SWEP.ActivePos = Vector(0, -1, 0)
 SWEP.ActiveAng = Angle(0, 0, 0)
 
 SWEP.CrouchPos = Vector(-0.2, -0.5, -1.5)
@@ -245,23 +248,29 @@ SWEP.Animations = {
 	},
 	["draw"] = {
 		Source = "draw",
-		Time = 20 / 30,
 	},
+    ["ready"] = {
+        Source = "equip",
+        EventTable = {
+            {s = path1 .. "rack_1.ogg", t = 0.44},
+            {s = path .. "breechclose.ogg", t = 0.5},
+            {s = common .. "shoulder.ogg",  t = 0.75},
+        },
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, }, { t = 0.6, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 1, },
+		},
+    },
 	["draw_empty"] = {
 		Source = "draw_empty",
-		Time = 20 / 30,
 	},
 	["holster"] = {
 		Source = "holster",
-		Time = 20 / 30,
 	},
 	["holster_empty"] = {
 		Source = "holster_empty",
-		Time = 20 / 30,
 	},
 	["fire"] = {
 		Source = "fire",
-		Time = 23 / 30,
 		ShellEjectAt = 0.01,
 		EventTable = {
 			{s = path .. "mech.ogg", t = 0}, -- Not temporary
@@ -279,7 +288,6 @@ SWEP.Animations = {
 	},
 	["cycle"] = {
 		Source = {"cycle"},
-		IKTimeLine = { { t = 0, lhik = 1, rhik = 0, }, { t = 1, lhik = 1, rhik = 0, }, },
         EventTable = {
             {s = common .. "cloth_3.ogg",  t = 0},
             {s = path1 .. "rack_1.ogg",  t = 0},
@@ -321,8 +329,7 @@ SWEP.Animations = {
 	["reload_start"] = {
 		Source = "reload_1",
 		IKTimeLine = {
-		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.3, lhik = 0, rhik = 0, },{ t = 1, lhik = 0, rhik = 0, },
+		{ t = 0, lhik = 1, rhik = 1, }, { t = 0.1, lhik = 1, rhik = 0, }, { t = 0.3, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 0, },
 		},
 		EventTable = {   
             {s = common .. "cloth_2.ogg",  t = 0},
@@ -334,7 +341,7 @@ SWEP.Animations = {
 	},   
 	["reload_insert"] = {
 		Source = "reload_2",
-		IKTimeLine = { { t = 0, lhik = 0, rhik = 0, },{ t = 1, lhik = 0, rhik = 0, },  },
+		IKTimeLine = { { t = 0, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 0, },  },
 		EventTable = { 
             {s = common .. "shotgun_insert_3.ogg",  t = 18/30},
             {s = common .. "cloth_4.ogg",  t = 0},
@@ -343,7 +350,7 @@ SWEP.Animations = {
 	},
 	["reload_insert_emp"] = {
 		Source = "reload_2pump_end",
-		IKTimeLine = { { t = 0, lhik = 0, rhik = 0, },{ t = 1, lhik = 0, rhik = 0, },  },
+		IKTimeLine = { { t = 0, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 0, },  },
 		EventTable = { 
             {s = path1 .. "rack_1.ogg",  t = 6/30},
             {s = path1 .. "eject.ogg",  t = 9/30},
@@ -370,8 +377,8 @@ SWEP.Animations = {
 	["reload_finish"] = {
 		Source = "reload_3",
 		IKTimeLine = {
-		{ t = 0, lhik = 0, rhik = 0, },
-		{ t = 0.3, lhik = 0, rhik = 0, }, { t = 0.9, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 0, },
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.3, lhik = 1, rhik = 0, }, { t = 0.9, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 1, },
 		},
 		EventTable = {
             {s = common .. "shoulder.ogg",  t = 0.4},
@@ -383,8 +390,8 @@ SWEP.Animations = {
 	["reload_finish_empty"] = {
 		Source = "reload_3pump",
 		IKTimeLine = {
-		{ t = 0, lhik = 0, rhik = 0, },
-		{ t = 0.3, lhik = 0, rhik = 0, }, { t = 0.9, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 0, },
+		{ t = 0, lhik = 1, rhik = 0, },	{ t = 0.3, lhik = 1, rhik = 0, }, 
+		{ t = 0.9, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 1, },
 		},
 		EventTable = {
             {s = path1 .. "rack_1.ogg",  t = 6/30},
@@ -398,7 +405,7 @@ SWEP.Animations = {
 	},  
 	["reload_end_empty"] = {
 		Source = "reload_3_emp",
-		IKTimeLine = {  { t = 0, lhik = 1, rhik = 0, }, { t = 1, lhik = 1, rhik = 0, },},
+		IKTimeLine = {  { t = 0, lhik = 1, rhik = 0, }, { t = 1, lhik = 1, rhik = 1, },},
 		EventTable = {
             {s = common .. "shoulder.ogg",  t = 0.4},
 		},
@@ -495,8 +502,8 @@ SWEP.Attachments = {
 		DefaultIcon = Material("arc9/def_att_icons/optic.png"),
 		Category = {"optic_css"},
 		Bone = "1014_parent",
-		Pos = Vector(0, -2, 5),
-		Ang = Angle(90, 2, -90),
+		Pos = Vector(0, -1.4, 2.5),
+		Ang = Angle(90, 0, -90),
 		MergeSlots = {9},
 	},
 	{
@@ -535,7 +542,7 @@ SWEP.Attachments = {
 
 		Category = {"ucalpha_1014_stock"},
 		Bone = "1014_parent",
-		Pos = Vector(0, 2, -9),
+		Pos = Vector(0, 2, -3.5),
 		Ang = Angle(90, 0, -90),
 	},
 	{

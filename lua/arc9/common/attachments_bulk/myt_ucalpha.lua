@@ -63,6 +63,14 @@ ATT.SortOrder = 10
 ATT.Category = "ucalpha_1014_stock"
 ATT.ActivateElements = {"s_1"}
 
+ATT.RHIK = true
+ATT.RHIK_Priority = 0
+
+ATT.Scale = 1
+ATT.ModelOffset = Vector(-7.3, -2.4, 4.6)
+ATT.ModelAngleOffset = Angle(0, 0, 0)
+ATT.Model = "models/weapons/arc9/myt_uc/c_m1014_ik_grip.mdl"
+
 ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_stock_poly")
 
 ----------------------------------------------------------------------------------
@@ -78,6 +86,14 @@ ATT.Description = [[tree
 ATT.SortOrder = 100
 ATT.Category = "ucalpha_1014_stock"
 ATT.ActivateElements = {"s_2"}
+
+ATT.RHIK = true
+ATT.RHIK_Priority = 0
+
+ATT.Scale = 1
+ATT.ModelOffset = Vector(-7.3, -2.4, 4.6)
+ATT.ModelAngleOffset = Angle(0, 0, 0)
+ATT.Model = "models/weapons/arc9/myt_uc/c_m1014_ik_grip.mdl"
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_stock_wood")
 
