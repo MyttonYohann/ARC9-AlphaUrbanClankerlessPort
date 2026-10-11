@@ -30,10 +30,10 @@ SWEP.WorldModelMirror = "models/weapons/arc9/myt_uc/c_m1014.mdl"
 SWEP.WorldModelOffset = {
 	Pos = Vector(0, 0, 0),
 	Ang = Angle(0, 0, 0),
-	TPIKPos = Vector(-7, 4, -5.8),
+	TPIKPos = Vector(-8, 5, -2),
 	TPIKAng = Angle(-6, 0, 180),
-	TPIKPosSightOffset = Vector(1, 1, -2),
-	TPIKPosReloadOffset = Vector(5, 0, 0),
+	TPIKPosSightOffset = Vector(4, -0.5, -3),
+	TPIKPosReloadOffset = Vector(0, 0, 0),
 	TPIKAngReloadOffset = Angle(0, 0, 0),
 
 	TPIKPosAlternative = Vector(-16, 4, 1.5),
@@ -204,7 +204,7 @@ SWEP.StandardPresets = {
 
 -------------------------- HoldTypes
 
-SWEP.HoldType = "shotgun"
+SWEP.HoldType = "ar2"
 SWEP.HoldTypeSprint = "passive"
 SWEP.HoldTypeHolstered = "passive"
 SWEP.HoldTypeSights = "ar2"
@@ -378,7 +378,7 @@ SWEP.Animations = {
 		Source = "reload_3",
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.3, lhik = 1, rhik = 0, }, { t = 0.9, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 1, },
+		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },
 		},
 		EventTable = {
             {s = common .. "shoulder.ogg",  t = 0.4},
@@ -413,6 +413,11 @@ SWEP.Animations = {
 		MinProgress = 32/40,
 	},  
 }
+
+SWEP.Hook_ModifyBodygroups = function(wep, data)
+    local model = data.model  -- hide bullet when not reloading, i think there was a proper bonehide method but i forgor
+    if !wep:GetReloading() 	then model:SetBodygroup(5,1) end
+end
 
 SWEP.Bodge_Cycle = 0
 SWEP.Bodge_Reload = 0
