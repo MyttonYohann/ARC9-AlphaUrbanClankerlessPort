@@ -48,6 +48,22 @@ ATT.ActivateElements = {"fe_pump2", "is_pumpaction"}
 ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_pump_wood")
 
 ----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[Railed]]
+ATT.CompactName = [[F. Railed]]
+ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
+ATT.Description = [[get railed stupid
+]]
+
+ATT.SortOrder = 100
+ATT.Category = "ucalpha_1014_pump"
+ATT.ActivateElements = {"fe_3"} 
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_pump_rail")
+
+----------------------------------------------------------------------------------
 ----------------
 -- Stock --
 ----------------
@@ -112,6 +128,21 @@ ATT.Category = "ucalpha_1014_stock"
 ATT.ActivateElements = {"s_3"}
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_stock_spas")
+----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[Heavy Stock]]
+ATT.CompactName = [[S. Heavy]]
+ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 100
+ATT.Category = "ucalpha_1014_stock"
+ATT.ActivateElements = {"s_4"}
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_stock_heavy")
 ----------------------------------------------------------------------------------
 ----------------
 -- Ammo --
@@ -202,7 +233,7 @@ ATT = {}
 ATT.PrintName = [[14\" M4 Super 90 Entry Barrel]]
 ATT.CompactName = [[B. Skeleton]]
 ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
-ATT.Description = [[Short barrel intended for breaching and close quarters use. Drastically increases pellet spread, but is much easier to manuver.
+ATT.Description = [[Short barrel intended for breaching and close quarters use. Drastically increases pellet spread, but is much easier to manoeuvre.
 ]]
 
 ATT.SortOrder = 3

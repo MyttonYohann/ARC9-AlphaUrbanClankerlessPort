@@ -487,9 +487,11 @@ SWEP.DefaultBodygroups = "00000000000000"
 SWEP.AttachmentElements = {
 	["fe_pump1"] = 	{ Bodygroups = { {4, 1}, },},   
 	["fe_pump2"] = 	{ Bodygroups = { {4, 2}, },},   
+	["fe_3"] = 	{ Bodygroups = { {4, 3}, },},   
 	["s_1"] = 	{ Bodygroups = { {3, 2}, },},   
 	["s_2"] = 	{ Bodygroups = { {3, 3}, },},   
-	["s_3"] = 	{ Bodygroups = { {3, 4}, },},   
+	["s_3"] = 	{ Bodygroups = { {3, 4}, },},  
+	["s_4"] = 	{ Bodygroups = { {3, 5}, },},   
 	["m_1"] = 	{ Bodygroups = { {2, 1}, },},   
 	["m_2"] = 	{ Bodygroups = { {2, 2}, },},   
 	["m_3"] = 	{ Bodygroups = { {2, 3}, },},   

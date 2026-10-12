@@ -1,0 +1,24 @@
+"VertexLitGeneric"
+{
+	"$basetexture"			"models\myt_uc\shot_1014\wep_benelli_railedforeend"
+	"$bumpmap" 			"models\myt_uc\shot_1014\wep_benelli_railedforeend_n"
+
+	"$phong"                        "1"	
+	"$phongalbedotint"              "1"	
+	"$phongexponenttexture"			"models\myt_uc\_detail\exponent"
+	"$phongexponent"                "16"	
+	"$phongboost"                   "30"
+	"$phongfresnelranges"           "[0.75 1.5 3]"
+
+	"$basetexturealphaenvmapmask"	"1"
+	"$envmap"			"env_cubemap"
+	"$envmaptint"			"[0.5 0.5 0.5]"
+	"$envmapfresnel"			"0.5"		
+
+	"$color2"	"[0.5 0.5 0.5]"
+
+	"$detail" "models\myt_uc\_detail\dt_metal1"
+	"$detailscale" "12"
+	"$detailblendfactor" "1"
+	"$detailblendmode" "0"		
+}
