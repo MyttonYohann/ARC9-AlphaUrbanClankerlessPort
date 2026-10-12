@@ -215,7 +215,7 @@ ATT.BashDamageType = DMG_SLASH
 ATT.BashDamage = 120
 ATT.BashLungeRange = 0
 ATT.BashRange = 104
-ATT.PreBashTime = 0.135
+ATT.PreBashTime = 0.05
 ATT.PostBashTime = 0.4
 
 -- you cant fucking use bashwhilespring WITHOUT shootwhilesprint
