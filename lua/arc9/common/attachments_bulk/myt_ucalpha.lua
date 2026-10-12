@@ -160,7 +160,7 @@ ATT.ClipSize = 5
 ATT.Category = "ucalpha_1014_tube"
 ATT.ActivateElements = {"m_1"}
 
-ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_mag_1")
+ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_mag_5")
 
 ----------------------------------------------------------------------------------
 ATT = {}
@@ -176,7 +176,7 @@ ATT.ClipSize = 6
 ATT.Category = "ucalpha_1014_tube"
 ATT.ActivateElements = {"m_2"}
 
-ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_mag_2")
+ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_mag_6")
 
 ----------------------------------------------------------------------------------
 ATT = {}
@@ -192,7 +192,7 @@ ATT.ClipSize = 8
 ATT.Category = "ucalpha_1014_tube"
 ATT.ActivateElements = {"m_3"}
 
-ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_mag_3")
+ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_mag_8")
 
 ----------------------------------------------------------------------------------
 ----------------
@@ -200,10 +200,10 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_mag_3")
 ----------------
 ATT = {}
 
-ATT.PrintName = [[Heatguard]]
+ATT.PrintName = [[21\" Entrenched Barrel]]
 ATT.CompactName = [[B. Heat]]
 ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
-ATT.Description = [[
+ATT.Description = [[bayonaise yo
 ]]
 
 ATT.SortOrder = 2
@@ -236,27 +236,31 @@ ATT.NearWallPos = Vector(0, -5, -4)
 ATT.NearWallAng = Angle(0, 2, -15)
 ATT.BobSprintMult = 0.5
 
-ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_barrel_1")
+ATT.BarrelLengthAdd = 10
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_barrel_bayo")
 
 ----------------------------------------------------------------------------------
 ATT = {}
 
-ATT.PrintName = [[Competitor]]
+ATT.PrintName = [[26\" Competition Barrel]]
 ATT.CompactName = [[B. Comp]]
 ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
-ATT.Description = [[
+ATT.Description = [[longest john
 ]]
 
 ATT.SortOrder = 3
 ATT.Category = "ucalpha_1014_barrel"
 ATT.ActivateElements = {"b_2"}
 
-ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_barrel_2")
+ATT.BarrelLengthAdd = 4
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_barrel_comp")
 
 ----------------------------------------------------------------------------------
 ATT = {}
 
-ATT.PrintName = [[14\" M4 Super 90 Entry Barrel]]
+ATT.PrintName = [[14\" Entry Barrel]]
 ATT.CompactName = [[B. Skeleton]]
 ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
 ATT.Description = [[Short barrel intended for breaching and close quarters use. Drastically increases pellet spread, but is much easier to manoeuvre.
@@ -279,6 +283,6 @@ ATT.SpeedMultShooting = 1.15
 
 ATT.BarrelLengthAdd = -4
 
-ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_barrel_3")
+ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_barrel_short")
 
 ----------------------------------------------------------------------------------
