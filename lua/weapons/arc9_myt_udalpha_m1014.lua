@@ -418,6 +418,7 @@ SWEP.Animations = {
 
 SWEP.Bodge_Cycle = 0
 SWEP.Bodge_Reload = 0
+SWEP.Bodge_StoreCycle = 0
 SWEP.Hook_Think = function(wep) 
 	-- for reloading when the gun is not chambered (uncycled, holding down the attack button)
 	if wep.Bodge_Cycle == 1 and !wep:GetUBGL() then
@@ -474,6 +475,16 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 		if curanim == "reload_start_empty" then return "reload_start" end	
 	end
 	
+	end
+
+	if curanim == "holster" and wep:GetNeedsCycle() then
+		wep:SetNeedsCycle(false)
+		wep.Bodge_StoreCycle = 1
+	end
+
+	if curanim == "draw" and wep.Bodge_StoreCycle == 1 then 
+		wep.Bodge_StoreCycle = 0
+		return "ready"
 	end
 end
 
