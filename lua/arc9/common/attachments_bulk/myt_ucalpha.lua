@@ -41,7 +41,7 @@ Pump Action
 
 ATT.ManualAction = true
 
-ATT.SortOrder = 100
+ATT.SortOrder = 11
 ATT.Category = "ucalpha_1014_pump"
 ATT.ActivateElements = {"fe_pump2", "is_pumpaction"}
 
@@ -57,7 +57,7 @@ ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
 ATT.Description = [[get railed stupid
 ]]
 
-ATT.SortOrder = 100
+ATT.SortOrder = 1
 ATT.Category = "ucalpha_1014_pump"
 ATT.ActivateElements = {"fe_3"} 
 
@@ -99,7 +99,7 @@ ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
 ATT.Description = [[tree
 ]]
 
-ATT.SortOrder = 100
+ATT.SortOrder = 11
 ATT.Category = "ucalpha_1014_stock"
 ATT.ActivateElements = {"s_2"}
 
@@ -118,12 +118,12 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_stock_wood")
 ATT = {}
 
 ATT.PrintName = [[Stock Exchange]]
-ATT.CompactName = [[S. Spas]]
+ATT.CompactName = [[S. Folded]]
 ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
 ATT.Description = [[hes so cool
 ]]
 
-ATT.SortOrder = 100
+ATT.SortOrder = 1
 ATT.Category = "ucalpha_1014_stock"
 ATT.ActivateElements = {"s_3"}
 
@@ -138,7 +138,7 @@ ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
 ATT.Description = [[
 ]]
 
-ATT.SortOrder = 100
+ATT.SortOrder = 0
 ATT.Category = "ucalpha_1014_stock"
 ATT.ActivateElements = {"s_4"}
 
@@ -150,7 +150,7 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_stock_heavy")
 ATT = {}
 
 ATT.PrintName = [[5-Round Tube]]
-ATT.CompactName = [[M. 5]]
+ATT.CompactName = [[M. 5R]]
 ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
 ATT.Description = [[
 ]]
@@ -166,7 +166,7 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_mag_5")
 ATT = {}
 
 ATT.PrintName = [[6-Round Tube]]
-ATT.CompactName = [[M. 6]]
+ATT.CompactName = [[M. 6R]]
 ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
 ATT.Description = [[
 ]]
@@ -182,7 +182,7 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_mag_6")
 ATT = {}
 
 ATT.PrintName = [[8-Round Tube]]
-ATT.CompactName = [[M. 8]]
+ATT.CompactName = [[M. 8R]]
 ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
 ATT.Description = [[
 ]]
@@ -230,13 +230,13 @@ ATT.HookP_BlockFire = function(self)
 	end
 end
 
-ATT.SprintPos = Vector(1, -1, -2)
-ATT.SprintAng = Angle(2, 2, -30)
+ATT.SprintPos = Vector(1, -1, -0.5)
+ATT.SprintAng = Angle(3, -2, -35)
 ATT.NearWallPos = Vector(0, -5, -4)
 ATT.NearWallAng = Angle(0, 2, -15)
 ATT.BobSprintMult = 0.5
 
-ATT.BarrelLengthAdd = 10
+ATT.BarrelLengthAdd = 12
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_barrel_bayo")
 

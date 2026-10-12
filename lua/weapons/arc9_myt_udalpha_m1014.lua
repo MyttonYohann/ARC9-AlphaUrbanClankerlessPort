@@ -224,7 +224,7 @@ SWEP.ShellModel = "models/weapons/shotgun_shell.mdl"
 SWEP.ShellCorrectAng = Angle(0, 0, 0)
 SWEP.ShellScale = 0.5
 SWEP.ShellPhysBox = Vector(0.5, 0.5, 2)
-SWEP.NoShellEject = true
+SWEP.NoShellEject = false
 SWEP.NoShellEjectManualAction = true
 
 -------------------------- SOUNDS
@@ -264,6 +264,20 @@ SWEP.Animations = {
         FireASAP = true,
         MinProgress = 0.6,
     },
+    ["draw_cycle"] = {
+        Source = "draw_cycle",
+        EventTable = {
+            {s = path1 .. "rack_1.ogg",  t = 8/30},
+            {s = path1 .. "rack_2.ogg",  t = 13/30},
+            {s = common .. "shoulder.ogg",  t = 0.6},
+        },
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, }, { t = 0.6, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 1, },
+		},
+        FireASAP = true,
+        MinProgress = 0.6,
+		EjectAt = 9/30,
+    },
 	["draw_empty"] = {
 		Source = "draw_empty",
 	},
@@ -275,7 +289,6 @@ SWEP.Animations = {
 	},
 	["fire"] = {
 		Source = "fire",
-		ShellEjectAt = 0.01,
 		EventTable = {
 			{s = path .. "mech.ogg", t = 0}, -- Not temporary
 			{s = path1 .. "eject.ogg", t = 0}, -- Not temporary
@@ -284,7 +297,6 @@ SWEP.Animations = {
 	["fire_empty"] = {
 		Source = "fire_empty",
 		Time = 23 / 30,
-		ShellEjectAt = 0.01,
 		EventTable = {
 			{s = path .. "mech_last.ogg", t = 0}, -- Not temporary
 			{s = path1 .. "eject.ogg", t = 0}, -- Not temporary
@@ -317,17 +329,17 @@ SWEP.Animations = {
 		MagSwapTime = 35/40,
 	},  
 	["reload_start_emp"] = {
-		Source = "reload_1pump_emp",
+		Source = "reload_1pump_emp2",
 		IKTimeLine = { { t = 0, lhik = 1, rhik = 0, }, { t = 1, lhik = 1, rhik = 0, }, },
 		EventTable = {   
             {s = common .. "cloth_2.ogg",  t = 0},
-            {s = path1 .. "rack_1.ogg",  t = 9/30},
-            {s = path1 .. "eject.ogg",  t = 12/30},
-            {s = path1 .. "rack_2.ogg",  t = 15/30},
-            {s = common .. "shotgun_insert_3.ogg",  t = 36/30},
+            {s = path1 .. "rack_1.ogg",  t = 5/30},
+            {s = path1 .. "eject.ogg",  t = 8/30},
+            {s = path1 .. "rack_2.ogg",  t = 11/30},
+            {s = common .. "shotgun_insert_3.ogg",  t = 31/30},
 		},
 		RestoreAmmo = 1,
-		ShellEjectAt = 12/30,
+		EjectAt = 8 / 40,
 	},  
 
 	["reload_start"] = {
@@ -362,7 +374,7 @@ SWEP.Animations = {
             {s = common .. "shotgun_insert_3.ogg",  t = 34/30},
             {s = common .. "cloth_4.ogg",  t = 0},
 		},
-		ShellEjectAt = 9/30,
+		EjectAt = 9/30,
 		RefillProgress = 32 / 40,
 	},
 	["reload_emptoloop"] = {
@@ -405,6 +417,7 @@ SWEP.Animations = {
 		FireASAP = true,
 		MinProgress = 24/40, 
 		RefillProgress = 24/40,
+		EjectAt = 9/30,
 	},  
 	["reload_end_empty"] = {
 		Source = "reload_3_emp",
@@ -488,7 +501,7 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 
 	if curanim == "draw" and wep.Bodge_StoreCycle == 1 then 
 		wep.Bodge_StoreCycle = 0
-		return "ready"
+		return "draw_cycle"
 	end
 end
 
@@ -497,9 +510,9 @@ end
 SWEP.DefaultBodygroups = "00000000000000"
 
 SWEP.AttachmentElements = {
-	["fe_pump1"] = 	{ Bodygroups = { {4, 1}, },},   
-	["fe_pump2"] = 	{ Bodygroups = { {4, 2}, },	AttPosMods = { [7] = { Pos = Vector(0, 1.45, 0.5), } }		},
-	["fe_3"] = 	{ Bodygroups = { {4, 3}, },},   
+	["fe_pump1"] = 	{ Bodygroups = { {4, 1}, },	AttPosMods = { [7] = { Pos = Vector(0, 1.5, -0.5), } }	}, 
+	["fe_pump2"] = 	{ Bodygroups = { {4, 2}, },	AttPosMods = { [7] = { Pos = Vector(0, 1.45, 0.5), } }	},
+	["fe_3"] = 	{ Bodygroups = { {4, 3}, },	AttPosMods = { [7] = { Pos = Vector(0, 1.1, 1.5), } }		},  
 	["s_1"] = 	{ Bodygroups = { {3, 2}, },},   
 	["s_2"] = 	{ Bodygroups = { {3, 3}, },},   
 	["s_3"] = 	{ Bodygroups = { {3, 4}, },},  
@@ -516,9 +529,11 @@ SWEP.AttachmentElements = {
 SWEP.Hook_ModifyBodygroups = function(wep, data)
     local model = data.model  
 	if !wep:GetReloading() 	then model:SetBodygroup(5,1) end -- hide bullet when not reloading, i think there was a proper bonehide method but i forgor
+	-- ziptied rail for foregrip
 	if wep:HasElement("fg_def") then model:SetBodygroup(6,1) end
 	if wep:HasElement("fg_def") and wep:HasElement("fe_pump2") then model:SetBodygroup(6,2) end
-	if wep:HasElement("fg_def") and wep:HasElement("fe_3") then model:SetBodygroup(6,0) end
+	if wep:HasElement("fg_def") and wep:HasElement("fe_pump1") then model:SetBodygroup(6,3) end
+	if wep:HasElement("fg_def") and wep:HasElement("fe_3") then model:SetBodygroup(6,0) end -- has its own rail
 end
  
 SWEP.Attachments = {
