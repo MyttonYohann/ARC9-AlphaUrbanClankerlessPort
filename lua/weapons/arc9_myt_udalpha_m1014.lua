@@ -417,11 +417,6 @@ SWEP.Animations = {
     },	
 }
 
-SWEP.Hook_ModifyBodygroups = function(wep, data)
-    local model = data.model  -- hide bullet when not reloading, i think there was a proper bonehide method but i forgor
-    if !wep:GetReloading() 	then model:SetBodygroup(5,1) end
-end
-
 SWEP.Bodge_Cycle = 0
 SWEP.Bodge_Reload = 0
 SWEP.Hook_Think = function(wep) 
@@ -489,7 +484,7 @@ SWEP.DefaultBodygroups = "00000000000000"
 
 SWEP.AttachmentElements = {
 	["fe_pump1"] = 	{ Bodygroups = { {4, 1}, },},   
-	["fe_pump2"] = 	{ Bodygroups = { {4, 2}, },},   
+	["fe_pump2"] = 	{ Bodygroups = { {4, 2}, },	AttPosMods = { [7] = { Pos = Vector(0, 1.45, 0.5), } }		},
 	["fe_3"] = 	{ Bodygroups = { {4, 3}, },},   
 	["s_1"] = 	{ Bodygroups = { {3, 2}, },},   
 	["s_2"] = 	{ Bodygroups = { {3, 3}, },},   
@@ -498,10 +493,18 @@ SWEP.AttachmentElements = {
 	["m_1"] = 	{ Bodygroups = { {2, 1}, },},   
 	["m_2"] = 	{ Bodygroups = { {2, 2}, },},   
 	["m_3"] = 	{ Bodygroups = { {2, 3}, },},   
-	["b_1"] = 	{ Bodygroups = { {1, 3}, },},   
-	["b_2"] = 	{ Bodygroups = { {1, 2}, },},   
-	["b_3"] = 	{ Bodygroups = { {1, 1}, },},   
+	["b_1"] = 	{ Bodygroups = { {1, 3}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 28.5), } }		},
+	["b_2"] = 	{ Bodygroups = { {1, 2}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 31.5), } }		},
+	["b_3"] = 	{ Bodygroups = { {1, 1}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 17.5), } }		},
 }
+
+
+SWEP.Hook_ModifyBodygroups = function(wep, data)
+    local model = data.model  
+	if !wep:GetReloading() 	then model:SetBodygroup(5,1) end -- hide bullet when not reloading, i think there was a proper bonehide method but i forgor
+	if wep:HasElement("fg_def") then model:SetBodygroup(6,1) end
+	if wep:HasElement("fg_def") and wep:HasElement("fe_pump2") then model:SetBodygroup(6,2) end
+end
  
 SWEP.Attachments = {
 	{
@@ -572,8 +575,8 @@ SWEP.Attachments = {
 		DefaultIcon = Material("arc9/def_att_icons/grip.png"),
 		ExcludeElements = {"nofg"},
 		Category = {"grip_css"},
-		Bone = "1014_parent",
-		Pos = Vector(0, 1.7, 9.5),
+		Bone = "1014_pump",
+		Pos = Vector(0, 1.2, -0.25),
 		Ang = Angle(90, 0, -90),
 	},
 	{
