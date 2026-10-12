@@ -15,7 +15,7 @@ ATT = {}
 
 ATT.PrintName = [[Nightprowler]]
 ATT.CompactName = [[F. PumpP]]
-ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[actual super 90
 Pump Action
 ]]
@@ -34,7 +34,7 @@ ATT = {}
 
 ATT.PrintName = [[Woodsman]]
 ATT.CompactName = [[F. PumpW]]
-ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[woo
 Pump Action
 ]]
@@ -53,7 +53,7 @@ ATT = {}
 
 ATT.PrintName = [[Railed]]
 ATT.CompactName = [[F. Railed]]
-ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[get railed stupid
 ]]
 
@@ -71,7 +71,7 @@ ATT = {}
 
 ATT.PrintName = [[Polymer]]
 ATT.CompactName = [[S. Polymer]]
-ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[Polyamourous
 ]]
 
@@ -95,7 +95,7 @@ ATT = {}
 
 ATT.PrintName = [[Woodsman]]
 ATT.CompactName = [[S. Wood]]
-ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[tree
 ]]
 
@@ -119,7 +119,7 @@ ATT = {}
 
 ATT.PrintName = [[Stock Exchange]]
 ATT.CompactName = [[S. Folded]]
-ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[hes so cool
 ]]
 
@@ -134,7 +134,7 @@ ATT = {}
 
 ATT.PrintName = [[Heavy Stock]]
 ATT.CompactName = [[S. Heavy]]
-ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[
 ]]
 
@@ -151,7 +151,7 @@ ATT = {}
 
 ATT.PrintName = [[5-Round Tube]]
 ATT.CompactName = [[M. 5R]]
-ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[
 ]]
 
@@ -167,7 +167,7 @@ ATT = {}
 
 ATT.PrintName = [[6-Round Tube]]
 ATT.CompactName = [[M. 6R]]
-ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[
 ]]
 
@@ -183,7 +183,7 @@ ATT = {}
 
 ATT.PrintName = [[8-Round Tube]]
 ATT.CompactName = [[M. 8R]]
-ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[
 ]]
 
@@ -202,7 +202,7 @@ ATT = {}
 
 ATT.PrintName = [[21\" Entrenched Barrel]]
 ATT.CompactName = [[B. Heat]]
-ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[bayonaise yo
 ]]
 
@@ -230,7 +230,7 @@ ATT.HookP_BlockFire = function(self)
 	end
 end
 
-ATT.SprintPos = Vector(1, -1, -0.5)
+ATT.SprintPos = Vector(1, -3, 0.5)
 ATT.SprintAng = Angle(3, -2, -35)
 ATT.NearWallPos = Vector(0, -5, -4)
 ATT.NearWallAng = Angle(0, 2, -15)
@@ -245,7 +245,7 @@ ATT = {}
 
 ATT.PrintName = [[26\" Competition Barrel]]
 ATT.CompactName = [[B. Comp]]
-ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[longest john
 ]]
 
@@ -262,7 +262,7 @@ ATT = {}
 
 ATT.PrintName = [[14\" Entry Barrel]]
 ATT.CompactName = [[B. Skeleton]]
-ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[Short barrel intended for breaching and close quarters use. Drastically increases pellet spread, but is much easier to manoeuvre.
 ]]
 
@@ -286,3 +286,87 @@ ATT.BarrelLengthAdd = -4
 ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_barrel_short")
 
 ----------------------------------------------------------------------------------
+
+
+-----------
+-- Optic --
+-----------
+
+
+----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = "Eotech3"
+ATT.CompactName = "EO3"
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[hwaet]]
+ATT.SortOrder = 1
+
+ATT.Model = "models/weapons/arc9/myt_uc/atts/optic_eotech.mdl"
+
+ATT.Category = {"optic_ucalpha"}
+
+-- Allows a custom sight position to be defined
+ATT.Sights = {
+    {
+        Pos = Vector(0, 9, -1.5),
+        Ang = Angle(0, 0, 0),
+        Magnification = 1.1,
+        ViewModelFOV = 60
+    }
+}
+
+ATT.HoloSight = true
+ATT.HoloSightReticle = Material("myt_uc/ud_holo.png", "mips smooth")
+ATT.HoloSightSize = 500
+ATT.HoloSightColorable = true
+
+ATT.SwayAdd = 0.02
+ATT.FreeAimRadiusMultSights = 0.25
+ATT.SprintToFireTimeAdd = 0.035
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_optic_eo")
+
+----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = "ACOG"
+ATT.CompactName = "cock"
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[hwaet]]
+ATT.SortOrder = 1
+
+ATT.Model = "models/weapons/arc9/myt_uc/atts/scope_acog.mdl"
+
+ATT.Category = {"optic_ucalpha"}
+
+-- Allows a custom sight position to be defined
+ATT.Sights = {
+    {
+        Pos = Vector(0, 7.5, -1.65),
+        Ang = Angle(0, 0, 0),
+        Magnification = 1.5,
+        ViewModelFOV = 40
+    },
+}
+
+ATT.RTScope = true
+ATT.RTScopeSubmatIndex = 0
+ATT.RTScopeMagnification = 2.5
+ATT.ScopeScreenRatio = 400/1080
+ATT.RTScopeReticle = Material("myt_uc/uc_acog_reticle.png", "mips smooth")
+ATT.RTScopeReticleScale = 1
+ATT.RTScopeColorable = true
+ATT.RTScopeShadowIntensity = 7
+
+ATT.Scale = 1
+ATT.ModelOffset = Vector(0, 0, -0.1)
+
+ATT.SwayAdd = 0.05
+ATT.FreeAimRadiusMultSights = 0.1
+ATT.AimDownSightsTimeAdd = 0.12
+ATT.SprintToFireTimeAdd = 0.05
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_optic_acog")

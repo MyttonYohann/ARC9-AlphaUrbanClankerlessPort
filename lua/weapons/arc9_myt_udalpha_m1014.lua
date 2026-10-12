@@ -454,7 +454,7 @@ end
 SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	if !wep:GetUBGL() then -- only checking the gun not the off hand
 	
-	-- unclyced state
+	-- uncycled state
 	if wep:Clip1() == 0 then
 		if	curanim == "reload_start" or "reload_start_empty" then wep.Bodge_Reload = 1	end
 	end
@@ -471,37 +471,36 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	if (!wep:GetNeedsCycle() and curanim == "reload_start") or curanim == "fire" then
 		wep.Bodge_Cycle = 0
 	end
-	-- use empty reload finish IF gun is EITHER uncycled OR starts at 0 but does not ends at 5
+	-- use empty reload finish IF gun is EITHER uncycled OR starts at 0 but does not ends at max cap
 	if (wep.Bodge_Cycle == 1 or wep.Bodge_Reload == 1) and wep:HasElement("is_pumpaction") then
 		if	wep:Clip1() == wep:GetValue("ClipSize") then
-			if curanim == "reload_insert" 	then 	return "reload_insert_emp"	end	
-			if curanim == "reload_start" 	then 	return "reload_start_emp"		end	
+			if curanim == "reload_insert" 	then return "reload_insert_emp"	end	-- transition anim to + 1 when gun at max cap
+			if curanim == "reload_start" 	then return "reload_start_emp"	end	-- clear chamber to add a + 1
 		end
 		if wep:Clip1() < wep:GetValue("ClipSize") + wep:GetValue("ChamberSize")  then
-			if	curanim == "reload_finish" then	return "reload_finish_empty"	end
+			if	curanim == "reload_finish"	then return "reload_finish_empty"	end
 		end
 	end
 
-	-- extended anim transition
-	if	wep:Clip1() == 1 and !wep:HasElement("is_pumpaction") then
-		if curanim == "reload_finish"		then return "reload_end_empty"	end	
-		if curanim == "reload_insert" 		then return "reload_emptoloop"	end	
+	-- extended anim transition for empty reload
+	if	wep:Clip1() == 1 and !wep:HasElement("is_pumpaction") then -- only for semi, pump uses a different set
+		if curanim == "reload_finish"		then return "reload_end_empty"	end	-- empty to end, skipping insert
+		if curanim == "reload_insert" 		then return "reload_emptoloop"	end	-- empty to insert loop
 	end
 	
-	if wep:HasElement("is_pumpaction") then
-		if curanim == "reload_start_empty" then return "reload_start" end	
+	if wep:HasElement("is_pumpaction") then -- pump does not use start empty
+		if curanim == "reload_start_empty"	then return "reload_start" end	
 	end
-	
-	end
-
+	-- special anim if uncycled when holstered
 	if curanim == "holster" and wep:GetNeedsCycle() then
 		wep:SetNeedsCycle(false)
 		wep.Bodge_StoreCycle = 1
 	end
-
 	if curanim == "draw" and wep.Bodge_StoreCycle == 1 then 
 		wep.Bodge_StoreCycle = 0
 		return "draw_cycle"
+	end
+	
 	end
 end
 
@@ -510,9 +509,9 @@ end
 SWEP.DefaultBodygroups = "00000000000000"
 
 SWEP.AttachmentElements = {
-	["fe_pump1"] = 	{ Bodygroups = { {4, 1}, },	AttPosMods = { [7] = { Pos = Vector(0, 1.5, -0.5), } }	}, 
-	["fe_pump2"] = 	{ Bodygroups = { {4, 2}, },	AttPosMods = { [7] = { Pos = Vector(0, 1.45, 0.5), } }	},
-	["fe_3"] = 	{ Bodygroups = { {4, 3}, },	AttPosMods = { [7] = { Pos = Vector(0, 1.1, 1.5), } }		},  
+	["fe_pump1"] = 	{ Bodygroups = { {4, 1}, },	AttPosMods = { [7] = { Pos = Vector(0, 1.35, -0.5), } }	}, 
+	["fe_pump2"] = 	{ Bodygroups = { {4, 2}, },	AttPosMods = { [7] = { Pos = Vector(0, 1.3, 0.5), } }	},
+	["fe_3"] = 	{ Bodygroups = { {4, 3}, },	AttPosMods = { [7] = { Pos = Vector(0, 0.9, 1.5), } }		},  
 	["s_1"] = 	{ Bodygroups = { {3, 2}, },},   
 	["s_2"] = 	{ Bodygroups = { {3, 3}, },},   
 	["s_3"] = 	{ Bodygroups = { {3, 4}, },},  
@@ -521,7 +520,7 @@ SWEP.AttachmentElements = {
 	["m_2"] = 	{ Bodygroups = { {2, 2}, },},   
 	["m_3"] = 	{ Bodygroups = { {2, 3}, },},   
 	["b_1"] = 	{ Bodygroups = { {1, 3}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 28.5), } }		},
-	["b_2"] = 	{ Bodygroups = { {1, 2}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 31.5), } }		},
+	["b_2"] = 	{ Bodygroups = { {1, 2}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 32.5), } }		},
 	["b_3"] = 	{ Bodygroups = { {1, 1}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 17.5), } }		},
 }
 
@@ -543,9 +542,9 @@ SWEP.Attachments = {
 		InstalledElements = {"rail_def", "has_optic"},
 
 		DefaultIcon = Material("arc9/def_att_icons/optic.png"),
-		Category = {"optic_css"},
+		Category = {"optic_ucalpha", "eft_optic_medium"},
 		Bone = "1014_parent",
-		Pos = Vector(0, -1.4, 2.5),
+		Pos = Vector(0, -1.2, 2.8),
 		Ang = Angle(90, 0, -90),
 		MergeSlots = {9},
 	},
@@ -604,9 +603,9 @@ SWEP.Attachments = {
 
 		DefaultIcon = Material("arc9/def_att_icons/grip.png"),
 		ExcludeElements = {"nofg"},
-		Category = {"grip_css"},
+		Category = {"eft_foregrip_small"},
 		Bone = "1014_pump",
-		Pos = Vector(0, 1.2, -0.25),
+		Pos = Vector(0, 1, -0.25),
 		Ang = Angle(90, 0, -90),
 	},
 	{
