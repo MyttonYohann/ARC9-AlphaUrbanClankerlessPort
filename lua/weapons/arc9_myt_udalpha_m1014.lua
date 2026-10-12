@@ -235,7 +235,7 @@ local common = "arc9_ucalpha/common/"
 SWEP.ShootSound = path .. "fire.ogg"
 SWEP.ShootSoundSilenced = path .. "fire_supp.ogg"
 SWEP.DistantShootSound = path .. "fire_dist.ogg"
-SWEP.DryFireSound = "weapons/clipempty_rifle.wav"
+SWEP.DryFireSound =  path1 .. "eject.ogg"
 
 SWEP.FiremodeSound = "arc9/firemode.ogg"
 
@@ -364,8 +364,7 @@ SWEP.Animations = {
 	["reload_emptoloop"] = {
 		Source = {"reload_2_emp"},
 		IKTimeLine = {
-		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.4, lhik = 1, rhik = 0, }, { t = 0.6, lhik = 0, rhik = 0, },{ t = 1, lhik = 0, rhik = 0, },
+		{ t = 0, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 0, },
 		},
 		EventTable = { 
             {s = common .. "shotgun_insert_3.ogg",  t = 18/30},
@@ -504,6 +503,7 @@ SWEP.Hook_ModifyBodygroups = function(wep, data)
 	if !wep:GetReloading() 	then model:SetBodygroup(5,1) end -- hide bullet when not reloading, i think there was a proper bonehide method but i forgor
 	if wep:HasElement("fg_def") then model:SetBodygroup(6,1) end
 	if wep:HasElement("fg_def") and wep:HasElement("fe_pump2") then model:SetBodygroup(6,2) end
+	if wep:HasElement("fg_def") and wep:HasElement("fe_3") then model:SetBodygroup(6,0) end
 end
  
 SWEP.Attachments = {
