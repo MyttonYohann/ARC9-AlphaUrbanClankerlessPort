@@ -193,7 +193,7 @@ SWEP.CrouchPos = Vector(-0.2, -0.5, -1.5)
 SWEP.CrouchAng = Angle(0, 0, -7)
 
 SWEP.CustomizeAng = Angle(90, 0, 0)
-SWEP.CustomizePos = Vector(14, 45, 6)
+SWEP.CustomizePos = Vector(16, 45, 6)
 SWEP.CustomizeSnapshotFOV = 110
 SWEP.CustomizeNoRotate = false
 
@@ -289,7 +289,7 @@ SWEP.Animations = {
 	["cycle"] = {
 		Source = {"cycle"},
         EventTable = {
-            {s = common .. "cloth_3.ogg",  t = 0},
+            {s = common .. "cloth_2.ogg",  t = 0},
             {s = path1 .. "rack_1.ogg",  t = 0},
             {s = path1 .. "eject.ogg",  t = 0.075},
             {s = path1 .. "rack_2.ogg",  t = 0.2},
@@ -412,6 +412,9 @@ SWEP.Animations = {
 		FireASAP = true,
 		MinProgress = 32/40,
 	},  
+	["bash"] = {
+        Source = {"stab"},
+    },	
 }
 
 SWEP.Hook_ModifyBodygroups = function(wep, data)

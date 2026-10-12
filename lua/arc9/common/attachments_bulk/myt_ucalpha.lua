@@ -206,9 +206,35 @@ ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
 ATT.Description = [[
 ]]
 
-ATT.SortOrder = 1
+ATT.SortOrder = 2
 ATT.Category = "ucalpha_1014_barrel"
 ATT.ActivateElements = {"b_1"}
+
+ATT.Bash = true
+ATT.BashDamageType = DMG_SLASH
+ATT.BashDamage = 120
+ATT.BashLungeRange = 0
+ATT.BashRange = 104
+ATT.PreBashTime = 0.135
+ATT.PostBashTime = 0.4
+
+-- you cant fucking use bashwhilespring WITHOUT shootwhilesprint
+ATT.BashWhileSprint = true
+ATT.ShootWhileSprint = true
+ATT.HookP_BlockFire = function(self)
+    local owner = self:GetOwner() 
+	local canfire = owner:KeyDown(IN_SPEED) and !owner:KeyDown(IN_USE)
+	
+	if owner:KeyDown(IN_FORWARD + IN_BACK + IN_MOVELEFT + IN_MOVERIGHT) then
+    return canfire
+	end
+end
+
+ATT.SprintPos = Vector(1, -1, -2)
+ATT.SprintAng = Angle(2, 2, -30)
+ATT.NearWallPos = Vector(0, -5, -4)
+ATT.NearWallAng = Angle(0, 2, -15)
+ATT.BobSprintMult = 0.5
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_barrel_1")
 
@@ -221,7 +247,7 @@ ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
 ATT.Description = [[
 ]]
 
-ATT.SortOrder = 2
+ATT.SortOrder = 3
 ATT.Category = "ucalpha_1014_barrel"
 ATT.ActivateElements = {"b_2"}
 
@@ -236,7 +262,7 @@ ATT.Icon = Material("entities/gekolt_css_blank.png", "mips smooth")
 ATT.Description = [[Short barrel intended for breaching and close quarters use. Drastically increases pellet spread, but is much easier to manoeuvre.
 ]]
 
-ATT.SortOrder = 3
+ATT.SortOrder = 1
 ATT.Category = "ucalpha_1014_barrel"
 ATT.ActivateElements = {"b_3"}
 ATT.ExcludeElements = {"m_2", "m_3"}
