@@ -227,6 +227,9 @@ SWEP.ShellPhysBox = Vector(0.5, 0.5, 2)
 SWEP.NoShellEject = false
 SWEP.NoShellEjectManualAction = true
 
+SWEP.CamQCA = 3
+SWEP.CamOffsetAng = Angle(0, 0, 90)
+
 -------------------------- SOUNDS
 
 local path1 = "arc9_ucalpha/870/"
@@ -320,8 +323,8 @@ SWEP.Animations = {
 		IKTimeLine = { { t = 0, lhik = 1, rhik = 0, }, { t = 1, lhik = 1, rhik = 0, }, },
 		EventTable = {   
             {s = common .. "cloth_2.ogg",  t = 0},
-            {s = path .. "breechload.ogg",  t = 20/30},
-            {s = path .. "breechclose.ogg",  t = 36/30},
+            {s = path .. "breechload.ogg",  t = 12/30},
+            {s = path .. "breechclose.ogg",  t = 29/30},
 		},
 		RestoreAmmo = 1,
 		RefillProgress = 35/40,
@@ -399,14 +402,13 @@ SWEP.Animations = {
             {s = common .. "shoulder.ogg",  t = 0.4},
 		},
 		FireASAP = true,
-		MinProgress = 24/40, 
-		RefillProgress = 24/40,
+		MinProgress = 9/30, 
 	},  
 	["reload_finish_empty"] = {
 		Source = "reload_3pump",
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },	{ t = 0.3, lhik = 1, rhik = 0, }, 
-		{ t = 0.9, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 1, },
+		{ t = 0.7, lhik = 1, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },
 		},
 		EventTable = {
             {s = path1 .. "rack_1.ogg",  t = 6/30},
@@ -428,10 +430,13 @@ SWEP.Animations = {
 		FireASAP = true,
 		MinProgress = 32/40,
 	},  
-	["bash"] = {
-        Source = {"stab"},
-    },	
+	["bash"] = { Source = {"idle"},},	-- has to exist for translateanim to work
+	["bash_bayo"] = { Source = {"stab"},},	
 }
+SWEP.Bash = true
+SWEP.Hook_BlockHasAnimation = function (wep, anim) -- use normal bash fuction if no bayonet
+	if anim == "bash" and !wep:HasElement("has_bayonet") then return false end
+end
 
 SWEP.Bodge_Cycle = 0
 SWEP.Bodge_Reload = 0
@@ -511,14 +516,18 @@ SWEP.DefaultBodygroups = "00000000000000"
 SWEP.AttachmentElements = {
 	["fe_pump1"] = 	{ Bodygroups = { {4, 1}, },	AttPosMods = { [7] = { Pos = Vector(0, 1.35, -0.5), } }	}, 
 	["fe_pump2"] = 	{ Bodygroups = { {4, 2}, },	AttPosMods = { [7] = { Pos = Vector(0, 1.3, 0.5), } }	},
+	["fe_pump5"] = 	{ Bodygroups = { {4, 5}, },	AttPosMods = { [7] = { Pos = Vector(0, 1.2, -0.4), } }	},
 	["fe_3"] = 	{ Bodygroups = { {4, 3}, },	AttPosMods = { [7] = { Pos = Vector(0, 0.9, 1.5), } }		},  
+	["fe_4"] = 	{ Bodygroups = { {4, 4}, },},  
 	["s_1"] = 	{ Bodygroups = { {3, 2}, },},   
 	["s_2"] = 	{ Bodygroups = { {3, 3}, },},   
 	["s_3"] = 	{ Bodygroups = { {3, 4}, },},  
 	["s_4"] = 	{ Bodygroups = { {3, 5}, },},   
+	["s_5"] = 	{ Bodygroups = { {3, 6}, },},   
 	["m_1"] = 	{ Bodygroups = { {2, 1}, },},   
 	["m_2"] = 	{ Bodygroups = { {2, 2}, },},   
-	["m_3"] = 	{ Bodygroups = { {2, 3}, },},   
+	["m_3"] = 	{ Bodygroups = { {2, 3}, },},    
+	["m_4"] = 	{ Bodygroups = { {2, 4}, },},   
 	["b_1"] = 	{ Bodygroups = { {1, 3}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 28.5), } }		},
 	["b_2"] = 	{ Bodygroups = { {1, 2}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 32.5), } }		},
 	["b_3"] = 	{ Bodygroups = { {1, 1}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 17.5), } }		},
@@ -532,6 +541,7 @@ SWEP.Hook_ModifyBodygroups = function(wep, data)
 	if wep:HasElement("fg_def") then model:SetBodygroup(6,1) end
 	if wep:HasElement("fg_def") and wep:HasElement("fe_pump2") then model:SetBodygroup(6,2) end
 	if wep:HasElement("fg_def") and wep:HasElement("fe_pump1") then model:SetBodygroup(6,3) end
+	if wep:HasElement("fg_def") and wep:HasElement("fe_pump5") then model:SetBodygroup(6,4) end
 	if wep:HasElement("fg_def") and wep:HasElement("fe_3") then model:SetBodygroup(6,0) end -- has its own rail
 end
  

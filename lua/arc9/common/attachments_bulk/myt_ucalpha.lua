@@ -51,6 +51,25 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_pump_wood")
 
 ATT = {}
 
+ATT.PrintName = [[Spasm]]
+ATT.CompactName = [[F. SPAS]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[how
+Pump Action
+]]
+
+ATT.ManualAction = true
+
+ATT.SortOrder = 11
+ATT.Category = "ucalpha_1014_pump"
+ATT.ActivateElements = {"fe_pump5", "is_pumpaction"}
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_pump_spas")
+
+----------------------------------------------------------------------------------
+
+ATT = {}
+
 ATT.PrintName = [[Railed]]
 ATT.CompactName = [[F. Railed]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
@@ -62,6 +81,22 @@ ATT.Category = "ucalpha_1014_pump"
 ATT.ActivateElements = {"fe_3"} 
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_pump_rail")
+
+----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[Wood]]
+ATT.CompactName = [[F. Wood]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 1
+ATT.Category = "ucalpha_1014_pump"
+ATT.ActivateElements = {"fe_4"} 
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_fe_wood")
 
 ----------------------------------------------------------------------------------
 ----------------
@@ -144,6 +179,21 @@ ATT.ActivateElements = {"s_4"}
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_stock_heavy")
 ----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[Heavy Wood Stock]]
+ATT.CompactName = [[S. HeavyW]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 0
+ATT.Category = "ucalpha_1014_stock"
+ATT.ActivateElements = {"s_5"}
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_stock_heavywood")
+----------------------------------------------------------------------------------
 ----------------
 -- Ammo --
 ----------------
@@ -195,12 +245,29 @@ ATT.ActivateElements = {"m_3"}
 ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_mag_8")
 
 ----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[7-Round Tube]]
+ATT.CompactName = [[M. 7R]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 7
+ATT.ClipSize = 7
+ATT.Category = "ucalpha_1014_tube"
+ATT.ActivateElements = {"m_4"}
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_mag_7")
+
+----------------------------------------------------------------------------------
 ----------------
 -- Barrel --
 ----------------
 ATT = {}
 
-ATT.PrintName = [[21\" Entrenched Barrel]]
+ATT.PrintName = [[21" Entrenched Barrel]]
 ATT.CompactName = [[B. Heat]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[bayonaise yo
@@ -208,7 +275,7 @@ ATT.Description = [[bayonaise yo
 
 ATT.SortOrder = 2
 ATT.Category = "ucalpha_1014_barrel"
-ATT.ActivateElements = {"b_1"}
+ATT.ActivateElements = {"b_1", "has_bayonet"}
 
 ATT.Bash = true
 ATT.BashDamageType = DMG_SLASH
@@ -229,6 +296,9 @@ ATT.HookP_BlockFire = function(self)
     return canfire
 	end
 end
+ATT.Hook_TranslateAnimation = function(wep, curanim)
+	if	curanim == "bash" and !wep:GetUBGL()	then	return "bash_bayo"		end
+end
 
 ATT.SprintPos = Vector(1, -3, 0.5)
 ATT.SprintAng = Angle(3, -2, -35)
@@ -243,7 +313,7 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_barrel_bayo")
 ----------------------------------------------------------------------------------
 ATT = {}
 
-ATT.PrintName = [[26\" Competition Barrel]]
+ATT.PrintName = [[26" Competition Barrel]]
 ATT.CompactName = [[B. Comp]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[longest john
@@ -260,7 +330,7 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_barrel_comp")
 ----------------------------------------------------------------------------------
 ATT = {}
 
-ATT.PrintName = [[14\" Entry Barrel]]
+ATT.PrintName = [[14" Entry Barrel]]
 ATT.CompactName = [[B. Skeleton]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[Short barrel intended for breaching and close quarters use. Drastically increases pellet spread, but is much easier to manoeuvre.
@@ -362,7 +432,6 @@ ATT.RTScopeColorable = true
 ATT.RTScopeShadowIntensity = 7
 
 ATT.Scale = 1
-ATT.ModelOffset = Vector(0, 0, -0.1)
 
 ATT.SwayAdd = 0.05
 ATT.FreeAimRadiusMultSights = 0.1
