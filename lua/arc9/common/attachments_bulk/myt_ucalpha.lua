@@ -22,6 +22,27 @@ Pump Action
 
 ATT.ManualAction = true
 
+ATT.Model = "models/weapons/arc9/myt_uc/c_m1014.mdl" -- i just need a qca point but im not making a whole new model
+ATT.ModelBodygroups = "1458610"
+ATT.ModelOffset = Vector(-2, 0, 7)
+ATT.ModelAngleOffset = Angle(-90, 90, 90)
+ATT.Scale = 1
+ATT.ToggleOnF = true -- This attachment is toggleable with the flashlight key.
+ATT.ToggleStats = {
+    {
+        Flashlight = true,
+        FlashlightColor = Color(255, 255, 255),
+        FlashlightMaterial = "effects/flashlight001",
+        FlashlightDistance = 1024,
+        FlashlightFOV =  60,
+        FlashlightAttachment = 3,
+		FlashlightBrightness = 5,
+    },
+    {
+    }
+}
+
+
 ATT.SortOrder = 10
 ATT.Category = "ucalpha_1014_pump"
 ATT.ActivateElements = {"fe_pump1", "is_pumpaction"}
