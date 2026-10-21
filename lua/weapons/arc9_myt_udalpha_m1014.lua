@@ -617,6 +617,7 @@ SWEP.Attachments = {
 		Bone = "1014_pump",
 		Pos = Vector(0, 1, -0.25),
 		Ang = Angle(90, 0, -90),
+		MergeSlots = {10},
 	},
 	{
 		PrintName = "Off Hand",
@@ -640,6 +641,18 @@ SWEP.Attachments = {
 		Category = {"bfc_optic_dove"},
 		Bone = "1014_parent",
 		Pos = Vector(0.8, -1.2, 2),
+		Ang = Angle(90, 0, -90),
+	}, 
+	{   --10 ubgl
+		PrintName = "",
+		DefaultName = "",
+		Hidden = true,
+		InstalledElements = {"fg_def"},
+		ExcludeElements = {"ubgl_magwell"},
+		
+		Category = {"ubgl_ucalpha"},
+		Bone = "1014_pump",
+		Pos = Vector(0, 1, -0.25),
 		Ang = Angle(90, 0, -90),
 	}, 
 }
