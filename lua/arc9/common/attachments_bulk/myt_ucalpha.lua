@@ -543,10 +543,7 @@ ATT.Hook_TranslateAnimation = function(wep, curanim)
 		if	curanim == "fire_ubgl_iron_empty" 	then	return "fire_ubgl_iron"	end	
 		if	curanim == "reload_ubgl_empty" 		then	return "reload_ubgl"	end	
 		if	curanim == "holster_ubgl_empty"		then	return "holster_ubgl"	end
-	-- separate check
-		if	curanim == "enter_ubgl_glempty" 		then	return "enter_ubgl"		end
-	else
-		return 
+		if	curanim == "enter_ubgl_glempty" 	then	return "enter_ubgl"		end
 	end
 end
 ATT.IKGunMotionOffset = Vector(0, 0, 0)
@@ -575,7 +572,7 @@ ATT.UBGLChamberSize = 0
 ATT.ShootVolumeUBGL = 110
 ATT.RPMUBGL = 600
 
-ATT.SpreadUBGL = 0.005
+ATT.SpreadUBGL = 0.01
 
 ATT.ShootEntUBGL = "arc9_ucalpha_rpg"
 ATT.ShootEntForceUBGL = 10000
@@ -585,7 +582,7 @@ ATT.HasSightsUBGL = true
 
 ATT.MuzzleParticleUBGL = "muzzleflash_m79"
 
-ATT.ModelOffset = Vector(0, 0, 1)
+ATT.ModelOffset = Vector(-2.5, 0, 1)
 ATT.ModelAngleOffset = Angle(0, 0, 0)
 
 ATT.Sights = {
