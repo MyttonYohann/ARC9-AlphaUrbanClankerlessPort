@@ -251,36 +251,36 @@ SWEP.Animations = {
 	},
 	["draw"] = {
 		Source = "draw",
-        FireASAP = true,
-        MinProgress = 0.35,
+		FireASAP = true,
+		MinProgress = 0.35,
 	},
-    ["ready"] = {
-        Source = "equip",
-        EventTable = {
-            {s = path1 .. "rack_1.ogg", t = 0.44},
-            {s = path .. "breechclose.ogg", t = 0.5},
-            {s = common .. "shoulder.ogg",  t = 0.75},
-        },
+	["ready"] = {
+		Source = "equip",
+		EventTable = {
+			{s = path1 .. "rack_1.ogg", t = 0.44},
+			{s = path .. "breechclose.ogg", t = 0.5},
+			{s = common .. "shoulder.ogg",  t = 0.75},
+		},
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, }, { t = 0.6, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 1, },
 		},
-        FireASAP = true,
-        MinProgress = 0.6,
-    },
-    ["draw_cycle"] = {
-        Source = "draw_cycle",
-        EventTable = {
-            {s = path1 .. "rack_1.ogg",  t = 8/30},
-            {s = path1 .. "rack_2.ogg",  t = 13/30},
-            {s = common .. "shoulder.ogg",  t = 0.6},
-        },
+		FireASAP = true,
+		MinProgress = 0.6,
+	},
+	["draw_cycle"] = {
+		Source = "draw_cycle",
+		EventTable = {
+			{s = path1 .. "rack_1.ogg",  t = 8/30},
+			{s = path1 .. "rack_2.ogg",  t = 13/30},
+			{s = common .. "shoulder.ogg",  t = 0.6},
+		},
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, }, { t = 0.6, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 1, },
 		},
-        FireASAP = true,
-        MinProgress = 0.6,
+		FireASAP = true,
+		MinProgress = 0.6,
 		EjectAt = 9/30,
-    },
+	},
 	["draw_empty"] = {
 		Source = "draw_empty",
 	},
@@ -307,12 +307,12 @@ SWEP.Animations = {
 	},
 	["cycle"] = {
 		Source = {"cycle"},
-        EventTable = {
-            {s = common .. "cloth_2.ogg",  t = 0},
-            {s = path1 .. "rack_1.ogg",  t = 0},
-            {s = path1 .. "eject.ogg",  t = 0.075},
-            {s = path1 .. "rack_2.ogg",  t = 0.2},
-        },
+		EventTable = {
+			{s = common .. "cloth_2.ogg",  t = 0},
+			{s = path1 .. "rack_1.ogg",  t = 0},
+			{s = path1 .. "eject.ogg",  t = 0.075},
+			{s = path1 .. "rack_2.ogg",  t = 0.2},
+		},
 		EjectAt = 8 / 40,
 		FireASAP = true,
 		MinProgress = 24/40,
@@ -322,9 +322,9 @@ SWEP.Animations = {
 		Source = "reload_1_emp",
 		IKTimeLine = { { t = 0, lhik = 1, rhik = 0, }, { t = 1, lhik = 1, rhik = 0, }, },
 		EventTable = {   
-            {s = common .. "cloth_2.ogg",  t = 0},
-            {s = path .. "breechload.ogg",  t = 12/30},
-            {s = path .. "breechclose.ogg",  t = 29/30},
+			{s = common .. "cloth_2.ogg",  t = 0},
+			{s = path .. "breechload.ogg",  t = 12/30},
+			{s = path .. "breechclose.ogg",  t = 29/30},
 		},
 		RestoreAmmo = 1,
 		RefillProgress = 35/40,
@@ -335,11 +335,11 @@ SWEP.Animations = {
 		Source = "reload_1pump_emp2",
 		IKTimeLine = { { t = 0, lhik = 1, rhik = 0, }, { t = 1, lhik = 1, rhik = 0, }, },
 		EventTable = {   
-            {s = common .. "cloth_2.ogg",  t = 0},
-            {s = path1 .. "rack_1.ogg",  t = 5/30},
-            {s = path1 .. "eject.ogg",  t = 8/30},
-            {s = path1 .. "rack_2.ogg",  t = 11/30},
-            {s = common .. "shotgun_insert_3.ogg",  t = 31/30},
+			{s = common .. "cloth_2.ogg",  t = 0},
+			{s = path1 .. "rack_1.ogg",  t = 5/30},
+			{s = path1 .. "eject.ogg",  t = 8/30},
+			{s = path1 .. "rack_2.ogg",  t = 11/30},
+			{s = common .. "shotgun_insert_3.ogg",  t = 31/30},
 		},
 		RestoreAmmo = 1,
 		EjectAt = 8 / 40,
@@ -351,8 +351,8 @@ SWEP.Animations = {
 		{ t = 0, lhik = 1, rhik = 1, }, { t = 0.1, lhik = 1, rhik = 0, }, { t = 0.3, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 0, },
 		},
 		EventTable = {   
-            {s = common .. "cloth_2.ogg",  t = 0},
-            {s = common .. "shotgun_insert_3.ogg",  t = 25/30},
+			{s = common .. "cloth_2.ogg",  t = 0},
+			{s = common .. "shotgun_insert_3.ogg",  t = 25/30},
 		},
 		RestoreAmmo = 1,
 		RefillProgress = 35/40,
@@ -362,8 +362,8 @@ SWEP.Animations = {
 		Source = "reload_2",
 		IKTimeLine = { { t = 0, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 0, },  },
 		EventTable = { 
-            {s = common .. "shotgun_insert_3.ogg",  t = 18/30},
-            {s = common .. "cloth_4.ogg",  t = 0},
+			{s = common .. "shotgun_insert_3.ogg",  t = 18/30},
+			{s = common .. "cloth_4.ogg",  t = 0},
 		},
 		RefillProgress = 32 / 40,
 	},
@@ -371,11 +371,11 @@ SWEP.Animations = {
 		Source = "reload_2pump_end",
 		IKTimeLine = { { t = 0, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 0, },  },
 		EventTable = { 
-            {s = path1 .. "rack_1.ogg",  t = 6/30},
-            {s = path1 .. "eject.ogg",  t = 9/30},
-            {s = path1 .. "rack_2.ogg",  t = 12/30},
-            {s = common .. "shotgun_insert_3.ogg",  t = 34/30},
-            {s = common .. "cloth_4.ogg",  t = 0},
+			{s = path1 .. "rack_1.ogg",  t = 6/30},
+			{s = path1 .. "eject.ogg",  t = 9/30},
+			{s = path1 .. "rack_2.ogg",  t = 12/30},
+			{s = common .. "shotgun_insert_3.ogg",  t = 34/30},
+			{s = common .. "cloth_4.ogg",  t = 0},
 		},
 		EjectAt = 9/30,
 		RefillProgress = 32 / 40,
@@ -386,8 +386,8 @@ SWEP.Animations = {
 		{ t = 0, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 0, },
 		},
 		EventTable = { 
-            {s = common .. "shotgun_insert_3.ogg",  t = 18/30},
-            {s = common .. "cloth_4.ogg",  t = 0},
+			{s = common .. "shotgun_insert_3.ogg",  t = 18/30},
+			{s = common .. "cloth_4.ogg",  t = 0},
 		},
 		RestoreAmmo = 0, -- WHO FUCKING BROKE THIS, insert is now consider 1 + RestoreAmmo
 		RefillProgress = 60/40,
@@ -399,7 +399,7 @@ SWEP.Animations = {
 		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },
 		},
 		EventTable = {
-            {s = common .. "shoulder.ogg",  t = 0.4},
+			{s = common .. "shoulder.ogg",  t = 0.4},
 		},
 		FireASAP = true,
 		MinProgress = 9/30, 
@@ -411,10 +411,10 @@ SWEP.Animations = {
 		{ t = 0.7, lhik = 1, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },
 		},
 		EventTable = {
-            {s = path1 .. "rack_1.ogg",  t = 6/30},
-            {s = path1 .. "eject.ogg",  t = 9/30},
-            {s = path1 .. "rack_2.ogg",  t = 12/30},
-            {s = common .. "shoulder.ogg",  t = 0.6},
+			{s = path1 .. "rack_1.ogg",  t = 6/30},
+			{s = path1 .. "eject.ogg",  t = 9/30},
+			{s = path1 .. "rack_2.ogg",  t = 12/30},
+			{s = common .. "shoulder.ogg",  t = 0.6},
 		},
 		FireASAP = true,
 		MinProgress = 24/40, 
@@ -425,7 +425,7 @@ SWEP.Animations = {
 		Source = "reload_3_emp",
 		IKTimeLine = {  { t = 0, lhik = 1, rhik = 0, }, { t = 1, lhik = 1, rhik = 1, },},
 		EventTable = {
-            {s = common .. "shoulder.ogg",  t = 0.4},
+			{s = common .. "shoulder.ogg",  t = 0.4},
 		},
 		FireASAP = true,
 		MinProgress = 32/40,
@@ -434,8 +434,8 @@ SWEP.Animations = {
 	["bash_bayo"] = { Source = {"stab"},},	
 }
 SWEP.Bash = true
-SWEP.Hook_BlockHasAnimation = function (wep, anim) -- use normal bash fuction if no bayonet
-	if anim == "bash" and !wep:HasElement("has_bayonet") then return false end
+SWEP.Hook_BlockHasAnimation = function (wep, anim) -- use normal bash fuction if no bayonet and not in UBGL
+	if anim == "bash" and !wep:HasElement("has_bayonet") and !wep:GetUBGL() then return false end
 end
 
 SWEP.Bodge_Cycle = 0
@@ -526,7 +526,7 @@ SWEP.AttachmentElements = {
 	["s_5"] = 	{ Bodygroups = { {3, 7}, },},   
 	["m_1"] = 	{ Bodygroups = { {2, 1}, },},   
 	["m_2"] = 	{ Bodygroups = { {2, 2}, },},   
-	["m_3"] = 	{ Bodygroups = { {2, 3}, },},    
+	["m_3"] = 	{ Bodygroups = { {2, 3}, },},	
 	["m_4"] = 	{ Bodygroups = { {2, 4}, },},   
 	["b_1"] = 	{ Bodygroups = { {1, 3}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 28.5), } }		},
 	["b_2"] = 	{ Bodygroups = { {1, 2}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 32.5), } }		},
@@ -535,7 +535,7 @@ SWEP.AttachmentElements = {
 
 
 SWEP.Hook_ModifyBodygroups = function(wep, data)
-    local model = data.model  
+	local model = data.model  
 	if !wep:GetReloading() 	then model:SetBodygroup(5,1) end -- hide bullet when not reloading, i think there was a proper bonehide method but i forgor
 	-- ziptied rail for foregrip
 	if wep:HasElement("fg_def") then model:SetBodygroup(6,1) end

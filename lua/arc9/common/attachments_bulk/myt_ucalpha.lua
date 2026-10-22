@@ -471,6 +471,14 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_optic_acog")
 ----------------------------------------------------------------------------------
 ATT = {}
 
+local rpg_path = "arc9_ucalpha/rocket/"
+local snd_common = "arc9_ucalpha/common/"
+
+local rpg_blast = rpg_path .. "fire-01.ogg", rpg_path .. "fire-02.ogg", rpg_path .. "fire-03.ogg", rpg_path .. "fire-04.ogg", rpg_path .. "fire-05.ogg", rpg_path .. "fire-06.ogg"
+local rpg_tail = rpg_path .. "fire-dist-01.ogg", rpg_path .. "fire-dist-02.ogg", rpg_path .. "fire-dist-03.ogg", rpg_path .. "fire-dist-04.ogg", rpg_path .. "fire-dist-05.ogg", rpg_path .. "fire-dist-06.ogg"
+local rpg_mech = rpg_path .. "mech-01.ogg", rpg_path .. "mech-02.ogg", rpg_path .. "mech-03.ogg", rpg_path .. "mech-04.ogg", rpg_path .. "mech-05.ogg", rpg_path .. "mech-06.ogg"
+
+
 ATT.PrintName = [[Sawnoff RPG]]
 ATT.CompactName = "RPG"
 ATT.Icon = Material("entities/gekolt_dod_ubw_garand.png")
@@ -488,16 +496,21 @@ ATT.ActivateElements = {"is_ubgl"}
 ATT.IKAnimationProxy = {
 	["fire_ubgl"] = {
 		Source = "fire",
+		EventTable = {
+			{s = rpg_blast, t = 0},
+			{s = rpg_mech, t = 0},
+		},
 	},
 	["reload_ubgl"] = {
 		Source = "reload",
-		MinProgress = 0.8,
+		MinProgress = 0.9,
 		FireASAP = true,
 		EventTable = {
-			--{s =  "gekolt_dod/m1carbine_clipin1.wav" ,	t = 10 / 40},
-			--{s =  "gekolt_dod/m1carbine_clipin2.wav" ,	t = 15 / 40},
-			--{s =  "gekolt_dod/k98_singleshotreload.wav" ,   t = 45 / 40},
-			--{s =  "gekolt_dod/m1carbine_boltforward.wav" ,	t = 72 / 40},
+			{s =  snd_common .. "magpouch.ogg" ,	t = 10 / 30},
+			{s =  rpg_path .. "tap.ogg" ,			t = 63 / 30},
+			{s =  rpg_path .. "slide1.ogg" ,		t = 83 / 30},
+			{s =  rpg_path .. "slide2.ogg" ,		t = 100 / 30},
+			{s =  rpg_path .. "insert.ogg" ,		t = 103 / 30},
 		},
 	},
 	["enter_ubgl"] = {
@@ -576,8 +589,7 @@ ATT.SpreadUBGL = 0.01
 
 ATT.ShootEntUBGL = "arc9_ucalpha_rpg"
 ATT.ShootEntForceUBGL = 10000
-ATT.ShootSoundUBGL = {"cturix_ar15/fire_grenade1.wav", "cturix_ar15/fire_grenade2.wav", "cturix_ar15/fire_grenade3.wav"}
-ATT.DistantShootSoundUBGL = {"cturix_ar15/fire_grenade_dist.wav"}
+ATT.ShootSoundUBGL = rpg_blast
 ATT.HasSightsUBGL = true
 
 ATT.MuzzleParticleUBGL = "muzzleflash_m79"
