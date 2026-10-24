@@ -625,3 +625,81 @@ ATT.UBGLExclusiveSightsUBGL = true
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_ubgl_rpg")
 ----------------------------------------------------------------------------------
+
+-----------
+-- Ammo --
+-----------
+
+ATT = {}
+
+ATT.PrintName = [["DRGN" Dragon's Breath]]
+ATT.CompactName = [[A. DRGN]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[Novelty magnesium-based round that projects a spectacular jet of sparks and fire. Burning at over 3,000 °F, the blast isn't immediately lethal, but can easily set objects and people ablaze.
+
+Only compatible with manual action or forced manual cycle converted shotguns due to a weak pressure curve.]]
+
+ATT.ManualAction = true
+
+ATT.SortOrder = 1
+ATT.Category = "ucalpha_ammo_sg"
+ATT.ActivateElements = {"is_pumpaction", "force_pumpaction"}
+
+local dontburn = {
+    npc_zombie = true,
+    npc_zombie_torso = true,
+    npc_zombine = true,
+    npc_fastzombie = true,
+    npc_fastzombie_torso = true,
+    npc_headcrab = true,
+    npc_headcrab_fast = true,
+    npc_headcrab_black = true,
+}
+
+ATT.DamageTypeOverride = DMG_BUCKSHOT + DMG_BURN 
+ATT.HullSize = 2
+ATT.HullSize_Priority = 100
+ATT.SpreadAdd = 0.003
+ATT.DamageMaxMult = 0.5
+ATT.DamageMinMult = 0.5
+ATT.AlwaysPhysBullet = true
+ATT.PhysBulletMuzzleVelocity = 10000
+ATT.PhysBulletGravityMult = 0.75
+ATT.PhysBulletDrag = 4
+
+ATT.Hook_PhysBulletHit = function(wep, data)
+    if SERVER and data.tr.Entity then
+        local d = data.bullet.Travelled * ARC9.HUToM
+        local dur = 6 - d * 2 / wep.Range
+        if dur > 0 then
+            data.tr.Entity:Extinguish()
+            data.tr.Entity:Ignite(dur)
+        end
+
+        local delta = math.Clamp(d / data.bullet.Range, 0, 1)
+
+        -- Impact is disabled (no bullet holes) so we do damage ourselves
+        local dmg = DamageInfo()
+        dmg:SetAttacker(data.bullet.Attacker)
+        dmg:SetInflictor(data.bullet.Weapon)
+        dmg:SetDamage(Lerp(delta, data.bullet.DamageMax, data.bullet.DamageMin))
+        dmg:SetDamagePosition(data.bullet.Pos)
+        dmg:SetDamageForce(data.bullet.Vel)
+        dmg:SetDamageType(dontburn[data.tr.Entity:GetClass()] and DMG_BUCKSHOT or (DMG_BURN + DMG_BUCKSHOT))
+
+        data.tr.Entity:TakeDamageInfo(dmg)
+    end
+
+    local effect = EffectData()
+    effect:SetOrigin(data.tr.HitPos)
+    util.Effect("StunstickImpact",effect)
+    
+    if data.tr.HitWorld then
+        util.Decal("FadingScorch",data.tr.HitPos - data.tr.HitNormal,data.tr.HitPos + data.tr.HitNormal)
+    end
+end
+
+ATT.MuzzleParticle = "muzzleflash_dragonbreath"
+ARC9.LoadAttachment(ATT, "myt_ucalpha_ammo_sg_dragonbreath")
+
+----------------------------------------------------------------------------------

@@ -1,0 +1,22 @@
+"VertexLitGeneric"
+{
+	"$basetexture"			"models\myt_uc\pist_4pistols\m1911_terminatorsight"
+	"$bumpmap" 			"models\myt_ucs\pist_4pistols\m1911_terminatorsight_n"
+
+	"$phong"                        "1"	
+	"$phongalbedotint"              "1"	
+	"$phongexponenttexture"			"models\myt_uc\_detail\exponent"
+	"$phongexponent"                "16"	
+	"$phongboost"                   "40"
+	"$phongfresnelranges"           "[0.75 1.5 3]"
+
+	"$basetexturealphaenvmapmask"	"1"
+	"$envmap"			"env_cubemap"
+	"$envmaptint"			"[0.25 0.25 0.25]"
+	"$envmapfresnel"			"0.5"	
+
+	"$detail" "models\myt_uc\_detail\dt_metal1"
+	"$detailscale" "6"
+	"$detailblendfactor" "1"
+	"$detailblendmode" "0"		
+}

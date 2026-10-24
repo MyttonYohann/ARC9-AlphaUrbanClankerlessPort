@@ -317,6 +317,18 @@ SWEP.Animations = {
 		FireASAP = true,
 		MinProgress = 24/40,
 	},  
+	["cycle_forced"] = {
+		Source = {"cycle_forced"},
+		EventTable = {
+			{s = common .. "cloth_2.ogg",  t = 0},
+			{s = path1 .. "rack_1.ogg",  t = 11/30},
+			{s = path1 .. "eject.ogg",  t = 13/30},
+			{s = path1 .. "rack_2.ogg",  t = 16/30},
+		},
+		EjectAt = 22 / 40,
+		FireASAP = true,
+		MinProgress = 24/40,
+	},  
 
 	["reload_start_empty"] = {
 		Source = "reload_1_emp",
@@ -330,9 +342,22 @@ SWEP.Animations = {
 		RefillProgress = 35/40,
 		MinProgress = 35/40,
 		MagSwapTime = 35/40,
-	},  
+	}, 
 	["reload_start_emp"] = {
 		Source = "reload_1pump_emp2",
+		IKTimeLine = { { t = 0, lhik = 1, rhik = 0, }, { t = 1, lhik = 1, rhik = 0, }, },
+		EventTable = {   
+			{s = common .. "cloth_2.ogg",  t = 0},
+			{s = path1 .. "rack_1.ogg",  t = 5/30},
+			{s = path1 .. "eject.ogg",  t = 8/30},
+			{s = path1 .. "rack_2.ogg",  t = 11/30},
+			{s = common .. "shotgun_insert_3.ogg",  t = 31/30},
+		},
+		RestoreAmmo = 1,
+		EjectAt = 8 / 40,
+	}, 
+	["reload_start_emp2"] = {
+		Source = "reload_1pump_emp",
 		IKTimeLine = { { t = 0, lhik = 1, rhik = 0, }, { t = 1, lhik = 1, rhik = 0, }, },
 		EventTable = {   
 			{s = common .. "cloth_2.ogg",  t = 0},
@@ -453,11 +478,12 @@ end
 
 SWEP.Hook_BlockAnimation = function(wep, curanim)
 	if wep.Bodge_Cycle == 1 and !wep:GetUBGL() then
-		if	curanim == "cycle"	then return true end
+		if	curanim == "cycle"			then return true end
+		if	curanim == "cycle_forced"	then return true end
 	end	
 end
 SWEP.Hook_TranslateAnimation = function(wep, curanim)
-	if !wep:GetUBGL() then -- only checking the gun not the off hand
+	if !wep:GetUBGL() then -- only checking the gun not the ubgl
 	
 	-- uncycled state
 	if wep:Clip1() == 0 then
@@ -480,6 +506,7 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	if (wep.Bodge_Cycle == 1 or wep.Bodge_Reload == 1) and wep:HasElement("is_pumpaction") then
 		if	wep:Clip1() == wep:GetValue("ClipSize") then
 			if curanim == "reload_insert" 	then return "reload_insert_emp"	end	-- transition anim to + 1 when gun at max cap
+			if curanim == "reload_start" and wep:HasElement("force_pumpaction")	then return "reload_start_emp2"	end	-- different anim when not pump action forend
 			if curanim == "reload_start" 	then return "reload_start_emp"	end	-- clear chamber to add a + 1
 		end
 		if wep:Clip1() < wep:GetValue("ClipSize") + wep:GetValue("ChamberSize")  then
@@ -506,6 +533,11 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 		return "draw_cycle"
 	end
 	
+	if wep:HasElement("force_pumpaction") then -- when not using a pump action forend
+		if curanim == "cycle" 		then return "cycle_forced"	end	
+		if curanim == "draw_cycle" 	then return "equip"	end	
+	end
+
 	end
 end
 
@@ -620,13 +652,13 @@ SWEP.Attachments = {
 		MergeSlots = {10},
 	},
 	{
-		PrintName = "Off Hand",
-		DefaultName = "None",
+		PrintName = "Ammo Type",
+		DefaultName = "12 Gauge",
 
-		ExcludeElements = {"nooh", "rh_occupied"},
-		Category = {"bf1942_dc_offhand"},
+		--ExcludeElements = {""},
+		Category = {"ucalpha_ammo_sg"},
 		Bone = "1014_parent",
-		Pos = Vector(-1, 3, -12),
+		Pos = Vector(0, 1, 3),
 		Ang = Angle(90, 0, -90),
 	},
 
