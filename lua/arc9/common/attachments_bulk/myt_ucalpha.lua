@@ -892,7 +892,7 @@ ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[
 ]]
 
-ATT.SortOrder = 1
+ATT.SortOrder = 10
 ATT.Category = "ucalpha_glock_mag"
 ATT.ActivateElements = {"m_10"}
 ATT.ClipSize = 10
@@ -913,7 +913,7 @@ ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[
 ]]
 
-ATT.SortOrder = 1
+ATT.SortOrder = 33
 ATT.Category = "ucalpha_glock_mag"
 ATT.ActivateElements = {"m_33"}
 ATT.ClipSize = 33
@@ -924,5 +924,44 @@ ATT.Hook_TranslateAnimation = function(wep, curanim)
 end
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_mag_33")
+
+----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[21-Round Mag]]
+ATT.CompactName = [[M. 21]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 21
+ATT.Category = "ucalpha_glock_mag"
+ATT.ActivateElements = {"m_21"}
+ATT.ClipSize = 21
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_mag_21")
+
+----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[100-Round Mag]]
+ATT.CompactName = [[M. 100]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[ballsack shredder
+]]
+
+ATT.SortOrder = 100
+ATT.Category = "ucalpha_glock_mag"
+ATT.ActivateElements = {"m_100"}
+ATT.ClipSize = 100
+
+ATT.Hook_TranslateAnimation = function(wep, curanim)
+	if	curanim == "reload" 		then	return "reload_100"	end
+	if	curanim == "reload_empty"	then	return "reload_empty_100"	end	
+end
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_mag_100")
 
 ----------------------------------------------------------------------------------

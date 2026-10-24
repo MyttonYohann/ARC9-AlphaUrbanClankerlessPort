@@ -374,6 +374,37 @@ SWEP.Animations = {
 			{s =  path .. "sliderel.ogg",   t = 55/30},  
 		},
 	},  
+	["reload_100"] = {
+		Source = "reload_100",
+		FireASAP = true,
+		MinProgress = 0.93,
+		EventTable = {
+			{s =  path .. "magrelease.ogg",   t = 14 / 30},  
+			{s =  path .. "magout.ogg",   t = 18 / 30},  
+			{s =  path .. "magin.ogg",   t = 31 / 30},   
+			{s =  path .. "magtap.ogg",   t = 44 / 30},   
+		},
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
+		},
+	},  
+	["reload_empty_100"] = {
+		Source = "reload_empty_100",
+		FireASAP = true,
+		MinProgress = 0.95,
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.1, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
+		},
+		EventTable = {
+			{s =  path .. "magrelease.ogg",   t = 7 / 30},  
+			{s =  path .. "magout.ogg",   t = 9 / 30},  
+			{s =  path .. "magin.ogg",   t = 28 / 30},  
+			{s = path .. "slide_pull.ogg", t = 64/30},
+			{s =  path .. "sliderel.ogg",   t = 73/30},  
+		},
+	},  
 }
 SWEP.Bash = true
 -------------------------- ATTACHMENTS
@@ -389,6 +420,8 @@ SWEP.AttachmentElements = {
 	
 	["m_10"] = 		{ Bodygroups = { {0, 1},{1, 1}, },},
 	["m_33"] = 		{ Bodygroups = { {1, 2}, },},
+	["m_21"] = 		{ Bodygroups = { {1, 4}, },},
+	["m_100"] = 	{ Bodygroups = { {1, 3}, },},
 }
 
 
