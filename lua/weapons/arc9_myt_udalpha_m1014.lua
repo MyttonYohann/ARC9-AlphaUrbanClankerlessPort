@@ -506,7 +506,7 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	if (wep.Bodge_Cycle == 1 or wep.Bodge_Reload == 1) and wep:HasElement("is_pumpaction") then
 		if	wep:Clip1() == wep:GetValue("ClipSize") then
 			if curanim == "reload_insert" 	then return "reload_insert_emp"	end	-- transition anim to + 1 when gun at max cap
-			if curanim == "reload_start" and wep:HasElement("force_pumpaction")	then return "reload_start_emp2"	end	-- different anim when not pump action forend
+			if curanim == "reload_start" and wep:HasElement("force_pumpaction")	and !wep:HasElement("has_forend") then return "reload_start_emp2"	end	-- different anim when not pump action forend
 			if curanim == "reload_start" 	then return "reload_start_emp"	end	-- clear chamber to add a + 1
 		end
 		if wep:Clip1() < wep:GetValue("ClipSize") + wep:GetValue("ChamberSize")  then
@@ -533,7 +533,7 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 		return "draw_cycle"
 	end
 	
-	if wep:HasElement("force_pumpaction") then -- when not using a pump action forend
+	if wep:HasElement("force_pumpaction") and !wep:HasElement("has_forend") then -- when not using a pump action forend
 		if curanim == "cycle" 		then return "cycle_forced"	end	
 		if curanim == "draw_cycle" 	then return "equip"	end	
 	end

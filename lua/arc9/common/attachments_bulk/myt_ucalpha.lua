@@ -45,7 +45,7 @@ ATT.ToggleStats = {
 
 ATT.SortOrder = 10
 ATT.Category = "ucalpha_1014_pump"
-ATT.ActivateElements = {"fe_pump1", "is_pumpaction"}
+ATT.ActivateElements = {"fe_pump1", "is_pumpaction", "has_forend"}
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_pump_poly")
 
@@ -64,7 +64,7 @@ ATT.ManualAction = true
 
 ATT.SortOrder = 11
 ATT.Category = "ucalpha_1014_pump"
-ATT.ActivateElements = {"fe_pump2", "is_pumpaction"}
+ATT.ActivateElements = {"fe_pump2", "is_pumpaction", "has_forend"}
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_pump_wood")
 
@@ -83,7 +83,7 @@ ATT.ManualAction = true
 
 ATT.SortOrder = 11
 ATT.Category = "ucalpha_1014_pump"
-ATT.ActivateElements = {"fe_pump5", "is_pumpaction"}
+ATT.ActivateElements = {"fe_pump5", "is_pumpaction", "has_forend"}
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_pump_spas")
 
@@ -645,7 +645,34 @@ ATT.SortOrder = 1
 ATT.Category = "ucalpha_ammo_sg"
 ATT.ActivateElements = {"is_pumpaction", "force_pumpaction"}
 
-local dontburn = {
+ATT.DamageType = DMG_BURN + DMG_BUCKSHOT
+ATT.HullSize = 2
+ATT.HullSize_Priority = 100
+ATT.SpreadAdd = 0.003
+ATT.DamageMaxMult = 2
+ATT.DamageMinMult = 2
+ATT.AlwaysPhysBullet = true
+ATT.PhysBulletMuzzleVelocity = 10000
+ATT.PhysBulletGravityMult = 0.75
+ATT.PhysBulletDrag = 4
+
+ATT.ImpactDecal = "FadingScorch"
+
+ATT.Hook_PrimaryAttack = function(wep, data)
+    --wep:EmitSound("UPLP_DB_ADD")
+    if SERVER and wep:GetHeatAmount() >= wep:GetProcessedValue("HeatCapacity", true) then
+        local dmg = DamageInfo()
+        dmg:SetAttacker(wep:GetOwner())
+        dmg:SetInflictor(wep)
+        dmg:SetDamage(10)
+        dmg:SetDamageType(DMG_BURN)
+        dmg:SetDamagePosition(wep:GetOwner():GetPos())
+        wep:GetOwner():TakeDamageInfo(dmg)
+        wep:GetOwner():Ignite(math.Rand(2, 3))
+    end
+end
+
+local direct_burn = {
     npc_zombie = true,
     npc_zombie_torso = true,
     npc_zombine = true,
@@ -654,49 +681,134 @@ local dontburn = {
     npc_headcrab = true,
     npc_headcrab_fast = true,
     npc_headcrab_black = true,
+    npc_headcrab_poison = true,
+    npc_poisonzombie = true,
+    npc_antlionguard = true,
+    npc_antlionguardian = true,
+    npc_barnacle = true,
 }
 
-ATT.DamageTypeOverride = DMG_BUCKSHOT + DMG_BURN 
-ATT.HullSize = 2
-ATT.HullSize_Priority = 100
-ATT.SpreadAdd = 0.003
-ATT.DamageMaxMult = 0.5
-ATT.DamageMinMult = 0.5
-ATT.AlwaysPhysBullet = true
-ATT.PhysBulletMuzzleVelocity = 10000
-ATT.PhysBulletGravityMult = 0.75
-ATT.PhysBulletDrag = 4
+local ignite_threshold = {
+    -- instantly killed by fire
+    npc_combine_s = 0.6,
+    npc_metropolice = 0.6,
 
-ATT.Hook_PhysBulletHit = function(wep, data)
-    if SERVER and data.tr.Entity then
-        local d = data.bullet.Travelled * ARC9.HUToM
-        local dur = 6 - d * 2 / wep.Range
-        if dur > 0 then
-            data.tr.Entity:Extinguish()
-            data.tr.Entity:Ignite(dur)
+    -- loses a lot of hp on ignite
+    npc_poisonzombie = 0.5,
+}
+
+ATT.Hook_BulletImpact = function(wep, data)
+    local ent = data.tr.Entity
+    if !IsValid(ent) then return end
+
+    -- volume check threshold is about as big as models/props_junk/trashdumpster02.mdl (the big blue dumpster)
+    local dur = 0
+    local max_dur = 30
+    if ent:IsPlayer() then
+        dur = 4 / 30
+        max_dur = 5
+    elseif ent:IsNPC() or ent:IsNextBot() then
+        -- burning will cause CC or even instant kill some NPCs so only burn if they're weak (or zombies)
+        if ent:IsNextBot() or ent:Health() / ent:GetMaxHealth() <= (ignite_threshold[data.tr.Entity:GetClass()] or 1) then
+            dur = 8 / 30
         end
+    elseif ent:GetPhysicsObject():IsValid() then
+        dur = Lerp(1 - ((ent:GetPhysicsObject():GetVolume() or 0) / 750000), 2, 10) / 30
+    end
+    if dur <= 0 then
 
-        local delta = math.Clamp(d / data.bullet.Range, 0, 1)
+        return
+    end
+    dur = Lerp(wep:GetDamageDeltaAtRange(data.range), dur, dur / 2)
 
-        -- Impact is disabled (no bullet holes) so we do damage ourselves
-        local dmg = DamageInfo()
-        dmg:SetAttacker(data.bullet.Attacker)
-        dmg:SetInflictor(data.bullet.Weapon)
-        dmg:SetDamage(Lerp(delta, data.bullet.DamageMax, data.bullet.DamageMin))
-        dmg:SetDamagePosition(data.bullet.Pos)
-        dmg:SetDamageForce(data.bullet.Vel)
-        dmg:SetDamageType(dontburn[data.tr.Entity:GetClass()] and DMG_BUCKSHOT or (DMG_BURN + DMG_BUCKSHOT))
+    if IsValid(ent) then
+        if vFireInstalled then
+            CreateVFire(ent, data.tr.HitPos, data.tr.HitNormal, dur / 5)
+        else
+            ent.UPLP_BurnTag = wep:GetOwner()
+            if (ent.UPLP_BurnTime or 0) < CurTime() then
+                ent.UPLP_BurnTime = CurTime()
+            end
+            ent.UPLP_BurnTime = math.min(CurTime() + max_dur, ent.UPLP_BurnTime + dur)
+            ent:Extinguish()
+            ent:Ignite(ent.UPLP_BurnTime - CurTime())
+            -- HL2 zombies ignore DMG_BURN damage, making pellets do no damage
+            data.dmg:SetDamageType(direct_burn[data.tr.Entity:GetClass()] and DMG_BUCKSHOT or (DMG_BURN + DMG_BUCKSHOT))
+        end
+    end
+end
 
-        data.tr.Entity:TakeDamageInfo(dmg)
+ATT.Hook_PhysBulletImpact = function(wep, data)
+    local emitter = ParticleEmitter(data.tr.HitPos)
+    if !IsValid(emitter) then return end
+
+    local a = wep:GetDamageDeltaAtRange(data.bullet.Travelled)
+
+    local dir = data.bullet.Vel:GetNormalized()
+    local reflect = dir:Dot(data.tr.HitNormal) * 2 * data.tr.HitNormal - dir
+    local vec = (reflect + VectorRand() * 0.1):GetNormalized()
+
+    for i = 1, math.ceil(math.Rand(16, 32) * Lerp(a, 1, 0.25) ) do
+        local ember = emitter:Add("effects/spark", data.tr.HitPos + VectorRand() * 4)
+        ember:SetVelocity(VectorRand() * 300 - vec * math.Rand(100, 300) + Vector(0, 0, math.Rand(75, 150)))
+        ember:SetGravity(Vector(0, 0, -600))
+        ember:SetDieTime(math.Rand(0.6, 1.2))
+        ember:SetStartAlpha(255)
+        ember:SetEndAlpha(0)
+        ember:SetStartSize(math.Rand(3, 6))
+        ember:SetEndSize(0)
+        ember:SetRoll(math.Rand(-180, 180))
+        ember:SetRollDelta(math.Rand(-0.2, 0.2))
+        ember:SetColor(255, Lerp(a, 220, 100), Lerp(a, 175, 0))
+        ember:SetAirResistance(80)
+        ember:SetLighting(false)
+        ember:SetCollide(true)
+        ember:SetBounce(0.5)
     end
 
-    local effect = EffectData()
-    effect:SetOrigin(data.tr.HitPos)
-    util.Effect("StunstickImpact",effect)
-    
-    if data.tr.HitWorld then
-        util.Decal("FadingScorch",data.tr.HitPos - data.tr.HitNormal,data.tr.HitPos + data.tr.HitNormal)
+    emitter:Finish()
+end
+
+ATT.HookC_DrawBullet = function(wep, bullet)
+    if bullet.Travelled <= 72 then return false end
+    local a = wep:GetDamageDeltaAtRange(bullet.Travelled)
+    if a == 0 then return false end
+
+    -- Do not try to keep emitting while time is frozen (singleplayer pause)
+    if (bullet.LastTick or 0) == CurTime() then return false end
+    bullet.LastTick = CurTime()
+
+    local emitter = ParticleEmitter(bullet.Pos)
+    if !IsValid(emitter) then return end
+
+    local vec = bullet.Vel * engine.TickInterval()
+    local count = math.ceil(vec:Length() / 12)
+
+    local count2 = math.ceil(math.sqrt(count) / 3 * a)
+    for j = 1, count2 do
+        local p = bullet.Pos - vec * (j / count2) + VectorRand() * math.Clamp((CurTime() - bullet.StartTime) / 0.5, 0, 8)
+
+        local spark = emitter:Add("effects/spark", p)
+        spark:SetVelocity(VectorRand() * 100 + vec * 0.75)
+        spark:SetGravity(Vector(math.Rand(-10, 10), math.Rand(-10, 10), -75))
+        spark:SetDieTime(math.Rand(0.15, 0.2))
+        spark:SetStartAlpha(255)
+        spark:SetEndAlpha(0)
+        spark:SetStartSize(math.Rand(3, 6))
+        spark:SetEndSize(0)
+        spark:SetRoll(math.Rand(-180, 180))
+        spark:SetRollDelta(math.Rand(-0.2, 0.2))
+        spark:SetColor(255, Lerp(a, 220, 100), Lerp(a, 175, 0))
+        spark:SetAirResistance(50)
+        spark:SetLighting(false)
+        spark:SetCollide(true)
+        spark:SetBounce(0.8)
     end
+
+    emitter:Finish()
+    bullet.RenderTick = (bullet.RenderTick or 0) + 1
+
+    return false
 end
 
 ATT.MuzzleParticle = "muzzleflash_dragonbreath"
