@@ -414,8 +414,8 @@ SWEP.Animations = {
 			{s = common .. "shotgun_insert_3.ogg",  t = 18/30},
 			{s = common .. "cloth_4.ogg",  t = 0},
 		},
-		RestoreAmmo = 0, -- WHO FUCKING BROKE THIS, insert is now consider 1 + RestoreAmmo
-		RefillProgress = 60/40,
+		RestoreAmmo = 1,
+		RefillProgress = 20/40,
 	},
 	["reload_finish"] = {
 		Source = "reload_3",
