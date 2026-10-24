@@ -1,7 +1,9 @@
 "VertexLitGeneric"
 {
 	"$basetexture"			"models\myt_uc\pist_4pistols\m1911_terminatorsight"
-	"$bumpmap" 			"models\myt_ucs\pist_4pistols\m1911_terminatorsight_n"
+	"$bumpmap" 			"models\myt_uc\pist_4pistols\m1911_terminatorsight_n"
+	
+	"$color2"			"[0.8 0.8 0.8]"
 
 	"$phong"                        "1"	
 	"$phongalbedotint"              "1"	

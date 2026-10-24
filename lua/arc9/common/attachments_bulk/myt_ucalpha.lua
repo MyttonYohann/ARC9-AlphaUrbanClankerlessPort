@@ -815,3 +815,114 @@ ATT.MuzzleParticle = "muzzleflash_dragonbreath"
 ARC9.LoadAttachment(ATT, "myt_ucalpha_ammo_sg_dragonbreath")
 
 ----------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+--- Glock ---
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------
+-- Slide --
+----------------
+ATT = {}
+
+ATT.PrintName = [[Cyclone]]
+ATT.CompactName = [[S. Auto]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[w speed
+]]
+
+ATT.SortOrder = 1
+ATT.Category = "ucalpha_glock_slide"
+ATT.ActivateElements = {"s_auto"}
+ATT.RPMMult = 1200/400
+
+ATT.Firemodes = {
+    {
+        Mode = -1,
+    },
+}
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_slide_auto")
+
+----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[Vented]]
+ATT.CompactName = [[S. Vented]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 2
+ATT.Category = "ucalpha_glock_slide"
+ATT.ActivateElements = {"s_vent"}
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_slide_vent")
+
+----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[Compact]]
+ATT.CompactName = [[S. G26]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 3
+ATT.Category = "ucalpha_glock_slide"
+ATT.ActivateElements = {"s_26"}
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_slide_compact")
+
+----------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[10-Round Mag]]
+ATT.CompactName = [[M. 10]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 1
+ATT.Category = "ucalpha_glock_mag"
+ATT.ActivateElements = {"m_10"}
+ATT.ClipSize = 10
+ATT.Hook_TranslateAnimation = function(wep, curanim)
+	if	curanim == "reload" 		then	return "reload_10"	end
+	if	curanim == "reload_empty"	then	return "reload_empty_10"	end	
+end
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_mag_10")
+
+----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[33-Round Mag]]
+ATT.CompactName = [[M. 33]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 1
+ATT.Category = "ucalpha_glock_mag"
+ATT.ActivateElements = {"m_33"}
+ATT.ClipSize = 33
+
+ATT.Hook_TranslateAnimation = function(wep, curanim)
+	if	curanim == "reload" 		then	return "reload_33"	end
+	if	curanim == "reload_empty"	then	return "reload_empty_33"	end	
+end
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_mag_33")
+
+----------------------------------------------------------------------------------

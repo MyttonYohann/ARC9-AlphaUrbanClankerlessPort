@@ -101,7 +101,7 @@ SWEP.RecoilPerShot = 0.24
 
 -------------------------- SPREAD
 
-SWEP.Spread = 1/30
+SWEP.Spread = 1/50
 
 SWEP.SpreadAddRecoil = 0.005 -- Applied per unit of recoil.
 SWEP.RecoilModifierCap = 10
@@ -111,7 +111,7 @@ SWEP.SpreadAddMidAir = 1/970
 SWEP.SpreadMultHipFire = 100/30
 SWEP.SpreadMultCrouch = 0.5
 
-SWEP.SpreadMultSights = 1
+SWEP.SpreadMultSights = 0.3
 SWEP.RecoilModifierCapSights = 2.5
 SWEP.RecoilModifierCapCrouch = 5
 
@@ -159,8 +159,8 @@ SWEP.TracerColor = Color(255, 225, 200) -- Color of tracers. Only works if trace
 -------------------------- POSITIONS
 
 SWEP.IronSights = {
-	Pos = Vector(-2.72, -4, 1.25),
-	Ang = Angle(0,-0.25,0),
+	Pos = Vector(-2.1, -4, 2.55),
+	Ang = Angle(0,0.4,2),
 	Midpoint = { -- Where the gun should be at the middle of it's irons
 		Pos = Vector(0, 15, -4),
 		Ang = Angle(0, 0, -45),
@@ -187,7 +187,7 @@ SWEP.CrouchPos = Vector(-0.2, -0.5, -1.5)
 SWEP.CrouchAng = Angle(0, 0, -7)
 
 SWEP.CustomizeAng = Angle(90, 0, 0)
-SWEP.CustomizePos = Vector(16, 45, 6)
+SWEP.CustomizePos = Vector(19.5, 38, 6)
 SWEP.CustomizeSnapshotFOV = 110
 SWEP.CustomizeNoRotate = false
 
@@ -250,7 +250,8 @@ SWEP.Animations = {
 	["ready"] = {
 		Source = "equip",
 		EventTable = {
-			{s = path .. "slide_pull.ogg", t = 12/30},
+			{s = path .. "slide_pull.ogg", t = 9/30},
+			{s = path .. "sliderel.ogg", t = 16/30},
 			{s = common .. "shoulder.ogg",  t = 20/30},
 		},
 		IKTimeLine = {
@@ -284,35 +285,95 @@ SWEP.Animations = {
 		},
 	},
 	
-    ["reload"] = {
-        Source = "reload",
-        FireASAP = true,
-        MinProgress = 0.93,
-        EventTable = {
-            {s =  path .. "magrelease.ogg",   t = 14 / 30},  
-            {s =  path .. "magout.ogg",   t = 18 / 30},  
-            {s =  path .. "magin.ogg",   t = 17 / 30},   
-        },
-        IKTimeLine = {
-        { t = 0, lhik = 1, rhik = 0, },
-        { t = 0.2, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
-        },
-    },  
-    ["reload_empty"] = {
-        Source = "reload_empty",
-        FireASAP = true,
-        MinProgress = 0.95,
-        IKTimeLine = {
-        { t = 0, lhik = 1, rhik = 0, },
-        { t = 0.1, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
-        },
-        EventTable = {
-            {s =  path .. "magrelease.ogg",   t = 7 / 30},  
-            {s =  path .. "magout.ogg",   t = 9 / 30},  
-            {s =  path .. "magin.ogg",   t = 18 / 30},  
-            {s =  path .. "sliderel.ogg",   t = 46 / 30},  
-        },
-    },  
+	["reload"] = {
+		Source = "reload",
+		FireASAP = true,
+		MinProgress = 0.93,
+		EventTable = {
+			{s =  path .. "magrelease.ogg",   t = 14 / 30},  
+			{s =  path .. "magout.ogg",   t = 18 / 30},  
+			{s =  path .. "magin.ogg",   t = 17 / 30},   
+		},
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
+		},
+	},  
+	["reload_empty"] = {
+		Source = "reload_empty",
+		FireASAP = true,
+		MinProgress = 0.95,
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.1, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
+		},
+		EventTable = {
+			{s =  path .. "magrelease.ogg",   t = 7 / 30},  
+			{s =  path .. "magout.ogg",   t = 9 / 30},  
+			{s =  path .. "magin.ogg",   t = 18 / 30},  
+			{s =  path .. "sliderel.ogg",   t = 46 / 30},  
+		},
+	}, 
+	["reload_10"] = {
+		Source = "reload_10",
+		FireASAP = true,
+		MinProgress = 0.93,
+		EventTable = {
+			{s =  path .. "magrelease.ogg",   t = 14 / 30},  
+			{s =  path .. "magout.ogg",   t = 18 / 30},  
+			{s =  path .. "magin.ogg",   t = 17 / 30},   
+		},
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
+		},
+	},  
+	["reload_empty_10"] = {
+		Source = "reload_empty_10",
+		FireASAP = true,
+		MinProgress = 0.95,
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.1, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
+		},
+		EventTable = {
+			{s =  path .. "magrelease.ogg",   t = 7 / 30},  
+			{s =  path .. "magout.ogg",   t = 9 / 30},  
+			{s =  path .. "magin.ogg",   t = 18 / 30},  
+			{s =  path .. "sliderel.ogg",   t = 46 / 30},  
+		},
+	},  
+	["reload_33"] = {
+		Source = "reload_33",
+		FireASAP = true,
+		MinProgress = 0.93,
+		EventTable = {
+			{s =  path .. "magrelease.ogg",   t = 14 / 30},  
+			{s =  path .. "magout.ogg",   t = 18 / 30},  
+			{s =  path .. "magin.ogg",   t = 17 / 30},   
+			{s =  path .. "magtap.ogg",   t = 42 / 30},   
+		},
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
+		},
+	},  
+	["reload_empty_33"] = {
+		Source = "reload_empty_33",
+		FireASAP = true,
+		MinProgress = 0.95,
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.1, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
+		},
+		EventTable = {
+			{s =  path .. "magrelease.ogg",   t = 7 / 30},  
+			{s =  path .. "magout.ogg",   t = 9 / 30},  
+			{s =  path .. "magin.ogg",   t = 18 / 30},  
+			{s = path .. "slide_pull.ogg", t = 46/30},
+			{s =  path .. "sliderel.ogg",   t = 55/30},  
+		},
+	},  
 }
 SWEP.Bash = true
 -------------------------- ATTACHMENTS
@@ -321,33 +382,20 @@ SWEP.DefaultBodygroups = "00000000000000"
 
 SWEP.AttachmentElements = {
 	["fe_pump1"] = 	{ Bodygroups = { {4, 1}, },	AttPosMods = { [7] = { Pos = Vector(0, 1.35, -0.5), } }	}, 
-	["fe_pump2"] = 	{ Bodygroups = { {4, 2}, },	AttPosMods = { [7] = { Pos = Vector(0, 1.3, 0.5), } }	},
-	["fe_pump5"] = 	{ Bodygroups = { {4, 5}, },	AttPosMods = { [7] = { Pos = Vector(0, 1.2, -0.4), } }	},
-	["fe_3"] = 	{ Bodygroups = { {4, 3}, },	AttPosMods = { [7] = { Pos = Vector(0, 0.9, 1.5), } }		},  
-	["fe_4"] = 	{ Bodygroups = { {4, 4}, },},  
-	["s_1"] = 	{ Bodygroups = { {3, 2}, },},   
-	["s_2"] = 	{ Bodygroups = { {3, 3}, },},   
-	["s_3"] = 	{ Bodygroups = { {3, 4}, },},  
-	["s_4"] = 	{ Bodygroups = { {3, 5}, },},   
-	["s_5"] = 	{ Bodygroups = { {3, 7}, },},   
-	["m_1"] = 	{ Bodygroups = { {2, 1}, },},   
-	["m_2"] = 	{ Bodygroups = { {2, 2}, },},   
-	["m_3"] = 	{ Bodygroups = { {2, 3}, },},	
-	["m_4"] = 	{ Bodygroups = { {2, 4}, },},   
-	["b_1"] = 	{ Bodygroups = { {1, 3}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 28.5), } }		},
-	["b_2"] = 	{ Bodygroups = { {1, 2}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 32.5), } }		},
-	["b_3"] = 	{ Bodygroups = { {1, 1}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 17.5), } }		},
+
+	["s_auto"] = 	{ Bodygroups = { {3, 2}, },},
+	["s_vent"] = 	{ Bodygroups = { {3, 1}, },},
+	["s_26"] = 		{ Bodygroups = { {3, 3}, },},
+	
+	["m_10"] = 		{ Bodygroups = { {0, 1},{1, 1}, },},
+	["m_33"] = 		{ Bodygroups = { {1, 2}, },},
 }
 
 
 SWEP.Hook_ModifyBodygroups = function(wep, data)
 	local model = data.model  
-	-- ziptied rail for foregrip
-	if wep:HasElement("fg_def") then model:SetBodygroup(6,1) end
-	if wep:HasElement("fg_def") and wep:HasElement("fe_pump2") then model:SetBodygroup(6,2) end
-	if wep:HasElement("fg_def") and wep:HasElement("fe_pump1") then model:SetBodygroup(6,3) end
-	if wep:HasElement("fg_def") and wep:HasElement("fe_pump5") then model:SetBodygroup(6,4) end
-	if wep:HasElement("fg_def") and wep:HasElement("fe_3") then model:SetBodygroup(6,0) end -- has its own rail
+	if wep:HasElement("rail_def") then model:SetBodygroup(2,1) end	
+	if wep:HasElement("s_26") then model:SetBodygroup(5,1) end	
 end
 
 SWEP.Attachments = {
@@ -359,7 +407,7 @@ SWEP.Attachments = {
 		DefaultIcon = Material("arc9/def_att_icons/optic.png"),
 		Category = {"optic_ucalpha", "eft_optic_medium"},
 		Bone = "glock_parent",
-		Pos = Vector(0, -1.2, 2.8),
+		Pos = Vector(0, -3.5, 1.9),
 		Ang = Angle(90, 0, -90),
 	},
 	{
@@ -378,8 +426,8 @@ SWEP.Attachments = {
 		DefaultIcon = Material("arc9/def_att_icons/barrel.png"),
 		ExcludeElements = {"pre_muzzed"},
 		Category = {"muzzle_css"},
-		Bone = "glock_parent",
-		Pos = Vector(0, -0.5, 24),
+		Bone = "glock_flash",
+		Pos = Vector(0, 0, 0),
 		Ang = Angle(90, 0, -90),
 	},
 	{
@@ -388,7 +436,7 @@ SWEP.Attachments = {
 
 		Category = "ucalpha_glock_slide",
 		Bone = "glock_parent",
-		Pos = Vector(0, 0, 9.5),
+		Pos = Vector(0, -2.5, -1),
 		Ang = Angle(90, 0, -90),
 	},
 	{
@@ -396,7 +444,7 @@ SWEP.Attachments = {
 		DefaultName = "Extended Stock",
 		InstalledElements = {"has_stock"},
 
-		Category = {"ucalpha_1014_stock"},
+		Category = {"ucalpha_pistol_stock"},
 		Bone = "glock_parent",
 		Pos = Vector(0, 2, -3.5),
 		Ang = Angle(90, 0, -90),
@@ -405,9 +453,9 @@ SWEP.Attachments = {
 		PrintName = "Magazine Type",
 		DefaultName = "17-Round Mag",
 
-		Category = {"ucalpha_1014_tube"},
+		Category = {"ucalpha_glock_mag"},
 		Bone = "glock_parent",
-		Pos = Vector(0, 0.5, 14.5),
+		Pos = Vector(0, 0.5, -0.25),
 		Ang = Angle(90, 0, -90),
 	},
 	{
@@ -419,7 +467,7 @@ SWEP.Attachments = {
 		ExcludeElements = {"nofg"},
 		Category = {"eft_foregrip_small"},
 		Bone = "glock_parent",
-		Pos = Vector(0, 1, -0.25),
+		Pos = Vector(0, -1, 5),
 		Ang = Angle(90, 0, -90),
 	},
 }
