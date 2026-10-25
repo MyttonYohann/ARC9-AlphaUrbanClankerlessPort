@@ -320,8 +320,8 @@ SWEP.Animations = {
 		MinProgress = 0.93,
 		EventTable = {
 			{s =  path .. "magrelease.ogg",   t = 14 / 30},  
-			{s =  path .. "magout.ogg",   t = 18 / 30},  
-			{s =  path .. "magin.ogg",   t = 17 / 30},   
+			{s =  path .. "magout.ogg",   t = 17 / 30},  
+			{s =  path .. "magin.ogg",   t = 16 / 30},   
 		},
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
@@ -339,8 +339,8 @@ SWEP.Animations = {
 		EventTable = {
 			{s =  path .. "magrelease.ogg",   t = 7 / 30},  
 			{s =  path .. "magout.ogg",   t = 9 / 30},  
-			{s =  path .. "magin.ogg",   t = 18 / 30},  
-			{s =  path .. "sliderel.ogg",   t = 46 / 30},  
+			{s =  path .. "magin.ogg",   t = 13 / 30},  
+			{s =  path .. "sliderel.ogg",   t = 41 / 30},  
 		},
 	},  
 	["reload_33"] = {

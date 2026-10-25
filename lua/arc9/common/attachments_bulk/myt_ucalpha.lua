@@ -861,6 +861,7 @@ ATT.Description = [[
 ATT.SortOrder = 2
 ATT.Category = "ucalpha_glock_slide"
 ATT.ActivateElements = {"s_vent"}
+ATT.RPMMult = 600/400
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_slide_vent")
 
