@@ -135,7 +135,7 @@ SWEP.SprintToFireTime = 0.5
 
 SWEP.SpeedMult = 1
 SWEP.SpeedMultSights = 0.75
-SWEP.SpeedMultShooting = 0.6
+SWEP.SpeedMultShooting = 0.9
 SWEP.SpeedMultMelee = 0.75
 SWEP.SpeedMultCrouch = 1
 
@@ -165,7 +165,7 @@ SWEP.IronSights = {
 		Pos = Vector(0, 15, -4),
 		Ang = Angle(0, 0, -45),
 	},
-	Magnification = 1.1,
+	Magnification = 1.05,
 	CrosshairInSights = false
 }
 
@@ -234,7 +234,7 @@ local common = "arc9_ucalpha/common/"
 SWEP.ShootSound = path .. "fire.ogg"
 SWEP.ShootSoundSilenced = path .. "fire_supp.ogg"
 SWEP.DistantShootSound = path .. "fire_dist.ogg"
-SWEP.DryFireSound =  path .. "eject.ogg"
+SWEP.DryFireSound =  path .. "mech_last.ogg"
 
 SWEP.FiremodeSound = "arc9/firemode.ogg"
 
@@ -275,16 +275,14 @@ SWEP.Animations = {
 	["fire"] = {
 		Source = "fire",
 		EventTable = {
-			{s = path .. "mech.ogg", t = 0}, -- Not temporary
-			{s = path .. "eject.ogg", t = 0}, -- Not temporary
+			{s = path .. "mech.ogg", t = 0},
 		},
 	},
 	["fire_empty"] = {
 		Source = "fire_empty",
 		Time = 23 / 30,
 		EventTable = {
-			{s = path .. "mech_last.ogg", t = 0}, -- Not temporary
-			{s = path .. "eject.ogg", t = 0}, -- Not temporary
+			{s = path .. "mech_last.ogg", t = 0}, 
 		},
 	},
 	

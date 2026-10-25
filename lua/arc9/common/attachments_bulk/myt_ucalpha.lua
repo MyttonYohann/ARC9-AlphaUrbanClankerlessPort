@@ -300,7 +300,7 @@ ATT.ActivateElements = {"b_1", "has_bayonet"}
 
 ATT.Bash = true
 ATT.BashDamageType = DMG_SLASH
-ATT.BashDamage = 120
+ATT.BashDamage = 30
 ATT.BashLungeRange = 0
 ATT.BashRange = 104
 ATT.PreBashTime = 0.05
@@ -319,6 +319,12 @@ ATT.HookP_BlockFire = function(self)
 end
 ATT.Hook_TranslateAnimation = function(wep, curanim)
 	if	curanim == "bash" and !wep:GetUBGL()	then	return "bash_bayo"		end
+end
+
+ATT.BashDamageHook = function(wep, dmg)
+	if wep:GetOwner():KeyDown(IN_SPEED) and wep:GetOwner():KeyDown(IN_FORWARD + IN_BACK + IN_MOVELEFT + IN_MOVERIGHT) then
+		return dmg * 4
+	end
 end
 
 ATT.SprintPos = Vector(1, -3, 0.5)
@@ -474,7 +480,6 @@ ATT = {}
 local rpg_path = "arc9_ucalpha/rocket/"
 local snd_common = "arc9_ucalpha/common/"
 
-local rpg_blast = rpg_path .. "fire-01.ogg", rpg_path .. "fire-02.ogg", rpg_path .. "fire-03.ogg", rpg_path .. "fire-04.ogg", rpg_path .. "fire-05.ogg", rpg_path .. "fire-06.ogg"
 local rpg_tail = rpg_path .. "fire-dist-01.ogg", rpg_path .. "fire-dist-02.ogg", rpg_path .. "fire-dist-03.ogg", rpg_path .. "fire-dist-04.ogg", rpg_path .. "fire-dist-05.ogg", rpg_path .. "fire-dist-06.ogg"
 local rpg_mech = rpg_path .. "mech-01.ogg", rpg_path .. "mech-02.ogg", rpg_path .. "mech-03.ogg", rpg_path .. "mech-04.ogg", rpg_path .. "mech-05.ogg", rpg_path .. "mech-06.ogg"
 
@@ -589,7 +594,14 @@ ATT.SpreadUBGL = 0.01
 
 ATT.ShootEntUBGL = "arc9_ucalpha_rpg"
 ATT.ShootEntForceUBGL = 10000
-ATT.ShootSoundUBGL = rpg_blast
+ATT.ShootSoundUBGL = {
+    rpg_path .. "fire-01.ogg",
+    rpg_path .. "fire-02.ogg",
+    rpg_path .. "fire-03.ogg",
+    rpg_path .. "fire-04.ogg",
+    rpg_path .. "fire-05.ogg",
+    rpg_path .. "fire-06.ogg",
+}
 ATT.HasSightsUBGL = true
 
 ATT.MuzzleParticleUBGL = "muzzleflash_m79"
@@ -623,6 +635,16 @@ end
 ATT.UBGLExclusiveSightsUBGL = true
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_ubgl_rpg")
+
+
+
+
+
+
+
+
+
+
 ----------------------------------------------------------------------------------
 
 -----------
@@ -645,15 +667,19 @@ ATT.Category = "ucalpha_ammo_sg"
 ATT.ActivateElements = {"is_pumpaction", "force_pumpaction"}
 
 ATT.DamageType = DMG_BURN + DMG_BUCKSHOT
-ATT.HullSize = 2
-ATT.HullSize_Priority = 100
-ATT.SpreadAdd = 0.003
-ATT.DamageMaxMult = 2
-ATT.DamageMinMult = 2
-ATT.AlwaysPhysBullet = true
-ATT.PhysBulletMuzzleVelocity = 10000
-ATT.PhysBulletGravityMult = 0.75
-ATT.PhysBulletDrag = 4
+ATT.RecoilMult = 0.75
+ATT.NumOverride = 22
+ATT.HullSizeOverride = 5
+ATT.PhysBulletGravityMult = 0.6
+
+ATT.SpreadMult = 1.25
+ATT.DamageMaxMult = 0.5
+ATT.DamageMinMult = 0.5
+ATT.PhysBulletMuzzleVelocityMult = 0.2
+ATT.AlwaysPhysBulletOverride = true
+ATT.RicochetChanceOverride = 0
+ATT.PenetrationOverride = 0
+
 
 ATT.ImpactDecal = "FadingScorch"
 
@@ -812,6 +838,17 @@ end
 
 ATT.MuzzleParticle = "muzzleflash_dragonbreath"
 ARC9.LoadAttachment(ATT, "myt_ucalpha_ammo_sg_dragonbreath")
+
+
+
+
+
+
+
+
+
+
+
 
 ----------------------------------------------------------------------------------
 

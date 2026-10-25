@@ -465,6 +465,7 @@ SWEP.Bash = true
 SWEP.Hook_BlockHasAnimation = function (wep, anim) -- use normal bash fuction if no bayonet and not in UBGL
 	if anim == "bash" and !wep:HasElement("has_bayonet") and !wep:GetUBGL() then return false end
 end
+SWEP.HideBones = {"1014_shell1"} 
 
 SWEP.Bodge_Cycle = 0
 SWEP.Bodge_Reload = 0
@@ -540,6 +541,13 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 		if curanim == "cycle" 		then return "cycle_forced"	end	
 		if curanim == "draw_cycle" 	then return "equip"	end	
 	end
+	
+	if wep:HasElement("is_pumpaction") then -- no empty state for manual action
+		if curanim == "idle_empty"		then return "idle"		end
+		if curanim == "fire_empty"		then return "fire"		end
+		if curanim == "draw_empty"		then return "draw"		end
+		if curanim == "holster_empty"	then return "holster"	end
+	end
 
 	end
 end
@@ -572,7 +580,6 @@ SWEP.AttachmentElements = {
 
 SWEP.Hook_ModifyBodygroups = function(wep, data)
 	local model = data.model  
-	if !wep:GetReloading() 	then model:SetBodygroup(5,1) end -- hide bullet when not reloading, i think there was a proper bonehide method but i forgor
 	-- ziptied rail for foregrip
 	if wep:HasElement("fg_def") then model:SetBodygroup(6,1) end
 	if wep:HasElement("fg_def") and wep:HasElement("fe_pump2") then model:SetBodygroup(6,2) end
