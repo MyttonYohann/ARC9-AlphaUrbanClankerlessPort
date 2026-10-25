@@ -3,7 +3,7 @@
 	"$basetexture"			"models\myt_uc\pist_4pistols\4pistols"
 	"$bumpmap" 			"models\myt_uc\pist_4pistols\4pistols_n"
 
-//    "$color2"			"[0.4 0.4 0.4]"
+    "$color2"			"[1.4 1.4 1.4]"
 
 	"$phong"                        "1"	
 	"$phongalbedotint"              "1"	

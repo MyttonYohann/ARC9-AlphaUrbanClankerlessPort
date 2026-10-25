@@ -23,7 +23,7 @@ Pump Action
 ATT.ManualAction = true
 
 ATT.Model = "models/weapons/arc9/myt_uc/c_m1014.mdl" -- i just need a qca point but im not making a whole new model
-ATT.ModelBodygroups = "1458610"
+ATT.ModelBodygroups = "1458610000"
 ATT.ModelOffset = Vector(-2, 0, 7)
 ATT.ModelAngleOffset = Angle(-90, 90, 90)
 ATT.Scale = 1
@@ -896,6 +896,7 @@ ATT.SortOrder = 10
 ATT.Category = "ucalpha_glock_mag"
 ATT.ActivateElements = {"m_10"}
 ATT.ClipSize = 10
+ATT.ReloadTimeMult = 0.9
 ATT.Hook_TranslateAnimation = function(wep, curanim)
 	if	curanim == "reload" 		then	return "reload_10"	end
 	if	curanim == "reload_empty"	then	return "reload_empty_10"	end	
@@ -939,6 +940,7 @@ ATT.SortOrder = 21
 ATT.Category = "ucalpha_glock_mag"
 ATT.ActivateElements = {"m_21"}
 ATT.ClipSize = 21
+ATT.ReloadTimeMult = 1.1
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_mag_21")
 
