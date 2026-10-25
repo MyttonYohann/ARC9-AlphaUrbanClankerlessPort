@@ -325,6 +325,9 @@ SWEP.Animations = {
 			{s = path1 .. "eject.ogg",  t = 13/30},
 			{s = path1 .. "rack_2.ogg",  t = 16/30},
 		},
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 1, }, { t = 0.2, lhik = 1, rhik = 0, }, { t = 0.6, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 1, },
+		},
 		EjectAt = 18 / 40,
 		FireASAP = true,
 		MinProgress = 24/40,

@@ -849,6 +849,7 @@ ATT.Firemodes = {
 }
 
 ATT.ShootSoundSilenced = "arc9_ucalpha/glock/fire.ogg"
+ATT.Silencer = false
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_slide_auto")
 
@@ -970,5 +971,22 @@ ATT.Hook_TranslateAnimation = function(wep, curanim)
 end
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_mag_100")
+
+----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[Tactical Sight]]
+ATT.CompactName = [[I. Tac]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[wickerman
+]]
+
+ATT.SortOrder = 0.1
+ATT.Category = "ucalpha_glock_irons"
+ATT.ActivateElements = {"i_tac"}
+
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_irons_tac")
 
 ----------------------------------------------------------------------------------

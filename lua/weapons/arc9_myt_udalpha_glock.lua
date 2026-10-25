@@ -427,6 +427,8 @@ SWEP.AttachmentElements = {
 	["m_33"] = 		{ Bodygroups = { {1, 2}, },},
 	["m_21"] = 		{ Bodygroups = { {1, 4}, },},
 	["m_100"] = 	{ Bodygroups = { {1, 3}, },},
+	
+	["i_tac"] = 	{ Bodygroups = { {5, 2}, },},
 }
 
 
@@ -434,6 +436,9 @@ SWEP.Hook_ModifyBodygroups = function(wep, data)
 	local model = data.model  
 	if wep:HasElement("rail_def") then model:SetBodygroup(2,1) end	
 	if wep:HasElement("s_26") then model:SetBodygroup(5,1) end	
+	if wep:HasElement("s_26") and wep:HasElement("i_tac") then model:SetBodygroup(5,3) end	
+
+	if wep:HasElement("rail_def") and wep:HasElement("i_tac") then model:SetBodygroup(2,0) end	
 end
 
 SWEP.Attachments = {
@@ -443,7 +448,7 @@ SWEP.Attachments = {
 		InstalledElements = {"rail_def", "has_optic"},
 
 		DefaultIcon = Material("arc9/def_att_icons/optic.png"),
-		Category = {"optic_ucalpha", "eft_optic_medium"},
+		Category = {"optic_ucalpha", "eft_optic_medium", "ucalpha_glock_irons"},
 		Bone = "glock_parent",
 		Pos = Vector(0, -3.5, 1.9),
 		Ang = Angle(90, 0, -90),
