@@ -176,8 +176,11 @@ SWEP.PeekAng = Angle(0, 0, -10)
 SWEP.BipodPos = Vector(-2.58, 0, 1)
 SWEP.BipodAng = Angle(0, 0, -5)
 
-SWEP.SprintAng = Angle(20, -15, -15)
 SWEP.SprintPos = Vector(2, -2, 1)
+SWEP.SprintAng = Angle(20, -15, -15)
+
+SWEP.NearWallPos = Vector(3, -4, -12)
+SWEP.NearWallAng = Angle(-4, 35, -10)
 
 SWEP.ViewModelFOVBase = 70
 SWEP.ActivePos = Vector(0, -2, 0)
@@ -208,7 +211,7 @@ SWEP.HoldTypeBlindfire = "pistol"
 SWEP.AnimShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_AR2
 SWEP.AnimReload = false
 SWEP.AnimDraw = false
-SWEP.BarrelLength = 52
+SWEP.BarrelLength = 24
 -------------------------- EFFECTS
 
 SWEP.MuzzleParticle = "muzzleflash_1"
