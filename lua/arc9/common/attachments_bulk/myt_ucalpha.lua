@@ -833,6 +833,8 @@ ATT.PrintName = [[Cyclone]]
 ATT.CompactName = [[S. Auto]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[w speed
+
+vented barrel can't be audiably suppressed
 ]]
 
 ATT.SortOrder = 1
@@ -845,6 +847,8 @@ ATT.Firemodes = {
         Mode = -1,
     },
 }
+
+ATT.ShootSoundSilenced = "arc9_ucalpha/glock/fire.ogg"
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_slide_auto")
 

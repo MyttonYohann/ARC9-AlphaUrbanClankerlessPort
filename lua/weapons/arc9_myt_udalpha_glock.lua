@@ -22,7 +22,7 @@ SWEP.Description = [[Handgun originally designed by a curtain rod manufacturer t
 SWEP.ViewModel = "models/weapons/arc9/myt_uc/c_glock.mdl"
 SWEP.WorldModel = "models/weapons/arc9/myt_uc/c_glock.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 1
 
 SWEP.MirrorVMWM = true
 SWEP.WorldModelMirror = "models/weapons/arc9/myt_uc/c_glock.mdl"
@@ -411,6 +411,7 @@ SWEP.BulletBones = { -- the bone that represents bullets in gun/mag
     [0] = "",
     [1] = "glock_bullet1"
 }
+SWEP.HideBones = {"glock_magb"} 
 -------------------------- ATTACHMENTS
 
 SWEP.DefaultBodygroups = "00000000000000"
