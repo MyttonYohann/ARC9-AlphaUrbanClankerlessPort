@@ -610,14 +610,12 @@ ATT.Sights = {
 
 ATT.Hook_PrimaryAttack = function(wep)   
 	if wep:GetUBGL() then
-		if SERVER then
-			local dmg = DamageInfo()
-			dmg:SetDamage(math.random(20, 50))
-			dmg:SetAttacker(wep:GetOwner())
-			dmg:SetDamageType(DMG_BURN) 
-			wep:GetOwner():TakeDamageInfo(dmg)
-			wep:GetOwner():Ignite(math.Rand(2, 3))
-		end
+		local dmg = DamageInfo()
+		dmg:SetDamage(math.Rand(20, 50))
+		dmg:SetAttacker(wep:GetOwner())
+		dmg:SetDamageType(DMG_BURN) 
+		wep:GetOwner():TakeDamageInfo(dmg)
+		wep:GetOwner():Ignite(math.Rand(1, 3))
 		wep:GetOwner():ScreenFade( SCREENFADE.IN, Color( 255, 0, 0, 125), 2, 0 )
 	end
 end
