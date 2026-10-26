@@ -141,14 +141,14 @@ SWEP.SpeedMultCrouch = 1
 
 -------------------------- MELEE
 
-SWEP.Bash = false
+SWEP.Bash = true
 SWEP.PrimaryBash = false
 
 SWEP.BashDamage = 100
 SWEP.BashLungeRange = 0
 SWEP.BashRange = 128
-SWEP.PreBashTime = 0.15
-SWEP.PostBashTime = 0.8
+SWEP.PreBashTime = 0.25
+SWEP.PostBashTime = 0.55
 SWEP.BashWhileSprint = true
 
 -------------------------- TRACERS
@@ -249,6 +249,16 @@ SWEP.Animations = {
 		Source = "draw",
 		FireASAP = true,
 		MinProgress = 0.35,
+	},
+	["bash"] = {
+		Source = {"melee", "melee2"},
+		FireASAP = true,
+		MinProgress = 0.7,
+	},
+	["bash_empty"] = {
+		Source = {"melee_empty", "melee2_empty"},
+		FireASAP = true,
+		MinProgress = 0.7,
 	},
 	["ready"] = {
 		Source = "equip",
@@ -407,7 +417,6 @@ SWEP.Animations = {
 		},
 	},  
 }
-SWEP.Bash = true
 SWEP.BulletBones = { -- the bone that represents bullets in gun/mag
     [0] = "",
     [1] = "glock_bullet1"
