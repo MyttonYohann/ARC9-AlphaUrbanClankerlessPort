@@ -147,7 +147,7 @@ SWEP.SpeedMultCrouch = 1
 
 -------------------------- MELEE
 
-SWEP.Bash = false
+SWEP.Bash = true
 SWEP.PrimaryBash = false
 
 SWEP.BashDamage = 100
@@ -156,6 +156,12 @@ SWEP.BashRange = 128
 SWEP.PreBashTime = 0.15
 SWEP.PostBashTime = 0.8
 SWEP.BashWhileSprint = true
+SWEP.ShootWhileSprint = true
+SWEP.ShootWhileSprintHook = function(self)
+	if !self:GetOwner():KeyDown(IN_USE) then
+		return false
+	end
+end
 
 -------------------------- TRACERS
 
@@ -461,7 +467,6 @@ SWEP.Animations = {
 	["bash"] = { Source = {"idle"},},	-- has to exist for translateanim to work
 	["bash_bayo"] = { Source = {"stab"},},	
 }
-SWEP.Bash = true
 SWEP.Hook_BlockHasAnimation = function (wep, anim) -- use normal bash fuction if no bayonet and not in UBGL
 	if anim == "bash" and !wep:HasElement("has_bayonet") and !wep:GetUBGL() then return false end
 end
