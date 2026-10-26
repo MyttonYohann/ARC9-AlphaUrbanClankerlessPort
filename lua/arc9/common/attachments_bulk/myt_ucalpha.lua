@@ -309,15 +309,7 @@ ATT.PostBashTime = 0.4
 -- you cant fucking use bashwhilespring WITHOUT shootwhilesprint
 ATT.BashWhileSprint = true
 ATT.ShootWhileSprint = true
-ATT.HookP_BlockFire = function(self)
-	local owner = self:GetOwner() 
-	local canfire = owner:KeyDown(IN_SPEED) and !owner:KeyDown(IN_USE)
-	
-	--if owner:KeyDown(IN_FORWARD + IN_BACK + IN_MOVELEFT + IN_MOVERIGHT) then
-	if self:GetOwner():KeyDown(IN_SPEED) then
-		return canfire
-	end
-end
+
 ATT.Hook_TranslateAnimation = function(wep, curanim)
 	if	curanim == "bash" and !wep:GetUBGL()	then	return "bash_bayo"		end
 end
