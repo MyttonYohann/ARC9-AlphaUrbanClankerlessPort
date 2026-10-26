@@ -269,11 +269,19 @@ SWEP.Animations = {
 		Source = {"melee", "melee2"},
 		FireASAP = true,
 		MinProgress = 0.7,
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.7, lhik = 0, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 0, },
+		},
 	},
 	["bash_empty"] = {
 		Source = {"melee_empty", "melee2_empty"},
 		FireASAP = true,
 		MinProgress = 0.7,
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.7, lhik = 0, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 0, },
+		},
 	},
 	["ready"] = {
 		Source = "equip",

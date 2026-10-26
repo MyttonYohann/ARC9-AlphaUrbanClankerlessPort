@@ -310,7 +310,7 @@ ATT.PostBashTime = 0.4
 ATT.BashWhileSprint = true
 ATT.ShootWhileSprint = true
 ATT.HookP_BlockFire = function(self)
-	--local owner = self:GetOwner() 
+	local owner = self:GetOwner() 
 	local canfire = owner:KeyDown(IN_SPEED) and !owner:KeyDown(IN_USE)
 	
 	--if owner:KeyDown(IN_FORWARD + IN_BACK + IN_MOVELEFT + IN_MOVERIGHT) then
