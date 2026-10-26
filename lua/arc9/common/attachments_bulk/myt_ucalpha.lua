@@ -314,7 +314,7 @@ ATT.HookP_BlockFire = function(self)
 	local canfire = owner:KeyDown(IN_SPEED) and !owner:KeyDown(IN_USE)
 	
 	--if owner:KeyDown(IN_FORWARD + IN_BACK + IN_MOVELEFT + IN_MOVERIGHT) then
-	if wep:GetOwner():KeyDown(IN_SPEED) then
+	if self:GetOwner():KeyDown(IN_SPEED) then
 		return canfire
 	end
 end
