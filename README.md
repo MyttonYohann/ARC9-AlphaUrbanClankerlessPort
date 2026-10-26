@@ -4,6 +4,7 @@
 ### clankerless port of the PRERELEASE/ALPHA version of the hit ArcCW mod Urban Decay.
 
 with some minor face lifts
+
 This will only entails Decay for the forseeable future, it is very unlikely that I'd port Renewal or even my own one offs (maybe scar).
 
 ### Changed Stuff.
@@ -12,7 +13,7 @@ This will only entails Decay for the forseeable future, it is very unlikely that
  - New Forend slot with options to convert to a pump action
  - One new Barrel attachment, heatshield + bayonet
  - Wood options for Stock attachment
- - To not bore you with the technicallity, the reload transitions are MUCH smoother now
+ - To not bore you with the technicallity, the transitions between reload states are MUCH smoother now
  
 **Glock 17**
  - Remove Frame Attachment, G26 Frame is now tie to the 10-Round Mag
