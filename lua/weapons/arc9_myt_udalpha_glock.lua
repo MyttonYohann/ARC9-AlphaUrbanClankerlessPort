@@ -158,7 +158,7 @@ SWEP.ShootWhileSprintHook = function(self)
 	end
 end
 SWEP.BashDamageHook = function(wep, dmg)
-	if wep:GetOwner():IsSprinting() then
+	if wep:GetOwner():KeyDown(IN_SPEED) and wep:GetOwner():KeyDown(IN_FORWARD + IN_BACK + IN_MOVELEFT + IN_MOVERIGHT) then
 		return dmg * 2
 	end
 end
