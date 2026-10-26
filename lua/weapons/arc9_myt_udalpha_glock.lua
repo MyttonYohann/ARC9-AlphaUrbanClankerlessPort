@@ -160,6 +160,11 @@ SWEP.HookP_BlockFire = function(self)
 	return canfire
 	end
 end
+SWEP.ShootWhileSprintHook = function(self)
+	if !self:GetOwner():KeyDown(IN_USE) then
+		return false
+	end
+end
 SWEP.BashDamageHook = function(wep, dmg)
 	if wep:GetOwner():KeyDown(IN_SPEED) and wep:GetOwner():KeyDown(IN_FORWARD + IN_BACK + IN_MOVELEFT + IN_MOVERIGHT) then
 		return dmg * 2

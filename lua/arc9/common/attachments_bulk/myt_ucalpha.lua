@@ -318,6 +318,11 @@ ATT.HookP_BlockFire = function(self)
 		return canfire
 	end
 end
+ATT.ShootWhileSprintHook = function(self)
+	if !self:GetOwner():KeyDown(IN_USE) then
+		return false
+	end
+end
 ATT.Hook_TranslateAnimation = function(wep, curanim)
 	if	curanim == "bash" and !wep:GetUBGL()	then	return "bash_bayo"		end
 end
