@@ -23,7 +23,7 @@ This will only entails Decay for the forseeable future, it is very unlikely that
  - Added a 21-Round Mag attachment
  - 'Backport' (this was unfinished lol) some of Harry's animations like bash and unjam (no shade to Harrimator, and tbf to man, it's unfinished, but i like Partexedd's)
  - New reload anim, 33-Round and 10-Round has altered anim sets, reworked 100-Round's
- - Overheat, after a certain cap, the bashing will do fire damage
+ - Overheat, after a certain cap, the bashing will set target on fire
 
 ### New Features
  - Animation fixes and improvements
@@ -34,7 +34,7 @@ This will only entails Decay for the forseeable future, it is very unlikely that
  - increased damage with sprint bash (mult by 2 for pistols, mult by 4 for bayonet)
  - Non-Pistol and Non-Bayonet melee will push back
 **Extended Shotgun Handling**
- - Reload when unchambered plays a different set depending on how many rounds are in the tube and if the chamber is loaded, it's a bit like hunt showdown
+ - Reload when unchambered plays a different set depending on if the tube has ammo and if the chamber is loaded, it's a bit like hunt showdown
  - Pump Action can reload to +1 even when empty
  - Anim set for reloading at full mag cap but unchambered
 
@@ -47,7 +47,7 @@ This will only entails Decay for the forseeable future, it is very unlikely that
  - Dragon Breath can be used on every type of shotgun but it will force the gun to be manual action (the m1014 even has its own anim set !)
 
 
-**The old ArcCW mod is still perfectly usable, this is not meant to be a replacement**
+**The ArcCW mod is still perfectly usable, this is not meant to be a replacement**
 
 This project was not 'sanctioned' by any of the UC devs, but I could not bear to see my friend's love and labour be churned inside out by a slop factory
 
