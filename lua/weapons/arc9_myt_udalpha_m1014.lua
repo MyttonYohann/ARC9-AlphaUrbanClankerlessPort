@@ -152,8 +152,8 @@ SWEP.PrimaryBash = false
 
 SWEP.BashDamage = 20
 SWEP.BashLungeRange = 0
-SWEP.BashRange = 50
-SWEP.PreBashTime = 0.2
+SWEP.BashRange = 64
+SWEP.PreBashTime = 0.18
 SWEP.PostBashTime = 0.5
 SWEP.BashWhileSprint = true
 SWEP.ShootWhileSprint = true
@@ -165,6 +165,13 @@ end
 SWEP.BashWhileSprintHook = function(self)
 	if !self:HasElement("has_bayonet") then -- only sprint bash with bayonet
 		return false
+	end
+end
+SWEP.Hook_BashHit = function(self, data)
+	if !self:HasElement("has_bayonet") then
+		if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) then
+			data.tr.Entity:SetVelocity(self:GetForward()*(2000) + self:GetUp()*(50) + self:GetRight()*(0))
+		end
 	end
 end
 
