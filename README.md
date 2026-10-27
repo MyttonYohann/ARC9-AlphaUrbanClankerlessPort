@@ -7,7 +7,7 @@ with some minor face lifts
 
 This will only entails Decay for the forseeable future, it is very unlikely that I'd port Renewal or even my own one offs (maybe scar).
 
-## Changed Stuff.
+## Changed Stuff
 
 **M1014**
  - New Forend slot with options to convert to a pump action
@@ -22,7 +22,7 @@ This will only entails Decay for the forseeable future, it is very unlikely that
  - 'Backport' (this was unfinished lol) some of Harry's animations like bash and unjam (no shade to Harrimator, and tbf to man, it's unfinished, but i like Partexedd's)
  - New reload anim, 33-Round and 10-Round has altered anim sets, reworked 100-Round's
 
-###New Features
+### New Features
  - Animation fixes and improvements
  - Fixed up the unfinished Underbarrel RPG
 
@@ -35,7 +35,7 @@ This will only entails Decay for the forseeable future, it is very unlikely that
  - Pump Action can reload to +1 even when empty
  - Anim set for reloading at full mag cap but unchambered
 
-###Remove/Altered Features
+### Remove/Altered Features
  - General rules are if the Alpha/PreRelease version lack them, I'm not bothered adding, with some exceptions
  - Uses Left 4 Dead 2 (with a lot of initial facelift by sirgibsalot) assets again
  - Uses the old sounds rzenith made like pre covid
