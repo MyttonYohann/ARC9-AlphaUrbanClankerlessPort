@@ -150,15 +150,20 @@ SWEP.SpeedMultCrouch = 1
 SWEP.Bash = true
 SWEP.PrimaryBash = false
 
-SWEP.BashDamage = 100
+SWEP.BashDamage = 20
 SWEP.BashLungeRange = 0
-SWEP.BashRange = 128
-SWEP.PreBashTime = 0.15
-SWEP.PostBashTime = 0.8
+SWEP.BashRange = 50
+SWEP.PreBashTime = 0.2
+SWEP.PostBashTime = 0.5
 SWEP.BashWhileSprint = true
 SWEP.ShootWhileSprint = true
 SWEP.ShootWhileSprintHook = function(self)
 	if !self:GetOwner():KeyDown(IN_USE) then
+		return false
+	end
+end
+SWEP.BashWhileSprintHook = function(self)
+	if !self:HasElement("has_bayonet") then -- only sprint bash with bayonet
 		return false
 	end
 end
@@ -331,9 +336,7 @@ SWEP.Animations = {
 			{s = path1 .. "eject.ogg",  t = 13/30},
 			{s = path1 .. "rack_2.ogg",  t = 16/30},
 		},
-		IKTimeLine = {
-		{ t = 0, lhik = 1, rhik = 1, }, { t = 0.2, lhik = 1, rhik = 0, }, { t = 0.6, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 1, },
-		},
+		IKTimeLine = {{ t = 0, lhik = 1, rhik = 1, }, { t = 0.2, lhik = 1, rhik = 0, }, { t = 0.6, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 1, },},
 		EjectAt = 18 / 40,
 		FireASAP = true,
 		MinProgress = 24/40,
@@ -464,11 +467,14 @@ SWEP.Animations = {
 		FireASAP = true,
 		MinProgress = 32/40,
 	},  
-	["bash"] = { Source = {"idle"},},	-- has to exist for translateanim to work
+	["bash"] = { -- has to exist for translateanim to work
+		Source = {"melee"},
+		IKTimeLine = {{ t = 0, lhik = 1, rhik = 1, }, { t = 0.2, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 0, },{ t = 0.7, lhik = 1, rhik = 1, },},
+	},	
 	["bash_bayo"] = { Source = {"stab"},},	
 }
-SWEP.Hook_BlockHasAnimation = function (wep, anim) -- use normal bash fuction if no bayonet and not in UBGL
-	if anim == "bash" and !wep:HasElement("has_bayonet") and !wep:GetUBGL() then return false end
+SWEP.Hook_BlockHasAnimation = function (wep, anim) -- use normal bash fuction if in UBGL
+	if anim == "bash" and wep:GetUBGL() then return false end
 end
 SWEP.HideBones = {"1014_shell1"} 
 
@@ -529,7 +535,7 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 		if curanim == "reload_insert" 		then return "reload_emptoloop"	end	-- empty to insert loop
 	end
 	
-	if wep:HasElement("is_pumpaction") then -- pump does not use start empty
+	if wep:HasElement("is_pumpaction") then -- pump does not use start empty, it chambers at the end
 		if curanim == "reload_start_empty"	then return "reload_start" end	
 	end
 	-- special anim if uncycled when holstered
@@ -542,12 +548,12 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 		return "draw_cycle"
 	end
 	
-	if wep:HasElement("force_pumpaction") and !wep:HasElement("has_forend") then -- when not using a pump action forend
+	if wep:HasElement("force_pumpaction") and !wep:HasElement("has_forend") then -- different anim when not using a pump action forend
 		if curanim == "cycle" 		then return "cycle_forced"	end	
 		if curanim == "draw_cycle" 	then return "equip"	end	
 	end
 	
-	if wep:HasElement("is_pumpaction") then -- no empty state for manual action
+	if wep:HasElement("is_pumpaction") then -- no empty state for manual action, this is why i dont like using suffix
 		if curanim == "idle_empty"		then return "idle"		end
 		if curanim == "fire_empty"		then return "fire"		end
 		if curanim == "draw_empty"		then return "draw"		end
@@ -581,7 +587,6 @@ SWEP.AttachmentElements = {
 	["b_2"] = 	{ Bodygroups = { {1, 2}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 32.5), } }		},
 	["b_3"] = 	{ Bodygroups = { {1, 1}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 17.5), } }		},
 }
-
 
 SWEP.Hook_ModifyBodygroups = function(wep, data)
 	local model = data.model  
