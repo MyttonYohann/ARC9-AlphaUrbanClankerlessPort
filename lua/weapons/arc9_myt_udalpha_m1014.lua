@@ -170,10 +170,12 @@ end
 SWEP.Hook_BashHit = function(self, data)
 	if !self:HasElement("has_bayonet") then
 		if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) then
-			data.tr.Entity:SetVelocity(self:GetForward()*(2000) + self:GetUp()*(50) + self:GetRight()*(0))
+			data.tr.Entity:SetVelocity(data.tr.HitPos * (self:GetForward()*(-2) + self:GetUp()*(0.1) + self:GetRight()*(0)))
 		end
 	end
 end
+
+
 
 -------------------------- TRACERS
 
