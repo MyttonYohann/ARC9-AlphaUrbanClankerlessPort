@@ -862,8 +862,6 @@ ATT.PrintName = [[Cyclone]]
 ATT.CompactName = [[S. Auto]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[w speed
-
-vented barrel can't be audiably suppressed
 ]]
 
 ATT.SortOrder = 1
@@ -877,8 +875,6 @@ ATT.Firemodes = {
     },
 }
 
-ATT.ShootSoundSilenced = "arc9_ucalpha/glock/fire.ogg"
-ATT.Silencer = false
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_slide_auto")
 
@@ -896,6 +892,7 @@ ATT.SortOrder = 2
 ATT.Category = "ucalpha_glock_slide"
 ATT.ActivateElements = {"s_vent"}
 ATT.RPMMult = 600/400
+ATT.HeatPerShotMult = 0.8
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_slide_vent")
 
@@ -1019,3 +1016,47 @@ ATT.ActivateElements = {"i_tac"}
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_irons_tac")
 
 ----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[Vented Barrel]]
+ATT.CompactName = [[B. Vented]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[auter
+
+vented barrel can't be audiably suppressed
+]]
+
+ATT.SortOrder = 1
+ATT.Category = "ucalpha_glock_barrel"
+ATT.ActivateElements = {"b_vent"}
+
+ATT.ShootSoundSilenced = "arc9_ucalpha/glock/fire.ogg"
+ATT.Silencer = false
+
+ATT.HeatDelayTimeMult = 0.5
+ATT.HeatDissipationMult = 3
+ATT.HeatPerShotMult = 0.5
+ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_barrel_vent")
+
+----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[Long Barrel]]
+ATT.CompactName = [[B. Long]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[shlongson
+]]
+
+ATT.SortOrder = 2
+ATT.Category = "ucalpha_glock_barrel"
+ATT.ActivateElements = {"b_long"}
+
+ATT.HeatDelayTimeMult = 1.2
+ATT.HeatDissipationMult = 0.75
+ATT.HeatPerShotMult = 1.4
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_barrel_long")
+
+----------------------------------------------------------------------------------	

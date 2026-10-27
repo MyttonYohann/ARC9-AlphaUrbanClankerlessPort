@@ -163,6 +163,29 @@ SWEP.BashDamageHook = function(wep, dmg)
 	end
 end
 
+
+SWEP.Overheat = true
+SWEP.HeatPerShot = 1/33
+SWEP.HeatDelayTime = 0.2
+SWEP.HeatDissipation = 0.15
+SWEP.HeatFix = true
+SWEP.HeatLockout = false
+SWEP.Hook_BashHit = function(self, data)
+	local heat = self:GetHeatAmount() / self:GetProcessedValue("HeatCapacity", true)
+	
+	if !self:GetUBGL() and heat >= 0.5 then
+		if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) then
+			data.tr.Entity:Ignite(math.Rand(2, 4))
+		end
+	end
+end
+SWEP.RPMHook = function(wep, stat)
+	if !wep:GetProcessedValue("ManualAction", true) then
+		local heat = wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true)
+		return Lerp(heat, stat, stat * 0.6)
+	end
+end
+
 -------------------------- TRACERS
 
 SWEP.TracerNum = 1 -- Tracer every X
@@ -262,8 +285,40 @@ SWEP.Animations = {
 		FireASAP = true,
 		MinProgress = 0.35,
 	},
+	["fix"] = {
+		Source = "jam_harry",
+		FireASAP = true,
+		EventTable = {
+			{s = path .. "slide_pull.ogg", t = 10/30},
+			{s = path .. "sliderel.ogg", t = 19/30},
+			{s = common .. "shoulder.ogg",  t = 20/30},
+		},
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, }, { t = 0.6, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 1, },
+		},
+		FireASAP = true,
+		MinProgress = 0.7,
+	},
 	["bash"] = {
 		Source = {"melee", "melee2"},
+		FireASAP = true,
+		MinProgress = 0.7,
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.7, lhik = 0, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 0, },
+		},
+	},
+	["bash_overheat"] = {
+		Source = {"melee2"},
+		FireASAP = true,
+		MinProgress = 0.7,
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.7, lhik = 0, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 0, },
+		},
+	},
+	["bash_overheat_empty"] = {
+		Source = {"melee2_empty"},
 		FireASAP = true,
 		MinProgress = 0.7,
 		IKTimeLine = {
@@ -442,6 +497,15 @@ SWEP.BulletBones = { -- the bone that represents bullets in gun/mag
     [1] = "glock_bullet1"
 }
 SWEP.HideBones = {"glock_magb"} 
+
+SWEP.Hook_TranslateAnimation = function(wep, curanim)
+	if !wep:GetUBGL() then -- only checking the gun not the ubgl
+		if wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true) > 0.5 then
+			if curanim == "bash" 		then return "bash_overheat" 		end
+			if curanim == "bash_empty"	then return "bash_overheat_empty"	end
+		end
+	end
+end
 -------------------------- ATTACHMENTS
 
 SWEP.DefaultBodygroups = "00000000000000"
@@ -451,7 +515,7 @@ SWEP.AttachmentElements = {
 
 	["s_auto"] = 	{ Bodygroups = { {3, 2}, },},
 	["s_vent"] = 	{ Bodygroups = { {3, 1}, },},
-	["s_26"] = 		{ Bodygroups = { {3, 3}, },},
+	["s_26"] = 		{ Bodygroups = { {3, 3},{6, 3}, },},
 	
 	["m_10"] = 		{ Bodygroups = { {0, 1},{1, 1}, },},
 	["m_33"] = 		{ Bodygroups = { {1, 2}, },},
@@ -459,6 +523,8 @@ SWEP.AttachmentElements = {
 	["m_100"] = 	{ Bodygroups = { {1, 3}, },},
 	
 	["i_tac"] = 	{ Bodygroups = { {5, 2}, },},
+	["b_vent"] = 	{ Bodygroups = { {6, 1}, },},
+	["b_long"] = 	{ Bodygroups = { {6, 2}, },},
 }
 
 
@@ -467,6 +533,7 @@ SWEP.Hook_ModifyBodygroups = function(wep, data)
 	if wep:HasElement("rail_def") then model:SetBodygroup(2,1) end	
 	if wep:HasElement("s_26") then model:SetBodygroup(5,1) end	
 	if wep:HasElement("s_26") and wep:HasElement("i_tac") then model:SetBodygroup(5,3) end	
+	if wep:HasElement("s_26") and wep:HasElement("b_vent") then model:SetBodygroup(6,4) end	
 
 	if wep:HasElement("rail_def") and wep:HasElement("i_tac") then model:SetBodygroup(2,0) end	
 end
@@ -489,7 +556,7 @@ SWEP.Attachments = {
 
 		Category = "ucalpha_glock_barrel",
 		Bone = "glock_parent",
-		Pos = Vector(0, -0.5, 7),
+		Pos = Vector(0, -2.3, 5),
 		Ang = Angle(90, 0, -90),
 	},
 	{
