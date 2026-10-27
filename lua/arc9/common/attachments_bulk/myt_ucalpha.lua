@@ -315,7 +315,7 @@ ATT.Hook_TranslateAnimation = function(wep, curanim)
 end
 
 ATT.BashDamageHook = function(wep, dmg)
-	if wep:GetOwner():KeyDown(IN_SPEED) and wep:GetOwner():KeyDown(IN_FORWARD + IN_BACK + IN_MOVELEFT + IN_MOVERIGHT) then
+	if wep:GetOwner():KeyDown(IN_SPEED) and wep:GetOwner():KeyDown(IN_FORWARD + IN_BACK + IN_MOVELEFT + IN_MOVERIGHT) and !wep:GetUBGL() then
 		return dmg * 4
 	end
 end
@@ -624,8 +624,26 @@ ATT.Hook_PrimaryAttack = function(wep)
 		wep:GetOwner():ScreenFade( SCREENFADE.IN, Color( 255, 0, 0, 125), 2, 0 )
 	end
 end
+ATT.ShootWhileSprintUBGL = false -- im not even sure if these are needed
+ATT.BashWhileSprintUBGL = false -- better safe than sorry
+ATT.ShootWhileSprintHook = function(self)
+	if self:GetUBGL() then
+		return false
+	end
+end
+ATT.BashWhileSprintHook = function(self)
+	if self:GetUBGL() then -- only sprint bash with bayonet
+		return false
+	end
+end
 
 ATT.UBGLExclusiveSightsUBGL = true
+
+ATT.BashDamageUBGL = 20
+ATT.BashLungeRangeUBGL = 64
+ATT.BashRangeUBGL = 64
+ATT.PreBashTimeUBGL = 0.2
+ATT.PostBashTimeUBGL = 0.4
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_ubgl_rpg")
 
