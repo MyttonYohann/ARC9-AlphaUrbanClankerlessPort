@@ -169,11 +169,11 @@ SWEP.BashWhileSprintHook = function(self)
 end
 SWEP.Hook_BashHit = function(self, data)
 	local entitypos = data.tr.Entity:GetPos()
-	local ownerpos = self:GetOwner():GetPos()
+	local ownerpos = self:EyePos()
 	 
 	if !self:HasElement("has_bayonet") then
 		if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) then
-			data.tr.Entity:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 2000) + self:GetUp()*(100) )
+			data.tr.Entity:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 2000) + self:GetUp()*(50) )
 		end
 	end
 end
