@@ -185,6 +185,12 @@ SWEP.RPMHook = function(wep, stat)
 		return Lerp(heat, stat, stat * 0.6)
 	end
 end
+SWEP.HeatDissipationHook = function(wep) -- temporarily 'freezes' the heat gauge
+	local heat = wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true)
+	if heat == 1 and wep:Clip1() != 0 then -- empty doesn't have a fix anim
+		return 0
+	end
+end
 
 -------------------------- TRACERS
 
@@ -508,11 +514,11 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 			if curanim == "bash_empty"	then return "bash_overheat_empty"	end
 		end
 	end
-	local heat = wep:GetHeatAmount()
+	local heat = wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true)
 
 	if curanim == "fix" then	-- remove a certain percentage of heat when playing overheat anim
 		timer.Simple(29/30, function() -- manual delay cos i cant think of any other way
-				wep:SetHeatAmount(heat - 0.5)
+				wep:SetHeatAmount(heat - 0.35)
 		end)
 	end
 end

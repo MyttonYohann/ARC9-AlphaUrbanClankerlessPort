@@ -1054,7 +1054,7 @@ ATT.Silencer = false
 
 ATT.HeatDelayTimeMult = 0.5
 ATT.HeatDissipationMult = 3
-ATT.HeatPerShotMult = 0.5
+ATT.HeatPerShotMult = 33/48
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_barrel_vent")
 
 ----------------------------------------------------------------------------------
@@ -1073,7 +1073,7 @@ ATT.ActivateElements = {"b_long"}
 
 ATT.HeatDelayTimeMult = 1.15
 ATT.HeatDissipationMult = 0.75
-ATT.HeatPerShotMult = 1.3
+ATT.HeatPerShotMult = 33/25
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_barrel_long")
 
