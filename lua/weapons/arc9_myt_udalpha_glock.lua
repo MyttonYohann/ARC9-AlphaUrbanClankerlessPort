@@ -179,12 +179,7 @@ SWEP.Hook_BashHit = function(self, data)
 		end
 	end
 end
-SWEP.RPMHook = function(wep, stat)
-	if !wep:GetProcessedValue("ManualAction", true) then
-		local heat = wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true)
-		return Lerp(heat, stat, stat * 0.6)
-	end
-end
+
 SWEP.HeatDissipationHook = function(wep) -- temporarily 'freezes' the heat gauge
 	local heat = wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true)
 	if heat == 1 and wep:Clip1() != 0 then -- empty doesn't have a fix anim
@@ -527,11 +522,9 @@ end
 SWEP.DefaultBodygroups = "00000000000000"
 
 SWEP.AttachmentElements = {
-	["fe_pump1"] = 	{ Bodygroups = { {4, 1}, },	AttPosMods = { [7] = { Pos = Vector(0, 1.35, -0.5), } }	}, 
-
 	["s_auto"] = 	{ Bodygroups = { {3, 2}, },},
 	["s_vent"] = 	{ Bodygroups = { {3, 1}, },},
-	["s_26"] = 		{ Bodygroups = { {3, 3},{6, 3}, },},
+	["s_26"] = 		{ Bodygroups = { {3, 3},{6, 3}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.1, -0.75), } }	},
 	
 	["m_10"] = 		{ Bodygroups = { {0, 1},{1, 1}, },},
 	["m_33"] = 		{ Bodygroups = { {1, 2}, },},
@@ -540,7 +533,7 @@ SWEP.AttachmentElements = {
 	
 	["i_tac"] = 	{ Bodygroups = { {5, 2}, },},
 	["b_vent"] = 	{ Bodygroups = { {6, 1}, },},
-	["b_long"] = 	{ Bodygroups = { {6, 2}, },},
+	["b_long"] = 	{ Bodygroups = { {6, 2}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.1, 5.8), } }	},
 }
 
 
@@ -572,7 +565,7 @@ SWEP.Attachments = {
 
 		Category = "ucalpha_glock_barrel",
 		Bone = "glock_parent",
-		Pos = Vector(0, -2.3, 5),
+		Pos = Vector(0, -2.45, 3),
 		Ang = Angle(90, 0, -90),
 	},
 	{
@@ -583,7 +576,7 @@ SWEP.Attachments = {
 		ExcludeElements = {"pre_muzzed"},
 		Category = {"muzzle_css"},
 		Bone = "glock_flash",
-		Pos = Vector(0, 0, 0),
+		Pos = Vector(0, -0.1, 0),
 		Ang = Angle(90, 0, -90),
 	},
 	{

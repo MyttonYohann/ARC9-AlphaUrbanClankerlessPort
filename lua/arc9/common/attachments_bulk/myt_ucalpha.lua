@@ -885,7 +885,12 @@ ATT.Description = [[w speed
 ATT.SortOrder = 1
 ATT.Category = "ucalpha_glock_slide"
 ATT.ActivateElements = {"s_auto"}
-ATT.RPMMult = 1200/400
+ATT.RPMMult = 1250/400
+
+ATT.RPMHook = function(wep, stat)
+	local heat = wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true)
+	return Lerp(heat, stat, stat * 0.7)
+end
 
 ATT.Firemodes = {
     {
@@ -1053,7 +1058,7 @@ ATT.ShootSoundSilenced = "arc9_ucalpha/glock/fire.ogg"
 ATT.Silencer = false
 
 ATT.HeatDelayTimeMult = 0.75
-ATT.HeatDissipationMult = 2.5
+ATT.HeatDissipationMult = 2
 ATT.HeatPerShotMult = 33/48
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_barrel_vent")
 
