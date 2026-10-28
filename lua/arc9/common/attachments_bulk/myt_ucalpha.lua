@@ -1052,8 +1052,8 @@ ATT.ActivateElements = {"b_vent"}
 ATT.ShootSoundSilenced = "arc9_ucalpha/glock/fire.ogg"
 ATT.Silencer = false
 
-ATT.HeatDelayTimeMult = 0.5
-ATT.HeatDissipationMult = 3
+ATT.HeatDelayTimeMult = 0.75
+ATT.HeatDissipationMult = 2.5
 ATT.HeatPerShotMult = 33/48
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_barrel_vent")
 
