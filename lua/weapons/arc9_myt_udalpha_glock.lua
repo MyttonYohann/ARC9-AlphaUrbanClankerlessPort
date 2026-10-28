@@ -167,7 +167,7 @@ end
 SWEP.Overheat = true
 SWEP.HeatPerShot = 1/33
 SWEP.HeatDelayTime = 0.2
-SWEP.HeatDissipation = 0.15
+SWEP.HeatDissipation = 0.25
 SWEP.HeatFix = false
 SWEP.HeatLockout = false
 SWEP.Hook_BashHit = function(self, data)
@@ -280,6 +280,9 @@ SWEP.Animations = {
 	["idle_empty"] = {
 		Source = "idle_empty",
 	},
+	["fix_empty"] = {
+		Source = "idle_empty",
+	},
 	["draw"] = {
 		Source = "draw",
 		FireASAP = true,
@@ -296,7 +299,7 @@ SWEP.Animations = {
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, }, { t = 0.6, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 1, },
 		},
-		FireASAP = true,
+		FireASAP = true, -- pretty sure this doenst work
 		MinProgress = 0.7,
 	},
 	["bash"] = {
@@ -504,6 +507,13 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 			if curanim == "bash" 		then return "bash_overheat" 		end
 			if curanim == "bash_empty"	then return "bash_overheat_empty"	end
 		end
+	end
+	local heat = wep:GetHeatAmount()
+
+	if curanim == "fix" then	-- remove a certain percentage of heat when playing overheat anim
+		timer.Simple(29/30, function() -- manual delay cos i cant think of any other way
+				wep:SetHeatAmount(heat - 0.5)
+		end)
 	end
 end
 -------------------------- ATTACHMENTS

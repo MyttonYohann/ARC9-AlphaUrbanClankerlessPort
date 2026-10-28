@@ -1071,9 +1071,9 @@ ATT.SortOrder = 2
 ATT.Category = "ucalpha_glock_barrel"
 ATT.ActivateElements = {"b_long"}
 
-ATT.HeatDelayTimeMult = 1.2
+ATT.HeatDelayTimeMult = 1.15
 ATT.HeatDissipationMult = 0.75
-ATT.HeatPerShotMult = 1.4
+ATT.HeatPerShotMult = 1.3
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_barrel_long")
 
