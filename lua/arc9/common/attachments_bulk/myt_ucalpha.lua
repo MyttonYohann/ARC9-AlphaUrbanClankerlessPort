@@ -236,14 +236,14 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_mag_5")
 ----------------------------------------------------------------------------------
 ATT = {}
 
-ATT.PrintName = [[6-Round Tube]]
-ATT.CompactName = [[M. 6R]]
+ATT.PrintName = [[7-Round Tube]]
+ATT.CompactName = [[M. 7R]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[
 ]]
 
-ATT.SortOrder = 6
-ATT.ClipSize = 6
+ATT.SortOrder = 7
+ATT.ClipSize = 7
 ATT.Category = "ucalpha_1014_tube"
 ATT.ActivateElements = {"m_2"}
 
@@ -269,14 +269,14 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_mag_8")
 
 ATT = {}
 
-ATT.PrintName = [[7-Round Tube]]
-ATT.CompactName = [[M. 7R]]
+ATT.PrintName = [[6-Round Tube]]
+ATT.CompactName = [[M. 6R]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[
 ]]
 
-ATT.SortOrder = 7
-ATT.ClipSize = 7
+ATT.SortOrder = 6
+ATT.ClipSize = 6
 ATT.Category = "ucalpha_1014_tube"
 ATT.ActivateElements = {"m_4"}
 
