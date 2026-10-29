@@ -158,11 +158,11 @@ SWEP.ShootWhileSprintHook = function(self)
 	end
 end
 SWEP.BashDamageHook = function(wep, dmg)
-	if wep:GetOwner():KeyDown(IN_SPEED) and wep:GetOwner():KeyDown(IN_FORWARD + IN_BACK + IN_MOVELEFT + IN_MOVERIGHT) then
+	--if wep:GetOwner():KeyDown(IN_SPEED) and wep:GetOwner():KeyDown(IN_FORWARD + IN_BACK + IN_MOVELEFT + IN_MOVERIGHT) then
+	if wep:GetIsSprinting() and !wep:GetUBGL() then -- this does the same thing
 		return dmg * 2
-	end
+	end 
 end
-
 
 SWEP.Overheat = true
 SWEP.HeatPerShot = 1/33
@@ -348,7 +348,7 @@ SWEP.Animations = {
 			{s = common .. "shoulder.ogg",  t = 20/30},
 		},
 		IKTimeLine = {
-		{ t = 0, lhik = 1, rhik = 0, }, { t = 0.6, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 1, },
+		{ t = 0, lhik = 0, rhik = 0, }, { t = 0.5, lhik = 0, rhik = 0, },{ t = 0.8, lhik = 1, rhik = 1, },
 		},
 		FireASAP = true,
 		MinProgress = 0.6,

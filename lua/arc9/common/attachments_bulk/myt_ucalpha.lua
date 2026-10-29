@@ -315,7 +315,8 @@ ATT.Hook_TranslateAnimation = function(wep, curanim)
 end
 
 ATT.BashDamageHook = function(wep, dmg)
-	if wep:GetOwner():KeyDown(IN_SPEED) and wep:GetOwner():KeyDown(IN_FORWARD + IN_BACK + IN_MOVELEFT + IN_MOVERIGHT) and !wep:GetUBGL() then
+	--if wep:GetOwner():KeyDown(IN_SPEED) and wep:GetOwner():KeyDown(IN_FORWARD + IN_BACK + IN_MOVELEFT + IN_MOVERIGHT) and !wep:GetUBGL() then
+	if wep:GetIsSprinting() and !wep:GetUBGL() then -- this does the same thing
 		return dmg * 4
 	end
 end
