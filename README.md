@@ -33,6 +33,7 @@ This will only entails Decay for the forseeable future, it is very unlikely that
  - bashing whilst sprinting for Bayonet and Pistols
  - increased damage with sprint bash (mult by 2 for pistols, mult by 4 for bayonet)
  - Non-Pistol and Non-Bayonet melee will push back
+ 
 **Extended Shotgun Handling**
  - Reload when unchambered plays a different set depending on if the tube has ammo and if the chamber is loaded, it's a bit like hunt showdown
  - Pump Action can reload to +1 even when empty
