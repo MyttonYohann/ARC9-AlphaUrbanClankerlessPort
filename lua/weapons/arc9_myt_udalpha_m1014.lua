@@ -11,7 +11,8 @@ SWEP.TrueName = "M4 Super 90"
 
 SWEP.Class = "Shotgun"
 SWEP.Trivia = {
-	["Country of Origin"] = [[Who the fuck read these]],
+	["Country of Origin"] = [[Germany]], -- its on the texture lmao
+	["Manufacturer"] = [[Rapid Arms Inc.]],
 	["Calibre"] = "12 Gauge",
 }
 

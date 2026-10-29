@@ -45,7 +45,7 @@ This will only entails Decay for the forseeable future, it is very unlikely that
  - Calibre Slot is removed
  - ReloadInSIght is removed, mate im lazy tbh, i edit A LOT of animations
  - Dragon Breath can be used on every type of shotgun but it will force the gun to be manual action (the m1014 even has its own anim set !)
-
+ - Zipties ! Magical floating rails begone
 
 **The ArcCW mod is still perfectly usable, this is not meant to be a replacement**
 

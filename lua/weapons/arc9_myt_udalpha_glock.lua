@@ -230,7 +230,7 @@ SWEP.CustomizePos = Vector(19.5, 38, 6)
 SWEP.CustomizeSnapshotFOV = 110
 SWEP.CustomizeNoRotate = false
 
-SWEP.CustomizeRotateAnchor = Vector(10.5, -2.55, -2.23)
+SWEP.CustomizeRotateAnchor = Vector(18, -2.55, -2.23)
 
 SWEP.StandardPresets = {
 }
@@ -556,7 +556,7 @@ SWEP.Attachments = {
 		DefaultIcon = Material("arc9/def_att_icons/optic.png"),
 		Category = {"optic_ucalpha", "eft_optic_medium", "ucalpha_glock_irons"},
 		Bone = "glock_parent",
-		Pos = Vector(0, -3.5, 1.9),
+		Pos = Vector(0, -3.55, 1.9),
 		Ang = Angle(90, 0, -90),
 	},
 	{
