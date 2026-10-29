@@ -4,6 +4,8 @@ $basetexture "models\myt_uc\attachments"
 $bumpmap 			"models\myt_uc\attachments_normal"
 $phongexponenttexture 	"models\myt_uc\_detail\exponent"
 
+$color2 "[1.5 1.5 1.5]"
+
 $phong 1
 $phongboost "20"
 $phongexponent "16"	

@@ -298,7 +298,8 @@ SWEP.Animations = {
 			{s = common .. "shoulder.ogg",  t = 20/30},
 		},
 		IKTimeLine = {
-		{ t = 0, lhik = 1, rhik = 0, }, { t = 0.6, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 1, },
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.7, lhik = 0, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 0, },
 		},
 		FireASAP = true, -- pretty sure this doenst work
 		MinProgress = 0.7,

@@ -479,7 +479,7 @@ local rpg_mech = rpg_path .. "mech-01.ogg", rpg_path .. "mech-02.ogg", rpg_path 
 
 ATT.PrintName = [[Sawnoff RPG]]
 ATT.CompactName = "RPG"
-ATT.Icon = Material("entities/gekolt_dod_ubw_garand.png")
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[Real
 ]]
 ATT.Pros = {}
