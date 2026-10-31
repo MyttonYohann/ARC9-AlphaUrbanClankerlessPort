@@ -937,7 +937,9 @@ ATT.ActivateElements = {"s_26"}
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_slide_compact")
 
 ----------------------------------------------------------------------------------
-
+----------------
+-- Mag --
+----------------
 ----------------------------------------------------------------------------------
 
 ATT = {}
@@ -1040,7 +1042,10 @@ ATT.ActivateElements = {"i_tac"}
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_irons_tac")
 
 ----------------------------------------------------------------------------------
-
+----------------
+-- Barrel --
+----------------
+----------------------------------------------------------------------------------
 ATT = {}
 
 ATT.PrintName = [[Vented Barrel]]
@@ -1083,4 +1088,122 @@ ATT.HeatPerShotMult = 33/25
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_barrel_long")
 
-----------------------------------------------------------------------------------	
+----------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+--- UZI ---
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------
+-- Mag --
+----------------
+----------------------------------------------------------------------------------
+ATT = {}
+
+ATT.PrintName = [[21-Round Mag]]
+ATT.CompactName = [[M. 21]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 21
+ATT.Category = "ucalpha_uzi_mag"
+ATT.ActivateElements = {"m_21"}
+ATT.ClipSize = 21
+
+ATT.Hook_TranslateAnimation = function(wep, curanim)
+	if	curanim == "reload" 		then	return "reload_16"	end
+	if	curanim == "reload_empty"	then	return "reload_empty_16"	end	
+end
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_mag_21")
+
+----------------------------------------------------------------------------------
+ATT = {}
+
+ATT.PrintName = [[42-Round Mag]]
+ATT.CompactName = [[M. 42]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 42
+ATT.Category = "ucalpha_uzi_mag"
+ATT.ActivateElements = {"m_42"}
+ATT.ClipSize = 42
+
+ATT.Hook_TranslateAnimation = function(wep, curanim)
+	if	curanim == "reload" 		then	return "reload_41"	end
+	if	curanim == "reload_empty"	then	return "reload_empty_41"	end	
+end
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_mag_42")
+
+----------------------------------------------------------------------------------
+----------------
+-- Frame --
+----------------
+----------------------------------------------------------------------------------
+ATT = {}
+
+ATT.PrintName = [[Patrol]]
+ATT.CompactName = [[F. Patrol]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[slong
+]]
+
+ATT.SortOrder = 1
+ATT.Category = "ucalpha_uzi_frame"
+ATT.ActivateElements = {"f_patrol"}
+ATT.RPMMult = 400/600
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_frame_patrol")
+
+----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[Mini]]
+ATT.CompactName = [[F. Mini]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 2
+ATT.Category = "ucalpha_uzi_frame"
+ATT.ActivateElements = {"f_mini"}
+ATT.RPMMult = 800/600
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_frame_mini")
+
+----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[Micro]]
+ATT.CompactName = [[F. Micro]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 3
+ATT.Category = "ucalpha_uzi_frame"
+ATT.ActivateElements = {"f_micro", "pistol_length"}
+ATT.RPMMult = 1200/600
+
+ATT.LHIK = true
+ATT.LHIK_Priority = 0.01
+ 
+ATT.Scale = 1
+ATT.ModelOffset = Vector(-23, -2.5, 4.5)
+ATT.ModelAngleOffset = Angle(0, 0, 0)
+ATT.Model = "models/weapons/arc9/myt_uc/atts/c_mini_lhik.mdl"
+
+ATT.Hook_TranslateAnimation = function(wep, curanim)
+	if	curanim == "bash" 	then	return "bash_pistol"	end
+end
+ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_frame_micro")
