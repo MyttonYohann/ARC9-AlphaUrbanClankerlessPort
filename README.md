@@ -16,7 +16,7 @@ This will only entails Decay for the forseeable future, it is very unlikely that
  - More Ammo Tube attachments
  - To not bore you with the technicallity, the transitions between reload states are MUCH smoother now
  - Bash animation
- 
+
 **Glock 17**
  - Remove Frame Attachment, G26 Frame is now tie to the 10-Round Mag
  - Removed a lot of Slide attachment, but added a new Barrel slot
@@ -24,6 +24,13 @@ This will only entails Decay for the forseeable future, it is very unlikely that
  - 'Backport' (this was unfinished lol) some of Harry's animations like bash and unjam (no shade to Harrimator, and tbf to man, it's unfinished, but i like Partexedd's)
  - New reload anim, 33-Round and 10-Round has altered anim sets, reworked 100-Round's
  - Overheat, after a certain cap, the bashing will set target on fire
+
+**UZI**
+ - Remove Carbine Barrel, Civvy now has a wooden handguard
+ - Short Magazine is now 21, Extended Magazine is now 42
+ - Micro Frame does not disable stock attachment
+ - New reload anim, with different type of bolt pull depend on mag types
+ - Bashing animation, Micro Frame is considered pistol length
 
 ### New Features
  - Animation fixes and improvements

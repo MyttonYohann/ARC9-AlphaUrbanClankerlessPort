@@ -165,7 +165,7 @@ SWEP.BashDamageHook = function(wep, dmg)
 end
 
 SWEP.Overheat = true
-SWEP.HeatPerShot = 1/33
+SWEP.HeatPerShot = 1/35
 SWEP.HeatDelayTime = 0.2
 SWEP.HeatDissipation = 0.25
 SWEP.HeatFix = false
@@ -230,7 +230,7 @@ SWEP.NearWallPos = Vector(3, -4, -12)
 SWEP.NearWallAng = Angle(-4, 35, -10)
 
 SWEP.ViewModelFOVBase = 70
-SWEP.ActivePos = Vector(0, -2, 0)
+SWEP.ActivePos = Vector(0, -1, 0)
 SWEP.ActiveAng = Angle(0, 0, 0)
 
 SWEP.CrouchPos = Vector(-0.2, -0.5, -1.5)
@@ -468,7 +468,7 @@ SWEP.Animations = {
 		},
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.75, lhik = 0, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 0, },
+		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.75, lhik = 0, rhik = 0, },{ t = 0.85, lhik = 1, rhik = 0, },
 		},
 	},  
 	["reload_empty_100"] = {

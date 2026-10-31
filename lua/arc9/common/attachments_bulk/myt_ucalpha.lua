@@ -1144,6 +1144,27 @@ end
 ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_mag_42")
 
 ----------------------------------------------------------------------------------
+ATT = {}
+
+ATT.PrintName = [[100-Round Mag]]
+ATT.CompactName = [[M. 100]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 100
+ATT.Category = "ucalpha_uzi_mag"
+ATT.ActivateElements = {"m_100"}
+ATT.ClipSize = 100
+
+ATT.Hook_TranslateAnimation = function(wep, curanim)
+	if	curanim == "reload" 		then	return "reload_100"	end
+	if	curanim == "reload_empty"	then	return "reload_empty_100"	end	
+end
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_mag_100")
+
+----------------------------------------------------------------------------------
 ----------------
 -- Frame --
 ----------------
@@ -1161,6 +1182,10 @@ ATT.Category = "ucalpha_uzi_frame"
 ATT.ActivateElements = {"f_patrol"}
 ATT.RPMMult = 400/600
 
+ATT.HeatDelayTimeMult = 0.9
+ATT.HeatDissipationMult = 0.9
+ATT.HeatPerShotMult = 35/28
+
 ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_frame_patrol")
 
 ----------------------------------------------------------------------------------
@@ -1177,6 +1202,9 @@ ATT.SortOrder = 2
 ATT.Category = "ucalpha_uzi_frame"
 ATT.ActivateElements = {"f_mini"}
 ATT.RPMMult = 800/600
+
+ATT.HeatDelayTimeMult = 1.2
+ATT.HeatDissipationMult = 1.1
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_frame_mini")
 
@@ -1199,11 +1227,18 @@ ATT.LHIK = true
 ATT.LHIK_Priority = 0.01
  
 ATT.Scale = 1
-ATT.ModelOffset = Vector(-23, -2.5, 4.5)
+ATT.ModelOffset = Vector(-23, -2.6, 3.6)
 ATT.ModelAngleOffset = Angle(0, 0, 0)
 ATT.PreBashTime = 0.25
 ATT.PostBashTime = 0.5
 ATT.Model = "models/weapons/arc9/myt_uc/atts/c_mini_lhik.mdl"
+ATT.DrawFunc = function(swep, model) 
+	if swep:GetElements()["m_100"] then
+		model:SetModel("models/weapons/arc9/myt_uc/atts/c_mini_100_lhik.mdl")
+	else
+		model:SetModel("models/weapons/arc9/myt_uc/atts/c_mini_lhik.mdl")
+	end
+end
 
 ATT.Hook_TranslateAnimation = function(wep, curanim)
 	if	curanim == "bash" 	then	return "bash_pistol"	end
