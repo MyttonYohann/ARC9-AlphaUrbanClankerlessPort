@@ -1201,9 +1201,65 @@ ATT.LHIK_Priority = 0.01
 ATT.Scale = 1
 ATT.ModelOffset = Vector(-23, -2.5, 4.5)
 ATT.ModelAngleOffset = Angle(0, 0, 0)
+ATT.PreBashTime = 0.25
+ATT.PostBashTime = 0.5
 ATT.Model = "models/weapons/arc9/myt_uc/atts/c_mini_lhik.mdl"
 
 ATT.Hook_TranslateAnimation = function(wep, curanim)
 	if	curanim == "bash" 	then	return "bash_pistol"	end
 end
 ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_frame_micro")
+
+----------------------------------------------------------------------------------
+----------------
+-- Frame --
+----------------
+----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[Wood Stock]]
+ATT.CompactName = [[S. Wood]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 3
+ATT.Category = "ucalpha_uzi_stock"
+ATT.ActivateElements = {"s_wood"}
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_stock_wood")
+
+----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[Polymer Stock]]
+ATT.CompactName = [[S. Polymer]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 2
+ATT.Category = "ucalpha_uzi_stock"
+ATT.ActivateElements = {"s_poly"}
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_stock_poly")
+
+----------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[Folded Stock]]
+ATT.CompactName = [[S. Folded]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 1
+ATT.Category = "ucalpha_uzi_stock"
+ATT.ActivateElements = {"s_folded"}
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_stock_folded")
+
+----------------------------------------------------------------------------------

@@ -146,8 +146,8 @@ SWEP.PrimaryBash = false
 SWEP.BashDamage = 20
 SWEP.BashLungeRange = 0
 SWEP.BashRange = 50
-SWEP.PreBashTime = 0.25
-SWEP.PostBashTime = 0.55
+SWEP.PreBashTime = 0.2
+SWEP.PostBashTime = 0.4
 SWEP.BashWhileSprint = true
 SWEP.ShootWhileSprint = false
 -- you cant fucking use bashwhilespring WITHOUT shootwhilesprint
@@ -277,6 +277,7 @@ SWEP.CamOffsetAng = Angle(0, 0, 90)
 -------------------------- SOUNDS
 
 local path = "arc9_ucalpha/uzi/"
+local path_glock = "arc9_ucalpha/glock/"
 local common = "arc9_ucalpha/common/"
 SWEP.ShootSound = path .. "fire.ogg"
 SWEP.ShootSoundSilenced = path .. "fire_supp.ogg"
@@ -330,7 +331,7 @@ SWEP.Animations = {
 		MinProgress = 0.7,
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.7, lhik = 0, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 0, },
+		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.6, lhik = 0, rhik = 0, },{ t = 0.8, lhik = 1, rhik = 0, },
 		},
 	},
 
@@ -375,13 +376,12 @@ SWEP.Animations = {
 		FireASAP = true,
 		MinProgress = 0.93,
 		EventTable = {
-			{s =  path .. "magrelease.ogg",   t = 14 / 30},  
-			{s =  path .. "magout.ogg",   t = 18 / 30},  
-			{s =  path .. "magin.ogg",   t = 17 / 30},   
+			{s =  path .. "magout.ogg",   t = 10 / 30},  
+			{s =  path .. "magin.ogg",   t = 21 / 30},   
 		},
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
+		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.7, lhik = 0, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 0, },
 		},
 	},  
 	["reload_empty"] = {
@@ -390,13 +390,13 @@ SWEP.Animations = {
 		MinProgress = 0.95,
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.1, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
+		{ t = 0.2, lhik = 0, rhik = 1, }, { t = 0.775, lhik = 0, rhik = 1, },{ t = 0.95, lhik = 1, rhik = 1, },
 		},
 		EventTable = {
-			{s =  path .. "magrelease.ogg",   t = 7 / 30},  
-			{s =  path .. "magout.ogg",   t = 9 / 30},  
-			{s =  path .. "magin.ogg",   t = 18 / 30},  
-			{s =  path .. "sliderel.ogg",   t = 46 / 30},  
+			{s =  path .. "magout.ogg",   t = 10 / 30},  
+			{s =  path .. "magin.ogg",   t = 28 / 30},   
+			{s =  path .. "chback.ogg",   t = 59 / 30},  
+			{s =  path .. "chforward.ogg",   t = 64 / 30},  
 		},
 	}, 
 	["reload_16"] = {
@@ -404,13 +404,12 @@ SWEP.Animations = {
 		FireASAP = true,
 		MinProgress = 0.93,
 		EventTable = {
-			{s =  path .. "magrelease.ogg",   t = 14 / 30},  
-			{s =  path .. "magout.ogg",   t = 17 / 30},  
-			{s =  path .. "magin.ogg",   t = 16 / 30},   
+			{s =  path .. "magout.ogg",   t = 10 / 30},  
+			{s =  path .. "magin.ogg",   t = 21 / 30},   
 		},
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
+		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.7, lhik = 0, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 0, },
 		},
 	},  
 	["reload_empty_16"] = {
@@ -419,13 +418,13 @@ SWEP.Animations = {
 		MinProgress = 0.95,
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.1, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
+		{ t = 0.2, lhik = 0, rhik = 1, }, { t = 0.775, lhik = 0, rhik = 1, },{ t = 0.95, lhik = 1, rhik = 1, },
 		},
 		EventTable = {
-			{s =  path .. "magrelease.ogg",   t = 7 / 30},  
-			{s =  path .. "magout.ogg",   t = 9 / 30},  
-			{s =  path .. "magin.ogg",   t = 13 / 30},  
-			{s =  path .. "sliderel.ogg",   t = 41 / 30},  
+			{s =  path .. "magout.ogg",   t = 10 / 30},  
+			{s =  path .. "magin.ogg",   t = 28 / 30},   
+			{s =  path .. "chback.ogg",   t = 59 / 30},  
+			{s =  path .. "chforward.ogg",   t = 64 / 30},  
 		},
 	},  
 	["reload_41"] = {
@@ -433,14 +432,13 @@ SWEP.Animations = {
 		FireASAP = true,
 		MinProgress = 0.93,
 		EventTable = {
-			{s =  path .. "magrelease.ogg",   t = 14 / 30},  
-			{s =  path .. "magout.ogg",   t = 18 / 30},  
-			{s =  path .. "magin.ogg",   t = 17 / 30},   
-			{s =  path .. "magtap.ogg",   t = 42 / 30},   
+			{s =  path .. "magout.ogg",   t = 10 / 30},  
+			{s =  path .. "magin.ogg",   t = 21 / 30},   
+			{s =  path_glock .. "magtap.ogg",   t = 42 / 30},   
 		},
 		IKTimeLine = {
-		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
+		{ t = 0, lhik = 1, rhik = 1, },
+		{ t = 0.2, lhik = 0, rhik = 1, }, { t = 0.7, lhik = 0, rhik = 1, },{ t = 0.9, lhik = 1, rhik = 1, },
 		},
 	},  
 	["reload_empty_41"] = {
@@ -448,15 +446,14 @@ SWEP.Animations = {
 		FireASAP = true,
 		MinProgress = 0.95,
 		IKTimeLine = {
-		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.1, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
+		{ t = 0, lhik = 1, rhik = 1, },
+		{ t = 0.2, lhik = 0, rhik = 1, }, { t = 0.75, lhik = 0, rhik = 1, },{ t = 0.85, lhik = 1, rhik = 1, },
 		},
 		EventTable = {
-			{s =  path .. "magrelease.ogg",   t = 7 / 30},  
-			{s =  path .. "magout.ogg",   t = 9 / 30},  
-			{s =  path .. "magin.ogg",   t = 18 / 30},  
-			{s = path .. "slide_pull.ogg", t = 46/30},
-			{s =  path .. "sliderel.ogg",   t = 55/30},  
+			{s =  path .. "magout.ogg",   t = 10 / 30},  
+			{s =  path .. "magin.ogg",   t = 28 / 30},   
+			{s =  path .. "chback.ogg",   t = 59 / 30},  
+			{s =  path .. "chforward.ogg",   t = 64 / 30},  
 		},
 	},  
 	["reload_100"] = {
@@ -471,7 +468,7 @@ SWEP.Animations = {
 		},
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
+		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.75, lhik = 0, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 0, },
 		},
 	},  
 	["reload_empty_100"] = {
@@ -515,8 +512,12 @@ SWEP.AttachmentElements = {
 	["m_42"] = 		{ Bodygroups = { {2, 2}, },},
 	["m_100"] = 	{ Bodygroups = { {2, 3}, },},
 
+	["s_wood"] = 	{ Bodygroups = { {3, 2}, },},
+	["s_poly"] = 	{ Bodygroups = { {3, 3}, },},
+	["s_folded"] = 	{ Bodygroups = { {3, 1}, },},
+
 	["f_patrol"] = 	{ Bodygroups = { {1, 1}, },},
-	["f_mini"] = 	{ Bodygroups = { {1, 2}, },},
+	["f_mini"] = 	{ Bodygroups = { {1, 2}, },	AttPosMods = { [3] = { Pos = Vector(0, 0.35, 11.2), } }	},
 	["f_micro"] = 	{ Bodygroups = { {1, 3}, {4, 1}, {3, 4}, },	AttPosMods = { [3] = { Pos = Vector(0, 0.35, 8.2), },[6] = { Pos = Vector(0, 1.5, 8.8), } }	},
 }
 
@@ -525,9 +526,13 @@ SWEP.Hook_ModifyBodygroups = function(wep, data)
 	if wep:HasElement("rail_def") then model:SetBodygroup(4,2) end	
 	if wep:HasElement("fg_def") then model:SetBodygroup(5,1) end	
 
-	if wep:HasElement("rail_def") and wep:HasElement("f_micro") then model:SetBodygroup(4,3) end	
-	if wep:HasElement("fg_def") and wep:HasElement("f_micro") then model:SetBodygroup(5,2) end	
-	if wep:HasElement("fg_def") and wep:HasElement("f_mini") then model:SetBodygroup(5,3) end	
+	if wep:HasElement("rail_def") and wep:HasElement("f_micro") then model:SetBodygroup(4,3) end
+	if wep:HasElement("fg_def") and wep:HasElement("f_micro") then model:SetBodygroup(5,2) end
+	if wep:HasElement("fg_def") and wep:HasElement("f_mini") then model:SetBodygroup(5,3) end
+
+	if wep:HasElement("s_wood") and wep:HasElement("f_micro") then model:SetBodygroup(3,6) end
+	if wep:HasElement("s_poly") and wep:HasElement("f_micro") then model:SetBodygroup(3,7) end
+	if wep:HasElement("s_folded") and wep:HasElement("f_micro") then model:SetBodygroup(3,5) end
 end
 
 SWEP.Attachments = {
@@ -568,7 +573,7 @@ SWEP.Attachments = {
 		DefaultName = "Extended Stock",
 		InstalledElements = {"has_stock"},
 
-		Category = {"ucalpha_pistol_stock"},
+		Category = {"ucalpha_uzi_stock"},
 		Bone = "uzi_parent",
 		Pos = Vector(0, 0, -3.5),
 		Ang = Angle(90, 0, -90),
