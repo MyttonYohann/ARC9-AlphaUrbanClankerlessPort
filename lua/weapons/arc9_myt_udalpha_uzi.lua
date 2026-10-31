@@ -339,9 +339,9 @@ SWEP.Animations = {
 	["ready"] = {
 		Source = "equip",
 		EventTable = {
-			{s = path .. "slide_pull.ogg", t = 9/30},
-			{s = path .. "sliderel.ogg", t = 16/30},
-			{s = common .. "shoulder.ogg",  t = 20/30},
+			{s = path .. "chback.ogg",   t = 16 / 30},  
+			{s = path .. "chforward.ogg",   t = 24 / 30},  
+			{s = common .. "shoulder.ogg",  t = 30/30},
 		},
 		IKTimeLine = {
 		{ t = 0, lhik = 0, rhik = 0, }, { t = 0.5, lhik = 0, rhik = 0, },{ t = 0.8, lhik = 1, rhik = 1, },
