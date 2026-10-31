@@ -305,13 +305,13 @@ SWEP.Animations = {
 		Source = "fix",
 		FireASAP = true,
 		EventTable = {
-			{s = path .. "slide_pull.ogg", t = 10/30},
-			{s = path .. "sliderel.ogg", t = 19/30},
+			{s = path .. "chback.ogg",   t = 8 / 30},  
+			{s = path .. "chforward.ogg",   t = 16 / 30},  
 			{s = common .. "shoulder.ogg",  t = 20/30},
 		},
 		IKTimeLine = {
-		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.7, lhik = 0, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 0, },
+		{ t = 0, lhik = 1, rhik = 1, },
+		{ t = 0.2, lhik = 0, rhik = 1, }, { t = 0.6, lhik = 0, rhik = 1, },{ t = 0.8, lhik = 1, rhik = 1, },
 		},
 		FireASAP = true, -- pretty sure this doenst work
 		MinProgress = 0.7,
@@ -498,7 +498,7 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	local heat = wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true)
 
 	if curanim == "fix" then	-- remove a certain percentage of heat when playing overheat anim
-		timer.Simple(29/30, function() -- manual delay cos i cant think of any other way
+		timer.Simple(28/30, function() -- manual delay cos i cant think of any other way
 				wep:SetHeatAmount(heat - 0.35)
 		end)
 	end
