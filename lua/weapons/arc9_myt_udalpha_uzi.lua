@@ -7,13 +7,13 @@ SWEP.Category = "ARC9 - Urban Redevelopment"
 --SWEP.SubCategory = "1DickGay"
 
 SWEP.PrintName = "Tel Aviv"
-SWEP.TrueName = "UZI"
+SWEP.TrueName = "Uzi"
 
-SWEP.Class = "SMG"
+SWEP.Class = "Submachine Gun"
 SWEP.Trivia = {
 	["Country of Origin"] = [[Israel]],
 	["Manufacturer"] = [[Zion Arms]], -- its on the texture lmao
-	["Calibre"] = "12 Gauge",
+	["Calibre"] = "9x19mm Parabellum",
 }
 
 SWEP.Credits = {
@@ -24,9 +24,9 @@ SWEP.ViewModel = "models/weapons/arc9/myt_uc/c_uzi.mdl"
 SWEP.WorldModel = "models/weapons/arc9/myt_uc/c_uzi.mdl"
 
 SWEP.Slot = 2
-
+ 
 SWEP.MirrorVMWM = true
-SWEP.WorldModelMirror = "models/weapons/arc9/myt_uc/c_uzi.mdl"
+--SWEP.WorldModelMirror = "models/weapons/arc9/myt_uc/c_uzi.mdl"
 SWEP.WorldModelOffset = {
 	Pos = Vector(0, 0, 0),
 	Ang = Angle(0, 0, 0),
@@ -46,10 +46,10 @@ SWEP.MirrorVMWMHeldOnly = false
 SWEP.DamageMax = 30 -- 3 shot close range kill
 SWEP.DamageMin = 17 -- 5 shot long range kill
 
-SWEP.RangeMin = 10
-SWEP.RangeMax = 30
+SWEP.RangeMin = 15
+SWEP.RangeMax = 75
 
-SWEP.Penetration = 2 -- Units of wood that can be penetrated by this gun.
+SWEP.Penetration = 3 -- Units of wood that can be penetrated by this gun.
 
 -------------------------- PHYS BULLET BALLISTICS
 
@@ -62,7 +62,7 @@ SWEP.PhysBulletDrag = 1.15
 
 SWEP.Ammo = "pistol" -- What ammo type this gun uses.
 
-SWEP.ChamberSize = 1 -- The amount of rounds this gun can chamber.
+SWEP.ChamberSize = 0 -- The amount of rounds this gun can chamber.
 SWEP.ClipSize = 32 -- Self-explanatory.
 SWEP.SupplyLimit = 3 -- Amount of magazines of ammo this gun can take from an ARC9 supply crate.
 SWEP.SecondarySupplyLimit = 2 -- Amount of reserve UBGL magazines you can take.
@@ -83,6 +83,7 @@ SWEP.RPM = 600
 -- n: n-round burst.
 SWEP.Firemodes = {
 	{ Mode = -1, },
+	{ Mode = 1, },
 }
 
 -------------------------- RECOIL
@@ -388,6 +389,7 @@ SWEP.Animations = {
 		Source = "reload_empty",
 		FireASAP = true,
 		MinProgress = 0.95,
+		MagSwapTime = 30/30,
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
 		{ t = 0.2, lhik = 0, rhik = 1, }, { t = 0.775, lhik = 0, rhik = 1, },{ t = 0.95, lhik = 1, rhik = 1, },
@@ -416,6 +418,7 @@ SWEP.Animations = {
 		Source = "reload_empty_16",
 		FireASAP = true,
 		MinProgress = 0.95,
+		MagSwapTime = 30/30,
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
 		{ t = 0.2, lhik = 0, rhik = 1, }, { t = 0.775, lhik = 0, rhik = 1, },{ t = 0.95, lhik = 1, rhik = 1, },
@@ -445,6 +448,7 @@ SWEP.Animations = {
 		Source = "reload_empty_41",
 		FireASAP = true,
 		MinProgress = 0.95,
+		MagSwapTime = 30/30,
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 1, },
 		{ t = 0.2, lhik = 0, rhik = 1, }, { t = 0.75, lhik = 0, rhik = 1, },{ t = 0.85, lhik = 1, rhik = 1, },
@@ -460,6 +464,7 @@ SWEP.Animations = {
 		Source = "reload_100",
 		FireASAP = true,
 		MinProgress = 0.93,
+
 		EventTable = {
 			{s =  path .. "magrelease.ogg",   t = 14 / 30},  
 			{s =  path .. "magout.ogg",   t = 18 / 30},  
@@ -475,6 +480,7 @@ SWEP.Animations = {
 		Source = "reload_empty_100",
 		FireASAP = true,
 		MinProgress = 0.95,
+		MagSwapTime = 30/30,
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
 		{ t = 0.1, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
@@ -490,7 +496,8 @@ SWEP.Animations = {
 }
 SWEP.BulletBones = { -- the bone that represents bullets in gun/mag
     [0] = "",
-    [1] = "glock_bullet1"
+    [1] = {"uzi_b1", "uzi_bb"},
+    [2] = "uzi_b2",
 }
 SWEP.HideBones = {"uzi_magb"} 
 

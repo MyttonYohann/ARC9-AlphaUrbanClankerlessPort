@@ -1022,6 +1022,15 @@ ATT.Hook_TranslateAnimation = function(wep, curanim)
 	if	curanim == "reload_empty"	then	return "reload_empty_100"	end	
 end
 
+ATT.LHIK = true
+ATT.LHIK_Priority = 0.01
+ 
+ATT.Scale = 1
+ATT.ModelOffset = Vector(-18.8, -2, 6.8)
+ATT.ModelAngleOffset = Angle(0, 0, 0)
+
+ATT.Model = "models/weapons/arc9/myt_uc/atts/c_mini_100_lhik.mdl"
+
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_mag_100")
 
 ----------------------------------------------------------------------------------

@@ -299,7 +299,7 @@ SWEP.Animations = {
 		},
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.7, lhik = 0, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 0, },
+		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.675, lhik = 0, rhik = 0, },{ t = 0.8, lhik = 1, rhik = 0, },
 		},
 		FireASAP = true, -- pretty sure this doenst work
 		MinProgress = 0.7,
