@@ -47,8 +47,8 @@ SWEP.MirrorVMWMHeldOnly = false
 SWEP.DamageMax = 20 -- 5 pellets to kill
 SWEP.DamageMin = 10 -- land 10 pellets to kill
 
-SWEP.RangeMin = 4
-SWEP.RangeMax = 40
+SWEP.RangeMin = 100
+SWEP.RangeMax = 1600
 
 SWEP.Penetration = 1 -- Units of wood that can be penetrated by this gun.
 
@@ -178,8 +178,6 @@ SWEP.Hook_BashHit = function(self, data)
 		end
 	end
 end
-
-
 
 -------------------------- TRACERS
 

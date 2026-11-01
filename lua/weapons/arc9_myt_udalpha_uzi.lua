@@ -46,8 +46,8 @@ SWEP.MirrorVMWMHeldOnly = false
 SWEP.DamageMax = 30 -- 3 shot close range kill
 SWEP.DamageMin = 17 -- 5 shot long range kill
 
-SWEP.RangeMin = 15
-SWEP.RangeMax = 75
+SWEP.RangeMin = 700
+SWEP.RangeMax = 4000
 
 SWEP.Penetration = 3 -- Units of wood that can be penetrated by this gun.
 
@@ -168,7 +168,7 @@ end
 SWEP.Overheat = true
 SWEP.HeatPerShot = 1/35
 SWEP.HeatDelayTime = 0.2
-SWEP.HeatDissipation = 0.25
+SWEP.HeatDissipation = 0.4
 SWEP.HeatFix = false
 SWEP.HeatLockout = false
 SWEP.Hook_BashHit = function(self, data)
@@ -300,7 +300,7 @@ SWEP.Animations = {
 	["draw"] = {
 		Source = "draw",
 		FireASAP = true,
-		MinProgress = 0.35,
+		MinProgress = 0.5,
 	},
 	["fix"] = {
 		Source = "fix",
@@ -351,6 +351,8 @@ SWEP.Animations = {
 	},
 	["draw_empty"] = {
 		Source = "draw_empty",
+		FireASAP = true,
+		MinProgress = 0.5,
 	},
 	["holster"] = {
 		Source = "holster",
@@ -483,7 +485,7 @@ SWEP.Animations = {
 		MagSwapTime = 30/30,
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.1, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
+		{ t = 0.1, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 0, },
 		},
 		EventTable = {
 			{s =  path .. "magrelease.ogg",   t = 7 / 30},  
@@ -506,7 +508,7 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 
 	if curanim == "fix" then	-- remove a certain percentage of heat when playing overheat anim
 		timer.Simple(28/30, function() -- manual delay cos i cant think of any other way
-				wep:SetHeatAmount(heat - 0.35)
+				wep:SetHeatAmount(heat - 0.4)
 		end)
 	end
 end
@@ -523,9 +525,9 @@ SWEP.AttachmentElements = {
 	["s_poly"] = 	{ Bodygroups = { {3, 3}, },},
 	["s_folded"] = 	{ Bodygroups = { {3, 1}, },},
 
-	["f_patrol"] = 	{ Bodygroups = { {1, 1}, },},
-	["f_mini"] = 	{ Bodygroups = { {1, 2}, },	AttPosMods = { [3] = { Pos = Vector(0, 0.35, 11.2), } }	},
-	["f_micro"] = 	{ Bodygroups = { {1, 3}, {4, 1}, {3, 4}, },	AttPosMods = { [3] = { Pos = Vector(0, 0.35, 8.2), },[6] = { Pos = Vector(0, 1.5, 8.8), } }	},
+	["f_patrol"] = 	{ Bodygroups = { {1, 1}, },	AttPosMods = { [3] = { Pos = Vector(-0.17, 0.35, 21.7), } }	},
+	["f_mini"] = 	{ Bodygroups = { {1, 2}, },	AttPosMods = { [3] = { Pos = Vector(-0.17, 0.35, 11.2), } }	},
+	["f_micro"] = 	{ Bodygroups = { {1, 3}, {4, 1}, {3, 4}, },	AttPosMods = { [3] = { Pos = Vector(-0.17, 0.35, 8.2), },[6] = { Pos = Vector(-0.17, 1.5, 8.8), } }	},
 }
 
 SWEP.Hook_ModifyBodygroups = function(wep, data)
@@ -571,7 +573,7 @@ SWEP.Attachments = {
 		ExcludeElements = {"pre_muzzed"},
 		Category = {"muzzle_css"},
 		Bone = "uzi_parent",
-		Pos = Vector(0, 0.35, 13.5),
+		Pos = Vector(-0.17, 0.35, 13.5),
 		Ang = Angle(90, 0, -90),
 	},
 
@@ -603,7 +605,7 @@ SWEP.Attachments = {
 		ExcludeElements = {"nofg"},
 		Category = {"eft_foregrip_small"},
 		Bone = "uzi_parent",
-		Pos = Vector(0, 2.1, 8),
+		Pos = Vector(-0.17, 2.1, 8),
 		Ang = Angle(90, 0, -90),
 	},
 }

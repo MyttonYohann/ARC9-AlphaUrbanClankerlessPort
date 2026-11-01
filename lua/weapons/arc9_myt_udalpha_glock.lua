@@ -45,8 +45,8 @@ SWEP.MirrorVMWMHeldOnly = false
 SWEP.DamageMax = 30 -- 3 shot close range kill
 SWEP.DamageMin = 17 -- 5 shot long range kill
 
-SWEP.RangeMin = 10
-SWEP.RangeMax = 30
+SWEP.RangeMin = 600
+SWEP.RangeMax = 2000
 
 SWEP.Penetration = 2 -- Units of wood that can be penetrated by this gun.
 
@@ -170,15 +170,18 @@ SWEP.HeatDelayTime = 0.2
 SWEP.HeatDissipation = 0.25
 SWEP.HeatFix = false
 SWEP.HeatLockout = false
+SWEP.HeatCap = 0.5
 SWEP.Hook_BashHit = function(self, data)
 	local heat = self:GetHeatAmount() / self:GetProcessedValue("HeatCapacity", true)
 	
-	if !self:GetUBGL() and heat >= 0.5 then
+	if !self:GetUBGL() and heat >= self.HeatCap then
 		if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) then
 			data.tr.Entity:Ignite(math.Rand(2, 4))
 		end
 	end
 end
+
+SWEP.OverheatAnim = 0
 
 SWEP.HeatDissipationHook = function(wep) -- temporarily 'freezes' the heat gauge
 	local heat = wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true)
@@ -505,7 +508,7 @@ SWEP.HideBones = {"glock_magb"}
 
 SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	if !wep:GetUBGL() then -- only checking the gun not the ubgl
-		if wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true) > 0.5 then
+		if wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true) > wep.HeatCap then
 			if curanim == "bash" 		then return "bash_overheat" 		end
 			if curanim == "bash_empty"	then return "bash_overheat_empty"	end
 		end

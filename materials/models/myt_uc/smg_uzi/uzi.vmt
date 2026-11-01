@@ -3,6 +3,8 @@
 	"$basetexture"			"models\myt_uc\smg_uzi\uzi"
 	"$bumpmap" 			"models\myt_uc\smg_uzi\uzi_normal"
 
+	"$color2"	"[1.4 1.4 1.4]"
+
 //	"$halflambert" 					"1"
 //	"$basemapalphaphongmask" 		"1"
 	"$phong"                        "1"	
