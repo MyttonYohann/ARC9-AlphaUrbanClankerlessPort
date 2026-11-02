@@ -468,8 +468,8 @@ SWEP.Animations = {
 	["reload_start_ghost"] = {
 		Source = "reload_1_ghost",
 		IKTimeLine = {
-		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },
+		{ t = 0, lhik = 1, rhik = 1, },
+		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 0, },
 		},
 		EventTable = {
 			{s = common .. "cloth_2.ogg",  t = 0},
@@ -484,8 +484,8 @@ SWEP.Animations = {
 	["reload_start_ghost_pump"] = {
 		Source = "reload_1pump_ghost",
 		IKTimeLine = {
-		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },
+		{ t = 0, lhik = 1, rhik = 1, },
+		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 0, },
 		},
 		EventTable = {
 			{s = common .. "cloth_2.ogg",  t = 0},
@@ -504,8 +504,8 @@ SWEP.Animations = {
 	["reload_start_ghost_pump2"] = {
 		Source = "reload_1pump_ghost2",
 		IKTimeLine = {
-		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },
+		{ t = 0, lhik = 1, rhik = 1, },
+		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 0, },
 		},
 		EventTable = {
 			{s = common .. "cloth_2.ogg",  t = 0},
@@ -524,8 +524,7 @@ SWEP.Animations = {
 	["reload_insert_ghost"] = {
 		Source = "reload_3_ghost1",
 		IKTimeLine = {
-		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },
+		{ t = 0, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 0, },
 		},
 		EventTable = {
 			{s = common .. "cloth_2.ogg",  t = 0},
@@ -540,7 +539,7 @@ SWEP.Animations = {
 		Source = "reload_3_ghost2",
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },
+		{ t = 0.3, lhik = 1, rhik = 0, }, { t = 0.5, lhik = 1, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },
 		},
 		EventTable = {
 			{s = common .. "shoulder.ogg",  t = 5/30},
