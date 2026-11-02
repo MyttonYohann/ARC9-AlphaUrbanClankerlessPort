@@ -466,12 +466,9 @@ SWEP.Animations = {
 		Source = "reload_100",
 		FireASAP = true,
 		MinProgress = 0.93,
-
 		EventTable = {
-			{s =  path .. "magrelease.ogg",   t = 14 / 30},  
-			{s =  path .. "magout.ogg",   t = 18 / 30},  
-			{s =  path .. "magin.ogg",   t = 31 / 30},   
-			{s =  path .. "magtap.ogg",   t = 44 / 30},   
+			{s =  path .. "magout.ogg",   t = 13 / 30},  
+			{s =  path .. "magin.ogg",   t = 50 / 30},     
 		},
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
@@ -488,11 +485,10 @@ SWEP.Animations = {
 		{ t = 0.1, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 0, },
 		},
 		EventTable = {
-			{s =  path .. "magrelease.ogg",   t = 7 / 30},  
-			{s =  path .. "magout.ogg",   t = 9 / 30},  
-			{s =  path .. "magin.ogg",   t = 28 / 30},  
-			{s = path .. "slide_pull.ogg", t = 64/30},
-			{s =  path .. "sliderel.ogg",   t = 73/30},  
+			{s =  path .. "magout.ogg",   t = 13 / 30},  
+			{s =  path .. "magin.ogg",   t = 40 / 30},   
+			{s =  path .. "chback.ogg",   t = 70 / 30},  
+			{s =  path .. "chforward.ogg",   t = 77 / 30},  
 		},
 	},  
 }
