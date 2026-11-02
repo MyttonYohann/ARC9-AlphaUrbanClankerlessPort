@@ -522,11 +522,11 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	end
 end
 
-SWEP.Hook_ModifyRecoilDir = function(self, dir) --return dir end # direction of recoil in degrees, 0 = up
+--[[SWEP.Hook_ModifyRecoilDir = function(self, dir) --return dir end # direction of recoil in degrees, 0 = up
     if self:GetInSights() then
         return {dir = Angle(0, -1, 0)}
     end
-end
+end]]
 -------------------------- ATTACHMENTS
 
 SWEP.DefaultBodygroups = "00000000000000"
