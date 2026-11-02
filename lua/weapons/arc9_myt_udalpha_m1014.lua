@@ -63,7 +63,7 @@ SWEP.PhysBulletDrag = 1.15
 
 SWEP.Ammo = "buckshot" -- What ammo type this gun uses.
 
-SWEP.ChamberSize = 1 -- The amount of rounds this gun can chamber.
+SWEP.ChamberSize = 2 -- The amount of rounds this gun can chamber.
 SWEP.ClipSize = 4 -- Self-explanatory.
 SWEP.SupplyLimit = 3 -- Amount of magazines of ammo this gun can take from an ARC9 supply crate.
 SWEP.SecondarySupplyLimit = 2 -- Amount of reserve UBGL magazines you can take.
@@ -187,8 +187,8 @@ SWEP.TracerColor = Color(255, 225, 200) -- Color of tracers. Only works if trace
 -------------------------- POSITIONS
 
 SWEP.IronSights = {
-	Pos = Vector(-2.72, -4, 1.25),
-	Ang = Angle(0,-0.25,0),
+	Pos = Vector(-2.72, -4, 1.23),
+	Ang = Angle(0,0,0),
 	Midpoint = { -- Where the gun should be at the middle of it's irons
 		Pos = Vector(0, 15, -4),
 		Ang = Angle(0, 0, -45),
@@ -451,7 +451,6 @@ SWEP.Animations = {
 			{s = common .. "shotgun_insert_3.ogg",  t = 18/30},
 			{s = common .. "cloth_4.ogg",  t = 0},
 		},
-		RestoreAmmo = 1,
 		RefillProgress = 20/40,
 	},
 	["reload_finish"] = {
@@ -464,6 +463,19 @@ SWEP.Animations = {
 			{s = common .. "shoulder.ogg",  t = 0.4},
 		},
 		FireASAP = true,
+		MinProgress = 9/30, 
+	},  
+	["reload_ghost"] = {
+		Source = "reload_3_ghost",
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },
+		},
+		EventTable = {
+			{s = common .. "shoulder.ogg",  t = 0.4},
+		},
+		FireASAP = true,
+		RestoreAmmo = 1,
 		MinProgress = 9/30, 
 	},  
 	["reload_finish_empty"] = {
@@ -506,6 +518,7 @@ SWEP.HideBones = {"1014_shell1"}
 SWEP.Bodge_Cycle = 0
 SWEP.Bodge_Reload = 0
 SWEP.Bodge_StoreCycle = 0
+SWEP.Bodge_GhostLoad = 0
 SWEP.Hook_Think = function(wep) 
 	-- for reloading when the gun is not chambered (uncycled, holding down the attack button)
 	if wep.Bodge_Cycle == 1 and !wep:GetUBGL() then
@@ -514,6 +527,11 @@ SWEP.Hook_Think = function(wep)
 			wep:SetNeedsCycle(false)
 		end
 	end
+end 
+SWEP.HookP_BlockReload = function(wep) -- i dont know guns but this feels right ?
+	if wep:Clip1() == wep:GetValue("ClipSize") + 1 then
+	return true
+	end 
 end
 
 SWEP.Hook_BlockAnimation = function(wep, curanim)
@@ -521,6 +539,9 @@ SWEP.Hook_BlockAnimation = function(wep, curanim)
 		if	curanim == "cycle"			then return true end
 		if	curanim == "cycle_forced"	then return true end
 	end	
+	if wep:Clip1() == wep:GetValue("ClipSize") + 1 and !wep:GetUBGL() then
+		if curanim == "reload_insert"	then return true end 
+	end
 end
 SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	if !wep:GetUBGL() then -- only checking the gun not the ubgl
@@ -541,6 +562,7 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	-- normal state
 	if (!wep:GetNeedsCycle() and curanim == "reload_start") or curanim == "fire" then
 		wep.Bodge_Cycle = 0
+		wep.Bodge_GhostLoad = 0
 	end
 	-- use empty reload finish IF gun is EITHER uncycled OR starts at 0 but does not ends at max cap
 	if (wep.Bodge_Cycle == 1 or wep.Bodge_Reload == 1) and wep:HasElement("is_pumpaction") then
@@ -549,7 +571,8 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 			if curanim == "reload_start" and wep:HasElement("force_pumpaction")	and !wep:HasElement("has_forend") then return "reload_start_emp2"	end	-- different anim when not pump action forend
 			if curanim == "reload_start" 	then return "reload_start_emp"	end	-- clear chamber to add a + 1
 		end
-		if wep:Clip1() < wep:GetValue("ClipSize") + wep:GetValue("ChamberSize")  then
+		--if wep:Clip1() < wep:GetValue("ClipSize") + wep:GetValue("ChamberSize")  then
+		if wep:Clip1() < wep:GetValue("ClipSize") + 1  then
 			if	curanim == "reload_finish"	then return "reload_finish_empty"	end
 		end
 	end
@@ -586,6 +609,12 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 		if curanim == "fire_empty"		then return "fire"		end
 		if curanim == "draw_empty"		then return "draw"		end
 		if curanim == "holster_empty"	then return "holster"	end
+	end
+	
+	-- ghostload
+	if wep:Clip1() == wep:GetValue("ClipSize") + 2  then
+		wep.Bodge_GhostLoad = 1
+		if curanim == "reload_finish" then return "reload_ghost" end
 	end
 
 	end

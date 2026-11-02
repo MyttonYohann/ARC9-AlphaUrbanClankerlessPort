@@ -1389,7 +1389,7 @@ ATT.RPMMult = 1200/600
 
 ATT.LHIK = true
 ATT.LHIK_Priority = 0.01
- 
+ATT.DeployTimeMult = 0.6
 ATT.Scale = 1
 ATT.ModelOffset = Vector(-23, -2.6, 3.6)
 ATT.ModelAngleOffset = Angle(0, 0, 0)
