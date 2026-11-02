@@ -425,7 +425,7 @@ SWEP.Animations = {
 		IKTimeLine = { { t = 0, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 0, },  },
 		EventTable = { 
 			{s = common .. "shotgun_insert_3.ogg",  t = 18/30},
-			{s = common .. "cloth_4.ogg",  t = 0},
+			--{s = common .. "cloth_4.ogg",  t = 0},
 		},
 		RefillProgress = 32 / 40,
 	},
@@ -472,7 +472,11 @@ SWEP.Animations = {
 		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },
 		},
 		EventTable = {
-			{s = common .. "shoulder.ogg",  t = 0.4},
+			{s = common .. "cloth_2.ogg",  t = 0},
+			{s = path1 .. "rack_1.ogg",  t = 13/30},
+			{s = common .. "shotgun_insert_2.ogg",  t = 22/30},
+			{s = path .. "breechclose.ogg",  t = 31/30},
+			{s = common .. "shoulder.ogg",  t = 42/30},
 		},
 		FireASAP = true,
 		RestoreAmmo = 1,
