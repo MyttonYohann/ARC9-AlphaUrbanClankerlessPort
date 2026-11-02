@@ -347,7 +347,7 @@ SWEP.Animations = {
 		{ t = 0, lhik = 0, rhik = 0, }, { t = 0.5, lhik = 0, rhik = 0, },{ t = 0.8, lhik = 1, rhik = 1, },
 		},
 		FireASAP = true,
-		MinProgress = 0.6,
+		MinProgress = 0.7,
 	},
 	["draw_empty"] = {
 		Source = "draw_empty",
