@@ -16,6 +16,7 @@ This will only entails Decay for the forseeable future, it is very unlikely that
  - More Ammo Tube attachments
  - To not bore you with the technicallity, the transitions between reload states are MUCH smoother now
  - Bash animation
+ - Proper ghost load animation
 
 **Glock 17**
  - Remove Frame Attachment, G26 Frame is now tie to the 10-Round Mag

@@ -496,7 +496,7 @@ SWEP.Animations = {
 			{s = common .. "shotgun_insert_2.ogg",  t = 51/30},
 			{s = path .. "breechclose.ogg",  t = 60/30},
 		},
-		EjectAt = 14/30,
+		EjectAt = 18/30,
 		FireASAP = true,
 		RestoreAmmo = 1,
 		MinProgress = 26/30, 
