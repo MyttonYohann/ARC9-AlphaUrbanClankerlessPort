@@ -465,8 +465,64 @@ SWEP.Animations = {
 		FireASAP = true,
 		MinProgress = 9/30, 
 	},  
-	["reload_ghost"] = {
-		Source = "reload_3_ghost",
+	["reload_start_ghost"] = {
+		Source = "reload_1_ghost",
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },
+		},
+		EventTable = {
+			{s = common .. "cloth_2.ogg",  t = 0},
+			{s = path1 .. "rack_1.ogg",  t = 18/30},
+			{s = common .. "shotgun_insert_2.ogg",  t = 27/30},
+			{s = path .. "breechclose.ogg",  t = 36/30},
+		},
+		FireASAP = true,
+		RestoreAmmo = 1,
+		MinProgress = 9/30, 
+	},  
+	["reload_start_ghost_pump"] = {
+		Source = "reload_1pump_ghost",
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },
+		},
+		EventTable = {
+			{s = common .. "cloth_2.ogg",  t = 0},
+			{s = path1 .. "rack_1.ogg",  t = 12/30},
+			{s = path1 .. "eject.ogg",  t = 15/30},
+			{s = path1 .. "rack_2.ogg",  t = 19/30},
+			{s = path1 .. "rack_1.ogg",  t = 42/30},
+			{s = common .. "shotgun_insert_2.ogg",  t = 51/30},
+			{s = path .. "breechclose.ogg",  t = 60/30},
+		},
+		EjectAt = 14/30,
+		FireASAP = true,
+		RestoreAmmo = 1,
+		MinProgress = 26/30, 
+	},  
+	["reload_start_ghost_pump2"] = {
+		Source = "reload_1pump_ghost2",
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },
+		},
+		EventTable = {
+			{s = common .. "cloth_2.ogg",  t = 0},
+			{s = path1 .. "rack_1.ogg",  t = 4/30},
+			{s = path1 .. "eject.ogg",  t = 5/30},
+			{s = path1 .. "rack_2.ogg",  t = 9/30},
+			{s = path1 .. "rack_1.ogg",  t = 30/30},
+			{s = common .. "shotgun_insert_2.ogg",  t = 38/30},
+			{s = path .. "breechclose.ogg",  t = 47/30},
+		},
+		EjectAt = 5/30,
+		FireASAP = true,
+		RestoreAmmo = 1,
+		MinProgress = 24/30, 
+	},  
+	["reload_insert_ghost"] = {
+		Source = "reload_3_ghost1",
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
 		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },
@@ -476,7 +532,18 @@ SWEP.Animations = {
 			{s = path1 .. "rack_1.ogg",  t = 13/30},
 			{s = common .. "shotgun_insert_2.ogg",  t = 22/30},
 			{s = path .. "breechclose.ogg",  t = 31/30},
-			{s = common .. "shoulder.ogg",  t = 42/30},
+		},
+		FireASAP = true,
+		MinProgress = 9/30, 
+	},  
+	["reload_end_ghost"] = {
+		Source = "reload_3_ghost2",
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.1, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },
+		},
+		EventTable = {
+			{s = common .. "shoulder.ogg",  t = 5/30},
 		},
 		FireASAP = true,
 		RestoreAmmo = 1,
@@ -522,7 +589,6 @@ SWEP.HideBones = {"1014_shell1"}
 SWEP.Bodge_Cycle = 0
 SWEP.Bodge_Reload = 0
 SWEP.Bodge_StoreCycle = 0
-SWEP.Bodge_GhostLoad = 0
 SWEP.Hook_Think = function(wep) 
 	-- for reloading when the gun is not chambered (uncycled, holding down the attack button)
 	if wep.Bodge_Cycle == 1 and !wep:GetUBGL() then
@@ -532,20 +598,17 @@ SWEP.Hook_Think = function(wep)
 		end
 	end
 end 
-SWEP.HookP_BlockReload = function(wep) -- i dont know guns but this feels right ?
+--[[SWEP.HookP_BlockReload = function(wep) -- i dont know guns but this feels right ?
 	if wep:Clip1() == wep:GetValue("ClipSize") + 1 then
 	return true
 	end 
-end
+end]]
 
 SWEP.Hook_BlockAnimation = function(wep, curanim)
 	if wep.Bodge_Cycle == 1 and !wep:GetUBGL() then
 		if	curanim == "cycle"			then return true end
 		if	curanim == "cycle_forced"	then return true end
 	end	
-	if wep:Clip1() == wep:GetValue("ClipSize") + 1 and !wep:GetUBGL() then
-		if curanim == "reload_insert"	then return true end 
-	end
 end
 SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	if !wep:GetUBGL() then -- only checking the gun not the ubgl
@@ -563,12 +626,14 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 			wep.Bodge_Reload = 1
 		end
 	end
+
 	-- normal state
-	if (!wep:GetNeedsCycle() and curanim == "reload_start") or curanim == "fire" then
+	if (!wep:GetNeedsCycle() and curanim == "reload_start") or curanim == "fire" then -- check for fire anim instead of using Hook_PrimaryAttack because that also calls when melee
 		wep.Bodge_Cycle = 0
 		wep.Bodge_GhostLoad = 0
 	end
-	-- use empty reload finish IF gun is EITHER uncycled OR starts at 0 but does not ends at max cap
+
+	-- use empty reload finish IF gun is EITHER uncycled OR starts at 0 but does not ends at max tube cap
 	if (wep.Bodge_Cycle == 1 or wep.Bodge_Reload == 1) and wep:HasElement("is_pumpaction") then
 		if	wep:Clip1() == wep:GetValue("ClipSize") then
 			if curanim == "reload_insert" 	then return "reload_insert_emp"	end	-- transition anim to + 1 when gun at max cap
@@ -590,6 +655,7 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	if wep:HasElement("is_pumpaction") then -- pump does not use start empty, it chambers at the end
 		if curanim == "reload_start_empty"	then return "reload_start" end	
 	end
+
 	-- special anim if uncycled when holstered
 	if curanim == "holster" and wep:GetNeedsCycle() then
 		wep:SetNeedsCycle(false)
@@ -603,22 +669,35 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 			return "draw_forced"
 		end
 	end
-	
-	if wep:HasElement("force_pumpaction") and !wep:HasElement("has_forend") then -- different anim when not using a pump action forend
+
+	-- different anim when not using a pump action forend
+	if wep:HasElement("force_pumpaction") and !wep:HasElement("has_forend") then 
 		if curanim == "cycle" 		then return "cycle_forced"	end	
 	end
-	
-	if wep:HasElement("is_pumpaction") then -- no empty state for manual action, this is why i dont like using suffix
+
+	-- no empty state for manual action, this is why i dont like using suffix
+	if wep:HasElement("is_pumpaction") then 
 		if curanim == "idle_empty"		then return "idle"		end
 		if curanim == "fire_empty"		then return "fire"		end
 		if curanim == "draw_empty"		then return "draw"		end
 		if curanim == "holster_empty"	then return "holster"	end
 	end
 	
+	-- unchambered ghostload
+	if (wep.Bodge_Cycle == 1 or wep.Bodge_Reload == 1) and wep:HasElement("is_pumpaction") then
+		if	wep:Clip1() == wep:GetValue("ClipSize") + 1 then
+			if curanim == "reload_start" and wep:HasElement("force_pumpaction")	and !wep:HasElement("has_forend") then return "reload_start_ghost_pump"	end	-- different anim when not pump action forend
+			if curanim == "reload_start" 	then return "reload_start_ghost_pump2"	end	-- clear chamber to add a + 1
+		end
+		--if wep:Clip1() < wep:GetValue("ClipSize") + wep:GetValue("ChamberSize")  then
+	end
 	-- ghostload
+	if wep:Clip1() == wep:GetValue("ClipSize") + 1  then
+		if curanim == "reload_start"		then return "reload_start_ghost"	 	end
+		if curanim == "reload_insert" 		then return "reload_insert_ghost" 		end
+	end
 	if wep:Clip1() == wep:GetValue("ClipSize") + 2  then
-		wep.Bodge_GhostLoad = 1
-		if curanim == "reload_finish" then return "reload_ghost" end
+		if curanim == "reload_finish" then return "reload_end_ghost" end
 	end
 
 	end
