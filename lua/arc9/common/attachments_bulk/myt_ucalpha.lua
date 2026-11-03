@@ -102,7 +102,8 @@ Pump Action
 
 ATT.SortOrder = 11
 ATT.Category = "ucalpha_1014_pump"
-ATT.ActivateElements = {"fe_pump5"}
+ATT.ActivateElements = {"fe_pump5", "is_pumpaction", "has_forend"}
+
 ATT.ManualAction = false -- roll with it
 ATT.Firemodes = {
 	{
@@ -112,10 +113,10 @@ ATT.Firemodes = {
 		SpreadMult = 0.9,	-- slightly worse stats than pure pump action
 		DamageMaxMult = 1.15,
 		DamageMinMult = 1.15,
-		ActivateElements = {"is_pumpaction", "has_forend"} -- idk why it doesnt play the has_forend anim set on force_pumpaction
 	},
 	{
 		Mode = 1,
+		ActivateElements = {"fe_pump5"}, -- pretty sure this doesnt work
 		ManualActionHook = function(wep) -- force manual action with special ammo, i know it looketh like shit
 			if wep:HasElement("force_pumpaction") then
 				return true
