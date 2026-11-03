@@ -737,7 +737,7 @@ ATT.PenetrationOverride = 0
 
 ATT.ImpactDecal = "FadingScorch"
 
---[[local direct_burn = {
+local direct_burn = {
 	npc_zombie = true,
 	npc_zombie_torso = true,
 	npc_zombine = true,
@@ -760,9 +760,10 @@ local ignite_threshold = {
 
 	-- loses a lot of hp on ignite
 	npc_poisonzombie = 0.5,
-}]]
+}
 
 ATT.Hook_BulletImpact = function(wep, data)
+	-- legacy code from pawlyarms
 	--[[local ent = data.tr.Entity
 	if !IsValid(ent) then return end
 	local d = DamageInfo()
@@ -806,11 +807,23 @@ ATT.Hook_BulletImpact = function(wep, data)
 			data.dmg:SetDamageType(direct_burn[data.tr.Entity:GetClass()] and DMG_BUCKSHOT or (DMG_BURN + DMG_BUCKSHOT))
 		end
 	end]]
+
 	local ent = data.tr.Entity
 	local owner = wep:GetOwner()
 	local d = DamageInfo()
+	local d2 = DamageInfo()
+
 	d:SetAttacker( owner )
-	d:SetDamageType( DMG_BURN )
+	-- HL2 zombies ignore DMG_BURN damage, making pellets do no damage
+	--d:SetDamageType( DMG_BURN )
+	d:SetDamageType(direct_burn[ent:GetClass()] and DMG_BUCKSHOT or (DMG_BURN + DMG_BUCKSHOT))
+
+	--[[d2:SetDamage(ent:GetMaxHealth())
+	d2:SetAttacker( owner )
+	if ent:Health() / ent:GetMaxHealth() < 0.3 then
+		ent:TakeDamageInfo( d2 )
+	end]]
+
 	if IsValid(owner) and owner:IsPlayer() and !wep:GetUBGL() then
 		if vFireInstalled then
 			CreateVFire(ent, data.tr.HitPos, data.tr.HitNormal, dur / 5)
@@ -818,9 +831,6 @@ ATT.Hook_BulletImpact = function(wep, data)
 			if IsValid(ent) and (ent:IsNPC() or ent:IsPlayer() or ent:IsNextBot()) then
 				ent:Ignite(math.Rand(3, 8))
 				ent:TakeDamageInfo( d )
-				--[[timer.Simple(0.4, function() 
-					ent:Extinguish()
-				end)]]
 			end
 		end
 	end

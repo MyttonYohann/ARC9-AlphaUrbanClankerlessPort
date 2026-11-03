@@ -449,6 +449,19 @@ SWEP.Animations = {
 		EjectAt = 9/30,
 		RefillProgress = 32 / 40,
 	},
+	["reload_insert_emp2"] = {
+		Source = "reload_2pump_end2",
+		IKTimeLine = { { t = 0, lhik = 1, rhik = 0, },{ t = 1, lhik = 1, rhik = 0, },  },
+		EventTable = { 
+			{s = path1 .. "rack_1.ogg",  t = 6/30},
+			{s = path1 .. "eject.ogg",  t = 9/30},
+			{s = path1 .. "rack_2.ogg",  t = 12/30},
+			{s = common .. "shotgun_insert_3.ogg",  t = 34/30},
+			{s = common .. "cloth_4.ogg",  t = 0},
+		},
+		EjectAt = 9/30,
+		RefillProgress = 32 / 40,
+	},
 	["reload_emptoloop"] = {
 		Source = {"reload_2_emp"},
 		IKTimeLine = {
@@ -635,15 +648,20 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	end
 
 	-- use empty reload finish IF gun is EITHER uncycled OR starts at 0 but does not ends at max tube cap
+	-- check has_forend to use a different set
 	if (wep.Bodge_Cycle == 1 or wep.Bodge_Reload == 1) and wep:HasElement("is_pumpaction") then
 		if	wep:Clip1() == wep:GetValue("ClipSize") then
-			if curanim == "reload_insert" 	then return "reload_insert_emp"	end	-- transition anim to + 1 when gun at max cap
-			if curanim == "reload_start" and wep:HasElement("force_pumpaction")	and !wep:HasElement("has_forend") then 
+			-- transition anim to + 1 when gun at max cap
+			if curanim == "reload_insert" and wep:HasElement("force_pumpaction")	and !wep:HasElement("has_forend") then 
+				return "reload_insert_emp"	
+			end
+			if curanim == "reload_insert" 	then return "reload_insert_emp2"	end	
+			-- start uncycled anim
+			if curanim == "reload_start" and wep:HasElement("force_pumpaction")		and !wep:HasElement("has_forend") then 
 				return "reload_start_emp2"	
 			end	-- different anim when not pump action forend
 			if curanim == "reload_start" 	then return "reload_start_emp"	end	-- clear chamber to add a + 1
 		end
-		--if wep:Clip1() < wep:GetValue("ClipSize") + wep:GetValue("ChamberSize")  then
 		if wep:Clip1() < wep:GetValue("ClipSize") + 1  then
 			if	curanim == "reload_finish"	then return "reload_finish_empty"	end
 		end
