@@ -17,10 +17,20 @@ ATT.PrintName = [[Nightprowler]]
 ATT.CompactName = [[F. PumpP]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[actual super 90
-Pump Action
+Magically increases damage
 ]]
 
 ATT.ManualAction = true
+ATT.SpreadMult = 0.8
+ATT.DamageMaxMult = 1.3
+ATT.DamageMinMult = 1.3
+
+ATT.Firemodes = {
+    {
+        Mode = 1,
+        PrintName = "Pump-Action",
+    },
+}
 
 ATT.Model = "models/weapons/arc9/myt_uc/c_m1014.mdl" -- i just need a qca point but im not making a whole new model
 ATT.ModelBodygroups = "1458610000"
@@ -58,9 +68,20 @@ ATT.CompactName = [[F. PumpW]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[woo
 Pump Action
+Magically increases damage
 ]]
 
+ATT.Firemodes = {
+    {
+        Mode = 1,
+        PrintName = "Pump-Action",
+    },
+}
+
 ATT.ManualAction = true
+ATT.SpreadMult = 0.8
+ATT.DamageMaxMult = 1.3
+ATT.DamageMinMult = 1.3
 
 ATT.SortOrder = 11
 ATT.Category = "ucalpha_1014_pump"
@@ -79,11 +100,31 @@ ATT.Description = [[how
 Pump Action
 ]]
 
-ATT.ManualAction = true
-
 ATT.SortOrder = 11
 ATT.Category = "ucalpha_1014_pump"
-ATT.ActivateElements = {"fe_pump5", "is_pumpaction", "has_forend"}
+ATT.ActivateElements = {"fe_pump5"}
+ATT.ManualAction = false -- roll with it
+ATT.Firemodes = {
+    {
+        Mode = 1,
+        PrintName = "Pump-Action",
+        ManualAction = true,
+        SpreadMult = 0.9,	-- slightly worse stats than pure pump action
+        DamageMaxMult = 1.15,
+        DamageMinMult = 1.15,
+		ActivateElements = {"is_pumpaction", "has_forend"} -- idk why it doesnt play the has_forend anim set on force_pumpaction
+    },
+    {
+        Mode = 1,
+        ManualActionHook = function(wep) -- force manual action with special ammo, i know it looketh like shit
+			if wep:HasElement("force_pumpaction") then
+				return true
+			end
+		end,
+    },
+}
+
+ATT.NoFiremodeWhenEmpty = true
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_pump_spas")
 
