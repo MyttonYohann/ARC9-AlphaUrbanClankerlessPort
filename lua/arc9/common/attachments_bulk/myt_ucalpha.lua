@@ -26,10 +26,10 @@ ATT.DamageMaxMult = 1.3
 ATT.DamageMinMult = 1.3
 
 ATT.Firemodes = {
-    {
-        Mode = 1,
-        PrintName = "Pump-Action",
-    },
+	{
+		Mode = 1,
+		PrintName = "Pump-Action",
+	},
 }
 
 ATT.Model = "models/weapons/arc9/myt_uc/c_m1014.mdl" -- i just need a qca point but im not making a whole new model
@@ -72,10 +72,10 @@ Magically increases damage
 ]]
 
 ATT.Firemodes = {
-    {
-        Mode = 1,
-        PrintName = "Pump-Action",
-    },
+	{
+		Mode = 1,
+		PrintName = "Pump-Action",
+	},
 }
 
 ATT.ManualAction = true
@@ -105,23 +105,23 @@ ATT.Category = "ucalpha_1014_pump"
 ATT.ActivateElements = {"fe_pump5"}
 ATT.ManualAction = false -- roll with it
 ATT.Firemodes = {
-    {
-        Mode = 1,
-        PrintName = "Pump-Action",
-        ManualAction = true,
-        SpreadMult = 0.9,	-- slightly worse stats than pure pump action
-        DamageMaxMult = 1.15,
-        DamageMinMult = 1.15,
+	{
+		Mode = 1,
+		PrintName = "Pump-Action",
+		ManualAction = true,
+		SpreadMult = 0.9,	-- slightly worse stats than pure pump action
+		DamageMaxMult = 1.15,
+		DamageMinMult = 1.15,
 		ActivateElements = {"is_pumpaction", "has_forend"} -- idk why it doesnt play the has_forend anim set on force_pumpaction
-    },
-    {
-        Mode = 1,
-        ManualActionHook = function(wep) -- force manual action with special ammo, i know it looketh like shit
+	},
+	{
+		Mode = 1,
+		ManualActionHook = function(wep) -- force manual action with special ammo, i know it looketh like shit
 			if wep:HasElement("force_pumpaction") then
 				return true
 			end
 		end,
-    },
+	},
 }
 
 ATT.NoFiremodeWhenEmpty = true
@@ -765,11 +765,11 @@ ATT.Hook_BulletImpact = function(wep, data)
 	--[[local ent = data.tr.Entity
 	if !IsValid(ent) then return end
 	local d = DamageInfo()
-    local inflictor = d:GetInflictor()
-    if IsValid(ent.URBALPHA_BurnTag) and (ent.URBALPHA_BurnTime or 0) >= CurTime() and IsValid(inflictor) and inflictor:GetClass() == "entityflame" then
-        d:SetAttacker(ent.UPLP_BurnTag)
-        d:ScaleDamage(3)
-    end
+	local inflictor = d:GetInflictor()
+	if IsValid(ent.URBALPHA_BurnTag) and (ent.URBALPHA_BurnTime or 0) >= CurTime() and IsValid(inflictor) and inflictor:GetClass() == "entityflame" then
+		d:SetAttacker(ent.UPLP_BurnTag)
+		d:ScaleDamage(3)
+	end
 
 	local dur = 0
 	local max_dur = 30
