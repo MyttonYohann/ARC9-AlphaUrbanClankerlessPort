@@ -15,8 +15,8 @@ This will only entails Decay for the forseeable future, it is very unlikely that
  - More Stock attachments
  - More Ammo Tube attachments
  - To not bore you with the technicallity, the transitions between reload states are MUCH smoother now
- - Bash animation
- - Proper ghost load animation
+ - Bash animations
+ - Actual ghost load animations
 
 **Glock 17**
  - Remove Frame Attachment, G26 Frame is now tie to the 10-Round Mag
@@ -24,11 +24,10 @@ This will only entails Decay for the forseeable future, it is very unlikely that
  - Added a 21-Round Mag attachment
  - 'Backport' (this was unfinished lol) some of Harry's animations like bash and unjam (no shade to Harrimator, and tbf to man, it's unfinished, but i like Partexedd's)
  - New reload anim, 33-Round and 10-Round has altered anim sets, reworked 100-Round's
- - Overheat, after a certain cap, the bashing will set target on fire
 
 **UZI**
  - Remove Carbine Barrel, Civvy now has a wooden handguard
- - Short Magazine is now 21, Extended Magazine is now 42
+ - 16-Round is now 21, 41-Round is now 42
  - Micro Frame does not disable stock attachment
  - New reload anim, with different type of bolt pull depend on mag types
  - Bashing animation, Micro Frame is considered pistol length
@@ -37,14 +36,19 @@ This will only entails Decay for the forseeable future, it is very unlikely that
  - Animation fixes and improvements
  - Fixed up the unfinished Underbarrel RPG
 
+**Changes to Overheat**
+ - After 50%, bashing will deals extra fire damage
+ - Max overheat will not cool down the gun until the fix anim is played
+ - Fixing will immediately reduce a flat percentage (around 35%) before cooling
+
 **Better/Extended Melee Handling**
- - bashing whilst sprinting for Bayonet and Pistols
- - increased damage with sprint bash (mult by 2 for pistols, mult by 4 for bayonet)
+ - Bashing whilst sprinting for Bayonet and Pistol
+ - Increased damage with sprint bash (mult by 2 for pistol, mult by 4 for bayonet)
  - Non-Pistol and Non-Bayonet melee will push back
  
 **Extended Shotgun Handling**
  - Reload when unchambered plays a different set depending on if the tube has ammo and if the chamber is loaded, it's a bit like hunt showdown
- - Pump Action can reload to +1 even when empty
+ - Pump Action can reload to +1 even when empty (M1014 can do upto + 2 ! with proper anims)
  - Anim set for reloading at full mag cap but unchambered
 
 ### Remove/Altered Features

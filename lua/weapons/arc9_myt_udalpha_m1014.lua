@@ -264,6 +264,13 @@ SWEP.DryFireSound =  path1 .. "eject.ogg"
 
 SWEP.FiremodeSound = "arc9/firemode.ogg"
 
+SWEP.CycleTimeHook = function(wep) 
+	-- slight nerf when using forced manual ammunition, but only for pump action
+	if wep:HasElement("force_pumpaction") and wep:HasElement("has_forend") then
+		return 1.25
+	end
+end
+
 SWEP.Animations = {
 	["idle"] = {
 		Source = "idle",

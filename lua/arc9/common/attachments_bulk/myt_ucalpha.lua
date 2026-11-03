@@ -680,12 +680,12 @@ ATT.ActivateElements = {"is_pumpaction", "force_pumpaction"}
 
 ATT.DamageType = DMG_BURN + DMG_BUCKSHOT
 ATT.RecoilMult = 0.75
-ATT.NumOverride = 22
+ATT.NumOverride = 30
 ATT.HullSizeOverride = 5
-ATT.PhysBulletGravityMult = 0.6
+ATT.PhysBulletGravityMult = 0.5
 
 ATT.SpreadMult = 1.25
-ATT.DamageMaxMult = 0.5
+ATT.DamageMaxMult = 0.75
 ATT.DamageMinMult = 0.5
 ATT.PhysBulletMuzzleVelocityMult = 0.2
 ATT.AlwaysPhysBulletOverride = true
@@ -695,7 +695,7 @@ ATT.PenetrationOverride = 0
 
 ATT.ImpactDecal = "FadingScorch"
 
-local direct_burn = {
+--[[local direct_burn = {
 	npc_zombie = true,
 	npc_zombie_torso = true,
 	npc_zombine = true,
@@ -718,13 +718,18 @@ local ignite_threshold = {
 
 	-- loses a lot of hp on ignite
 	npc_poisonzombie = 0.5,
-}
+}]]
 
 ATT.Hook_BulletImpact = function(wep, data)
-	local ent = data.tr.Entity
+	--[[local ent = data.tr.Entity
 	if !IsValid(ent) then return end
+	local d = DamageInfo()
+    local inflictor = d:GetInflictor()
+    if IsValid(ent.URBALPHA_BurnTag) and (ent.URBALPHA_BurnTime or 0) >= CurTime() and IsValid(inflictor) and inflictor:GetClass() == "entityflame" then
+        d:SetAttacker(ent.UPLP_BurnTag)
+        d:ScaleDamage(3)
+    end
 
-	-- volume check threshold is about as big as models/props_junk/trashdumpster02.mdl (the big blue dumpster)
 	local dur = 0
 	local max_dur = 30
 	if ent:IsPlayer() then
@@ -748,15 +753,33 @@ ATT.Hook_BulletImpact = function(wep, data)
 		if vFireInstalled then
 			CreateVFire(ent, data.tr.HitPos, data.tr.HitNormal, dur / 5)
 		else
-			ent.UPLP_BurnTag = wep:GetOwner()
-			if (ent.UPLP_BurnTime or 0) < CurTime() then
-				ent.UPLP_BurnTime = CurTime()
+			ent.URBALPHA_BurnTag = wep:GetOwner()
+			if (ent.URBALPHA_BurnTime or 0) < CurTime() then
+				ent.URBALPHA_BurnTime = CurTime()
 			end
-			ent.UPLP_BurnTime = math.min(CurTime() + max_dur, ent.UPLP_BurnTime + dur)
+			ent.URBALPHA_BurnTime = math.min(CurTime() + max_dur, ent.URBALPHA_BurnTime + dur)
 			ent:Extinguish()
-			ent:Ignite(ent.UPLP_BurnTime - CurTime())
+			ent:Ignite(ent.URBALPHA_BurnTime - CurTime())
 			-- HL2 zombies ignore DMG_BURN damage, making pellets do no damage
 			data.dmg:SetDamageType(direct_burn[data.tr.Entity:GetClass()] and DMG_BUCKSHOT or (DMG_BURN + DMG_BUCKSHOT))
+		end
+	end]]
+	local ent = data.tr.Entity
+	local owner = wep:GetOwner()
+	local d = DamageInfo()
+	d:SetAttacker( owner )
+	d:SetDamageType( DMG_BURN )
+	if IsValid(owner) and owner:IsPlayer() and !wep:GetUBGL() then
+		if vFireInstalled then
+			CreateVFire(ent, data.tr.HitPos, data.tr.HitNormal, dur / 5)
+		else
+			if IsValid(ent) and (ent:IsNPC() or ent:IsPlayer() or ent:IsNextBot()) then
+				ent:Ignite(math.Rand(3, 8))
+				ent:TakeDamageInfo( d )
+				--[[timer.Simple(0.4, function() 
+					ent:Extinguish()
+				end)]]
+			end
 		end
 	end
 end
@@ -890,8 +913,8 @@ ATT.ImpactDecal = "FadingScorch"
 ATT.Override_DamageType = DMG_BLAST + DMG_AIRBOAT
 ATT.DamageType = DMG_BLAST + DMG_AIRBOAT
 
-ATT.DamageMaxMult = 0.4
-ATT.DamageMinMult = 0.6
+ATT.DamageMaxMult = 0.6
+ATT.DamageMinMult = 0.8
 ATT.NumOverride = 1
 ATT.RecoilMult = 2
 ATT.PhysBulletGravityMult = 1.3
@@ -1389,7 +1412,7 @@ ATT.RPMMult = 1200/600
 
 ATT.LHIK = true
 ATT.LHIK_Priority = 0.01
-ATT.DeployTimeMult = 0.6
+--ATT.DeployTimeMult = 1.4 -- does this fucking work
 ATT.Scale = 1
 ATT.ModelOffset = Vector(-23, -2.6, 3.6)
 ATT.ModelAngleOffset = Angle(0, 0, 0)

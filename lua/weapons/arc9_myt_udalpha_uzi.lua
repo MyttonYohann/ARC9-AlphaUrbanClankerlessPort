@@ -504,7 +504,7 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 
 	if curanim == "fix" then	-- remove a certain percentage of heat when playing overheat anim
 		timer.Simple(28/30, function() -- manual delay cos i cant think of any other way
-				wep:SetHeatAmount(heat - 0.4)
+				wep:SetHeatAmount(heat - 0.6)
 		end)
 	end
 end
