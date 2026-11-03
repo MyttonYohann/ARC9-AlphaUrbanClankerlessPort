@@ -585,6 +585,23 @@ SWEP.Animations = {
 		RefillProgress = 24/40,
 		EjectAt = 9/30,
 	},  
+	["reload_finish_empty_pump"] = {
+		Source = "reload_3pump2",
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },	{ t = 0.3, lhik = 1, rhik = 0, }, 
+		{ t = 0.7, lhik = 1, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },
+		},
+		EventTable = {
+			{s = path1 .. "rack_1.ogg",  t = 6/30},
+			{s = path1 .. "eject.ogg",  t = 9/30},
+			{s = path1 .. "rack_2.ogg",  t = 12/30},
+			{s = common .. "shoulder.ogg",  t = 0.6},
+		},
+		FireASAP = true,
+		MinProgress = 24/40, 
+		RefillProgress = 24/40,
+		EjectAt = 9/30,
+	},  
 	["reload_end_empty"] = {
 		Source = "reload_3_emp",
 		IKTimeLine = {  { t = 0, lhik = 1, rhik = 0, }, { t = 1, lhik = 1, rhik = 1, },},
@@ -625,7 +642,7 @@ SWEP.Hook_BlockAnimation = function(wep, curanim)
 	end	
 end
 SWEP.Hook_TranslateAnimation = function(wep, curanim)
-	if !wep:GetUBGL() then -- only checking the gun not the ubgl
+	if !wep:GetUBGL() then -- only checking the gun not the ubgl, probably redundant
 	
 	-- uncycled state
 	if wep:Clip1() == 0 then
@@ -648,22 +665,26 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	end
 
 	-- use empty reload finish IF gun is EITHER uncycled OR starts at 0 but does not ends at max tube cap
-	-- check has_forend to use a different set
 	if (wep.Bodge_Cycle == 1 or wep.Bodge_Reload == 1) and wep:HasElement("is_pumpaction") then
 		if	wep:Clip1() == wep:GetValue("ClipSize") then
+			-- has_forend uses a different set
+			if wep:HasElement("force_pumpaction")	and !wep:HasElement("has_forend") then 
 			-- transition anim to + 1 when gun at max cap
-			if curanim == "reload_insert" and wep:HasElement("force_pumpaction")	and !wep:HasElement("has_forend") then 
-				return "reload_insert_emp"	
+			-- start uncycled anim, clear chamber to add a + 1
+				if curanim == "reload_insert"  	then 	return "reload_insert_emp"			end
+				if curanim == "reload_start"	then	return "reload_start_emp2"			end
+			else
+				if curanim == "reload_insert" 	then 	return "reload_insert_emp2"			end	
+				if curanim == "reload_start" 	then 	return "reload_start_emp"			end	
 			end
-			if curanim == "reload_insert" 	then return "reload_insert_emp2"	end	
-			-- start uncycled anim
-			if curanim == "reload_start" and wep:HasElement("force_pumpaction")		and !wep:HasElement("has_forend") then 
-				return "reload_start_emp2"	
-			end	-- different anim when not pump action forend
-			if curanim == "reload_start" 	then return "reload_start_emp"	end	-- clear chamber to add a + 1
 		end
 		if wep:Clip1() < wep:GetValue("ClipSize") + 1  then
-			if	curanim == "reload_finish"	then return "reload_finish_empty"	end
+			-- has_forend uses a different set
+			if wep:HasElement("force_pumpaction")	and !wep:HasElement("has_forend") then 
+				if	curanim == "reload_finish"	then 	return "reload_finish_empty"		end
+			else
+				if	curanim == "reload_finish"	then 	return "reload_finish_empty_pump"	end
+			end
 		end
 	end
 
@@ -673,8 +694,8 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 		if curanim == "reload_insert" 		then return "reload_emptoloop"	end	-- empty to insert loop
 	end
 	
-	if wep:HasElement("is_pumpaction") then -- pump does not use start empty, it chambers at the end
-		if curanim == "reload_start_empty"	then return "reload_start" end	
+	if wep:HasElement("is_pumpaction")	then -- pump does not use start empty, it chambers at the end
+		if curanim == "reload_start_empty"	then return "reload_start" 		end	
 	end
 
 	-- special anim if uncycled when holstered
@@ -684,7 +705,7 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	end
 	if curanim == "draw" and wep.Bodge_StoreCycle == 1 then 
 		wep.Bodge_StoreCycle = 0
-		if wep:HasElement("has_forend") then
+		if wep:HasElement("has_forend")	then
 			return "draw_cycle"
 		else
 			return "draw_forced"
@@ -693,15 +714,15 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 
 	-- different anim when not using a pump action forend
 	if wep:HasElement("force_pumpaction") and !wep:HasElement("has_forend") then 
-		if curanim == "cycle" 		then return "cycle_forced"	end	
+		if curanim == "cycle" 			then return "cycle_forced"			end	
 	end
 
 	-- no empty state for manual action, this is why i dont like using suffix
-	if wep:HasElement("is_pumpaction") then 
-		if curanim == "idle_empty"		then return "idle"		end
-		if curanim == "fire_empty"		then return "fire"		end
-		if curanim == "draw_empty"		then return "draw"		end
-		if curanim == "holster_empty"	then return "holster"	end
+	if wep:HasElement("is_pumpaction")	then 
+		if curanim == "idle_empty"		then return "idle"					end
+		if curanim == "fire_empty"		then return "fire"					end
+		if curanim == "draw_empty"		then return "draw"					end
+		if curanim == "holster_empty"	then return "holster"				end
 	end
 	
 	-- unchambered ghostload
@@ -715,11 +736,11 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	end
 	-- ghostload
 	if wep:Clip1() == wep:GetValue("ClipSize") + 1  then
-		if curanim == "reload_start"		then return "reload_start_ghost"	 	end
-		if curanim == "reload_insert" 		then return "reload_insert_ghost" 		end
+		if curanim == "reload_start"	then return "reload_start_ghost"	end
+		if curanim == "reload_insert" 	then return "reload_insert_ghost"	end
 	end
 	if wep:Clip1() == wep:GetValue("ClipSize") + 2  then
-		if curanim == "reload_finish" then return "reload_end_ghost" end
+		if curanim == "reload_finish" 	then return "reload_end_ghost" 		end
 	end
 
 	end
