@@ -184,7 +184,7 @@ SWEP.Hook_BashHit = function(self, data)
 	if !self:HasElement("has_bayonet") and !self:GetUBGL() then
 		if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) then
 			data.tr.Entity:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 1000) + self:GetUp()*(50) )
-			-- stun, turn off ai behaviour for a bit so stuff like zombies stop running whist in knockback
+			-- stunbash, temporarily turn off ai behaviour so stuff like zombies stop running whist in knockback
 			if data.tr.Entity:IsNPC() then
 				data.tr.Entity:SetNPCState(NPC_STATE_PLAYDEAD)
 				data.tr.Entity:SetSchedule(SCHED_COWER)
