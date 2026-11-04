@@ -822,15 +822,18 @@ ATT.Hook_BulletImpact = function(wep, data)
 	d2:SetAttacker( owner )
 	if ent:Health() / ent:GetMaxHealth() < 0.3 then
 		ent:TakeDamageInfo( d2 )
-	end]]
-
+	end]] 
 	if IsValid(owner) and owner:IsPlayer() and !wep:GetUBGL() then
 		if vFireInstalled then
-			CreateVFire(ent, data.tr.HitPos, data.tr.HitNormal, dur / 5)
+			CreateVFire(ent, data.tr.HitPos, data.tr.HitNormal, 1)
 		else
 			if IsValid(ent) and (ent:IsNPC() or ent:IsPlayer() or ent:IsNextBot()) then
-				ent:Ignite(math.Rand(3, 8))
+				ent:Ignite(math.Rand(5, 20))
 				ent:TakeDamageInfo( d )
+				timer.Simple(math.Rand(2, 8), function()
+					if not IsValid(ent) then return end
+					ent:Extinguish()
+				end)
 			end
 		end
 	end

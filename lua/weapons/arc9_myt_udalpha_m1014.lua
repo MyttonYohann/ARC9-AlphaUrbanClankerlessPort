@@ -168,6 +168,15 @@ SWEP.BashWhileSprintHook = function(self)
 		return false
 	end
 end
+--[[SWEP.Hook_Bash = function(wep, tr)
+	local owner = wep:GetOwner()
+	for _,v in ipairs(ents.FindInCone(wep:GetPos(),owner:EyeAngles():Forward() , wep.BashRange * 1.2, math.cos( math.rad( 120 ) ) )) do
+		if IsValid(v.Entity) and (v.Entity:IsNPC() or v.Entity:IsPlayer() or v.Entity:IsNextBot()) then
+			
+		end	
+	end
+end]]
+
 SWEP.Hook_BashHit = function(self, data)
 	local entitypos = data.tr.Entity:GetPos()
 	local ownerpos = self:EyePos()
@@ -179,7 +188,7 @@ SWEP.Hook_BashHit = function(self, data)
 			if data.tr.Entity:IsNPC() then
 				data.tr.Entity:SetNPCState(NPC_STATE_PLAYDEAD)
 				data.tr.Entity:SetSchedule(SCHED_COWER)
-				timer.Simple(0.2, function()
+				timer.Simple(0.3, function()
 					if not IsValid(data.tr.Entity) then return end
 					data.tr.Entity:SetNPCState(NPC_STATE_ALERT)
 					data.tr.Entity:SetSchedule(SCHED_ALERT_WALK)
