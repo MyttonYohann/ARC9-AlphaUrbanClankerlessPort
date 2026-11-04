@@ -153,7 +153,7 @@ SWEP.PrimaryBash = false
 
 SWEP.BashDamage = 20
 SWEP.BashLungeRange = 0
-SWEP.BashRange = 64
+SWEP.BashRange = 80
 SWEP.PreBashTime = 0.18
 SWEP.PostBashTime = 0.5
 SWEP.BashWhileSprint = true
@@ -168,22 +168,14 @@ SWEP.BashWhileSprintHook = function(self)
 		return false
 	end
 end
---[[SWEP.Hook_Bash = function(wep, tr)
-	local owner = wep:GetOwner()
-	for _,v in ipairs(ents.FindInCone(wep:GetPos(),owner:EyeAngles():Forward() , wep.BashRange * 1.2, math.cos( math.rad( 120 ) ) )) do
-		if IsValid(v.Entity) and (v.Entity:IsNPC() or v.Entity:IsPlayer() or v.Entity:IsNextBot()) then
-			
-		end	
-	end
-end]]
 
 SWEP.Hook_BashHit = function(self, data)
 	local entitypos = data.tr.Entity:GetPos()
 	local ownerpos = self:EyePos()
-	 
+	local owner = self:GetOwner()
 	if !self:HasElement("has_bayonet") and !self:GetUBGL() then
 		if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) then
-			data.tr.Entity:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 1000) + self:GetUp()*(50) )
+			data.tr.Entity:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 1000) + self:GetUp()*(20) )
 			-- stunbash, temporarily turn off ai behaviour so stuff like zombies stop running whist in knockback
 			if data.tr.Entity:IsNPC() then
 				data.tr.Entity:SetNPCState(NPC_STATE_PLAYDEAD)
@@ -195,6 +187,21 @@ SWEP.Hook_BashHit = function(self, data)
 				end)
 			end
 		end
+		-- knock back surrounding npcs
+		for _,v in ipairs(ents.FindInCone(self:GetPos(),owner:EyeAngles():Forward() , self.BashRange * 3, math.cos( math.rad( 100 ) ) )) do
+			if IsValid(v.Entity) and (v.Entity:IsNPC() or v.Entity:IsPlayer() or v.Entity:IsNextBot()) then
+				v.Entity:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 1200) + self:GetUp()*(50) )
+				if data.tr.Entity:IsNPC() then
+					data.tr.Entity:SetNPCState(NPC_STATE_PLAYDEAD)
+					data.tr.Entity:SetSchedule(SCHED_COWER)
+					timer.Simple(1, function()
+						if not IsValid(data.tr.Entity) then return end
+						data.tr.Entity:SetNPCState(NPC_STATE_ALERT)
+						data.tr.Entity:SetSchedule(SCHED_ALERT_WALK)
+					end)
+				end
+			end
+		end			
 	end
 end
 
