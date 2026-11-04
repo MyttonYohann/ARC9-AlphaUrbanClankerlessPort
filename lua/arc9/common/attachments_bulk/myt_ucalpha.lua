@@ -488,8 +488,8 @@ ATT.Sights = {
 ATT.RTScope = true
 ATT.RTScopeSubmatIndex = 0
 ATT.RTScopeMagnification = 2.5
-ATT.ScopeScreenRatio = 400/1080
-ATT.RTScopeReticle = Material("myt_uc/uc_acog_reticle.png", "mips smooth")
+ATT.ScopeScreenRatio = 350/1080
+ATT.RTScopeReticle = Material("myt_uc/uc_acog_reticle.png")
 ATT.RTScopeReticleScale = 1
 ATT.RTScopeColorable = true
 ATT.RTScopeShadowIntensity = 7
@@ -669,13 +669,13 @@ ATT.Hook_PrimaryAttack = function(wep)
 end
 ATT.ShootWhileSprintUBGL = false -- im not even sure if these are needed
 ATT.BashWhileSprintUBGL = false -- better safe than sorry
-ATT.ShootWhileSprintHook = function(self)
+ATT.ShootWhileSprintHook = function(self) -- disable sprint bash for stuff that supports it
 	if self:GetUBGL() then
 		return false
 	end
 end
-ATT.BashWhileSprintHook = function(self)
-	if self:GetUBGL() then -- only sprint bash with bayonet
+ATT.BashWhileSprintHook = function(self)	
+	if self:GetUBGL() then
 		return false
 	end
 end
