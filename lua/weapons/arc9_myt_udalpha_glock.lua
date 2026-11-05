@@ -171,18 +171,7 @@ SWEP.HeatDissipation = 0.25
 SWEP.HeatFix = false
 SWEP.HeatLockout = false
 SWEP.HeatCap = 0.5
-local zbase_bodge = {	-- zbase has a hidden weapon or something
-	npc_zombie = true,
-	npc_zombie_torso = true,
-	npc_zombine = true,
-	npc_fastzombie = true,
-	npc_fastzombie_torso = true,
-	npc_headcrab = true,
-	npc_headcrab_fast = true,
-	npc_headcrab_black = true,
-	npc_headcrab_poison = true,
-	npc_poisonzombie = true,
-}
+
 SWEP.Hook_BashHit = function(self, data)
 	local heat = self:GetHeatAmount() / self:GetProcessedValue("HeatCapacity", true)
 	
@@ -196,7 +185,7 @@ SWEP.Hook_BashHit = function(self, data)
 			if data.tr.Entity:IsNPC() then
 				--data.tr.Entity:SetSchedule(SCHED_FLINCH_PHYSICS)
 			end
-			if zbase_bodge[data.tr.Entity:GetClass()] and data.tr.Entity:GetActiveWeapon() and math.Rand(1, 100) > 70 then
+			if data.tr.Entity:GetActiveWeapon() and math.Rand(1, 100) > 70 then
 				data.tr.Entity:DropWeapon()
 			end	
 		end
