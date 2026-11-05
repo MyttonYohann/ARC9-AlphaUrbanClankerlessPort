@@ -172,35 +172,31 @@ SWEP.HeatDissipation = 0.4
 SWEP.HeatFix = false
 SWEP.HeatLockout = false
 SWEP.Hook_BashHit = function(self, data)
-	-- flame damage when overheat
 	local heat = self:GetHeatAmount() / self:GetProcessedValue("HeatCapacity", true)
-	
-	if !self:GetUBGL() and heat >= 0.5 then
-		if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) then
-			data.tr.Entity:Ignite(math.Rand(2, 4))
-		end
-	end
-	
-	-- bash push back, only for rifle length
-	local entitypos = data.tr.Entity:GetPos()
 	local ownerpos = self:EyePos()
 	local owner = self:GetOwner()
-	if !self:HasElement("pistol_length") and !self:GetUBGL() then
-		if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) then
+	local entitypos = data.tr.Entity:GetPos()
+	
+	if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) and !self:GetUBGL() then
+		-- burn damage when overheat
+		if heat >= 0.5 then
+			data.tr.Entity:Ignite(math.Rand(2, 4))
+		end
+		-- rifle length specific code
+		if !self:HasElement("pistol_length") then
+			-- bash push back
 			data.tr.Entity:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 1000) + self:GetUp()*(40) )
 			if data.tr.Entity:IsNPC() then
 				data.tr.Entity:SetSchedule(SCHED_FLINCH_PHYSICS)
 			end
-		end
-		-- knock back surrounding npcs, 100 degree angle from the hit position
-		for _,v in ipairs(ents.FindInCone(data.tr.HitPos,owner:EyeAngles():Forward() , self.BashRange * 0.5, math.cos( math.rad( 100 ) ) )) do
-			if IsValid(v.Entity) and (v.Entity:IsNPC() or v.Entity:IsPlayer() or v.Entity:IsNextBot()) then
-				v.Entity:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 800) + self:GetUp()*(50) )
+			-- knock back surrounding npcs, 100 degree angle from the hit position
+			for _,v in ipairs(ents.FindInCone(data.tr.HitPos, owner:EyeAngles():Forward(), self.BashRange * 0.75, math.cos( math.rad( 100 ) ) )) do
+				v:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 800) + self:GetUp()*(30) )
 				if data.tr.Entity:IsNPC() then
 					data.tr.Entity:SetSchedule(SCHED_FLINCH_PHYSICS)
 				end
-			end
-		end			
+			end			
+		end	
 	end
 end
 

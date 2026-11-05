@@ -173,17 +173,17 @@ SWEP.Hook_BashHit = function(self, data)
 	local entitypos = data.tr.Entity:GetPos()
 	local ownerpos = self:EyePos()
 	local owner = self:GetOwner()
-	if !self:HasElement("has_bayonet") and !self:GetUBGL() then
-		if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) then
+	if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) and !self:GetUBGL() then
+		if !self:HasElement("has_bayonet") then -- bayonet doesn do any of this stuff
+			-- knock back
 			data.tr.Entity:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 1000) + self:GetUp()*(40) )
+			-- flinch, mostly for zombies
 			if data.tr.Entity:IsNPC() then
 				data.tr.Entity:SetSchedule(SCHED_FLINCH_PHYSICS)
 			end
-		end
-		-- knock back surrounding npcs, 100 degree angle from the hit position
-		for _,v in ipairs(ents.FindInCone(data.tr.HitPos,owner:EyeAngles():Forward() , self.BashRange * 0.5, math.cos( math.rad( 100 ) ) )) do
-			if IsValid(v.Entity) and (v.Entity:IsNPC() or v.Entity:IsPlayer() or v.Entity:IsNextBot()) then
-				v.Entity:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 800) + self:GetUp()*(50) )
+			-- knock back surrounding npcs, 100 degree angle from the hit position
+			for _,v in ipairs(ents.FindInCone(data.tr.HitPos, owner:EyeAngles():Forward(), self.BashRange * 0.75, math.cos( math.rad( 100 ) ) )) do
+				v:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 800) + self:GetUp()*(30) )
 				if data.tr.Entity:IsNPC() then
 					data.tr.Entity:SetSchedule(SCHED_FLINCH_PHYSICS)
 				end
