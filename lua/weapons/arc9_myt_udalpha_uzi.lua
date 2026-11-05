@@ -146,7 +146,7 @@ SWEP.PrimaryBash = false
 
 SWEP.BashDamage = 20
 SWEP.BashLungeRange = 0
-SWEP.BashRange = 50
+SWEP.BashRange = 60
 SWEP.PreBashTime = 0.2
 SWEP.PostBashTime = 0.4
 SWEP.BashWhileSprint = true
@@ -166,7 +166,7 @@ SWEP.BashDamageHook = function(wep, dmg)
 end
 
 SWEP.Overheat = true
-SWEP.HeatPerShot = 1/35
+SWEP.HeatPerShot = 1/38
 SWEP.HeatDelayTime = 0.2
 SWEP.HeatDissipation = 0.4
 SWEP.HeatFix = false
@@ -184,10 +184,10 @@ SWEP.Hook_BashHit = function(self, data)
 	-- bash push back, only for rifle length
 	local entitypos = data.tr.Entity:GetPos()
 	local ownerpos = self:EyePos()
-	 
+	local owner = self:GetOwner()
 	if !self:HasElement("pistol_length") and !self:GetUBGL() then
 		if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) then
-			data.tr.Entity:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 2000) + self:GetUp()*(50) )
+			data.tr.Entity:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 1000) + self:GetUp()*(40) )
 			-- stunbash, temporarily turn off ai behaviour so stuff like zombies stop running whist in knockback
 			if data.tr.Entity:IsNPC() then
 				data.tr.Entity:SetNPCState(NPC_STATE_PLAYDEAD)
@@ -199,7 +199,22 @@ SWEP.Hook_BashHit = function(self, data)
 				end)
 			end
 		end
-	end	
+		-- knock back surrounding npcs
+		for _,v in ipairs(ents.FindInCone(self:GetPos(),owner:EyeAngles():Forward(), self.BashRange * 2, math.cos( math.rad( 100 ) ) )) do
+			if IsValid(v.Entity) and (v.Entity:IsNPC() or v.Entity:IsPlayer() or v.Entity:IsNextBot()) then
+				v.Entity:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 1200) + self:GetUp()*(50) )
+				if data.tr.Entity:IsNPC() then
+					data.tr.Entity:SetNPCState(NPC_STATE_PLAYDEAD)
+					data.tr.Entity:SetSchedule(SCHED_COWER)
+					timer.Simple(1, function()
+						if not IsValid(data.tr.Entity) then return end
+						data.tr.Entity:SetNPCState(NPC_STATE_ALERT)
+						data.tr.Entity:SetSchedule(SCHED_ALERT_WALK)
+					end)
+				end
+			end
+		end			
+	end
 end
 
 SWEP.HeatDissipationHook = function(wep) -- temporarily 'freezes' the heat gauge
@@ -331,10 +346,7 @@ SWEP.Animations = {
 		Source = {"melee"},
 		FireASAP = true,
 		MinProgress = 0.7,
-		IKTimeLine = {
-		{ t = 0, lhik = 1, rhik = 0, },
-		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.7, lhik = 0, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 0, },
-		},
+		IKTimeLine = { { t = 0, lhik = 1, rhik = 0, },{ t = 0.2, lhik = 1, rhik = 0, }, { t = 0.7, lhik = 1, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 0, },},
 	},
 	["bash_pistol"] = {
 		Source = {"melee2"},
@@ -463,7 +475,7 @@ SWEP.Animations = {
 		MagSwapTime = 30/30,
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 1, },
-		{ t = 0.2, lhik = 0, rhik = 1, }, { t = 0.75, lhik = 0, rhik = 1, },{ t = 0.85, lhik = 1, rhik = 1, },
+		{ t = 0.2, lhik = 0, rhik = 1, }, { t = 0.78, lhik = 0, rhik = 1, },{ t = 0.86, lhik = 1, rhik = 1, },
 		},
 		EventTable = {
 			{s =  path .. "magout.ogg",   t = 10 / 30},  
@@ -557,7 +569,7 @@ SWEP.Attachments = {
 		InstalledElements = {"rail_def", "has_optic"},
 
 		DefaultIcon = Material("arc9/def_att_icons/optic.png"),
-		Category = {"optic_ucalpha", "eft_optic_medium"},
+		Category = {"optic_ucalpha", "eft_optic_medium", "csgo_optic"},
 		Bone = "uzi_parent",
 		Pos = Vector(-0.17, -1.3, -2.8),
 		Ang = Angle(90, 0, -90),

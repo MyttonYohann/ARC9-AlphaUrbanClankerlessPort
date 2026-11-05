@@ -472,7 +472,7 @@ ATT.Description = [[hwaet]]
 ATT.SortOrder = 1
 
 ATT.Model = "models/weapons/arc9/myt_uc/atts/scope_acog.mdl"
-
+ATT.ModelOffset = Vector(0, 0, -0.05)
 ATT.Category = {"optic_ucalpha"}
 
 -- Allows a custom sight position to be defined

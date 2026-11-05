@@ -175,7 +175,7 @@ SWEP.Hook_BashHit = function(self, data)
 	local owner = self:GetOwner()
 	if !self:HasElement("has_bayonet") and !self:GetUBGL() then
 		if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) then
-			data.tr.Entity:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 1000) + self:GetUp()*(20) )
+			data.tr.Entity:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 1000) + self:GetUp()*(40) )
 			-- stunbash, temporarily turn off ai behaviour so stuff like zombies stop running whist in knockback
 			if data.tr.Entity:IsNPC() then
 				data.tr.Entity:SetNPCState(NPC_STATE_PLAYDEAD)
@@ -637,7 +637,7 @@ SWEP.Animations = {
 		FireASAP = true,
 		MinProgress = 32/40,
 	},  
-	["bash"] = { -- has to exist for translateanim to work
+	["bash"] = {
 		Source = {"melee"},
 		IKTimeLine = {{ t = 0, lhik = 1, rhik = 1, }, { t = 0.2, lhik = 1, rhik = 0, }, { t = 0.4, lhik = 1, rhik = 0, },{ t = 0.7, lhik = 1, rhik = 1, },},
 	},	
@@ -814,9 +814,9 @@ SWEP.Attachments = {
 		InstalledElements = {"rail_def", "has_optic"},
 
 		DefaultIcon = Material("arc9/def_att_icons/optic.png"),
-		Category = {"optic_ucalpha", "eft_optic_medium"},
+		Category = {"optic_ucalpha", "eft_optic_medium", "csgo_optic"},
 		Bone = "1014_parent",
-		Pos = Vector(0, -1.2, 2.8),
+		Pos = Vector(-0.02, -1.25, 2.8),
 		Ang = Angle(90, 0, -90),
 		MergeSlots = {9},
 	},

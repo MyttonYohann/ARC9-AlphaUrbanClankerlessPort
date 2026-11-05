@@ -564,7 +564,7 @@ SWEP.Attachments = {
 		InstalledElements = {"rail_def", "has_optic"},
 
 		DefaultIcon = Material("arc9/def_att_icons/optic.png"),
-		Category = {"optic_ucalpha", "eft_optic_medium", "ucalpha_glock_irons"},
+		Category = {"optic_ucalpha", "eft_optic_medium", "ucalpha_glock_irons", "csgo_optic"},
 		Bone = "glock_parent",
 		Pos = Vector(0, -3.55, 1.9),
 		Ang = Angle(90, 0, -90),
@@ -584,7 +584,7 @@ SWEP.Attachments = {
 
 		DefaultIcon = Material("arc9/def_att_icons/barrel.png"),
 		ExcludeElements = {"pre_muzzed"},
-		Category = {"muzzle_css"},
+		Category = {"muzzle_css", "muzzle"},
 		Bone = "glock_flash",
 		Pos = Vector(0, -0.1, 0),
 		Ang = Angle(90, 0, -90),
@@ -624,7 +624,7 @@ SWEP.Attachments = {
 
 		DefaultIcon = Material("arc9/def_att_icons/grip.png"),
 		ExcludeElements = {"nofg"},
-		Category = {"eft_foregrip_small"},
+		Category = {"eft_foregrip_small", "grip"},
 		Bone = "glock_parent",
 		Pos = Vector(0, -1, 5),
 		Ang = Angle(90, 0, -90),
