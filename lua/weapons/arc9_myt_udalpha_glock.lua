@@ -174,21 +174,15 @@ SWEP.HeatCap = 0.5
 
 SWEP.Hook_BashHit = function(self, data)
 	local heat = self:GetHeatAmount() / self:GetProcessedValue("HeatCapacity", true)
-	
-	if !self:GetUBGL() and heat >= self.HeatCap then
-		if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) then
+	if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) and !self:GetUBGL() then	
+		-- burn damage when overheat
+		if !self:GetUBGL() and heat >= self.HeatCap then
 			data.tr.Entity:Ignite(math.Rand(2, 4))
 		end
-	end
-	if !self:GetUBGL() then
-		if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) then
-			if data.tr.Entity:IsNPC() then
-				--data.tr.Entity:SetSchedule(SCHED_FLINCH_PHYSICS)
-			end
-			if data.tr.Entity:GetActiveWeapon() and math.Rand(1, 100) > 70 then
-				data.tr.Entity:DropWeapon()
-			end	
-		end
+		-- disarm weapon, a bit buggy with zbase but thats zippy's problem
+		if data.tr.Entity:GetActiveWeapon() and math.Rand(1, 100) > 70 then
+			data.tr.Entity:DropWeapon()
+		end	
 	end
 end
 
@@ -635,7 +629,7 @@ SWEP.Attachments = {
 
 		DefaultIcon = Material("arc9/def_att_icons/grip.png"),
 		ExcludeElements = {"nofg"},
-		Category = {"eft_foregrip_small", "grip"},
+		Category = {"eft_foregrip_small"},
 		Bone = "glock_parent",
 		Pos = Vector(0, -1, 5),
 		Ang = Angle(90, 0, -90),
