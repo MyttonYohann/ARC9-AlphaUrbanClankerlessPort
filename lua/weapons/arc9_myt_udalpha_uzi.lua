@@ -30,13 +30,12 @@ SWEP.MirrorVMWM = true
 SWEP.WorldModelOffset = {
 	Pos = Vector(0, 0, 0),
 	Ang = Angle(0, 0, 0),
-	TPIKPos = Vector(-8, 5, -2),
+	TPIKPos = Vector(-13, 4, -5),
 	TPIKAng = Angle(-6, 0, 180),
-	TPIKPosSightOffset = Vector(4, -0.5, -3),
+	TPIKPosSightOffset = Vector(3, -0.5, -0.5),
 	TPIKPosReloadOffset = Vector(0, 0, 0),
 	TPIKAngReloadOffset = Angle(0, 0, 0),
 
-	TPIKPosAlternative = Vector(-16, 4, 1.5),
 	Scale = 1
 }
 SWEP.MirrorVMWMHeldOnly = false
@@ -226,7 +225,7 @@ SWEP.IronSights = {
 }
 
 SWEP.Crosshair = true
-SWEP.PeekPos = Vector(1.5, -1, -1.5)
+SWEP.PeekPos = Vector(1.5, -1, -2)
 SWEP.PeekAng = Angle(0, 0, -10)
 
 SWEP.BipodPos = Vector(-2.58, 0, 1)

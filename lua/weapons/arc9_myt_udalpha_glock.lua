@@ -35,7 +35,6 @@ SWEP.WorldModelOffset = {
 	TPIKPosReloadOffset = Vector(0, 0, 0),
 	TPIKAngReloadOffset = Angle(0, 0, 0),
 
-	TPIKPosAlternative = Vector(-16, 4, 1.5),
 	Scale = 1
 }
 SWEP.MirrorVMWMHeldOnly = false
