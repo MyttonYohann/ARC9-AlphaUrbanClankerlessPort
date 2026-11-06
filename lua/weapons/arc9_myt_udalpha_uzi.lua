@@ -46,14 +46,14 @@ SWEP.MirrorVMWMHeldOnly = false
 SWEP.DamageMax = 30 -- 3 shot close range kill
 SWEP.DamageMin = 17 -- 5 shot long range kill
 
-SWEP.RangeMin = 700
-SWEP.RangeMax = 4000
+SWEP.RangeMin = 18 / ARC9.HUToM
+SWEP.RangeMax = 120 / ARC9.HUToM
 
 SWEP.Penetration = 3 -- Units of wood that can be penetrated by this gun.
 
 -------------------------- PHYS BULLET BALLISTICS
 
-SWEP.PhysBulletMuzzleVelocity = 1240 * 12
+SWEP.PhysBulletMuzzleVelocity = 400 / ARC9.HUToM
 SWEP.PhysBulletGravity = 1.5
 SWEP.PhysBulletDrag = 1.15
 
@@ -288,10 +288,11 @@ SWEP.CamOffsetAng = Angle(0, 0, 90)
 local path = "arc9_ucalpha/uzi/"
 local path_glock = "arc9_ucalpha/glock/"
 local common = "arc9_ucalpha/common/"
-SWEP.ShootSound = path .. "fire.ogg"
-SWEP.ShootSoundSilenced = path .. "fire_supp.ogg"
+SWEP.FirstShootSound = path .. "fire.ogg"
+SWEP.ShootSound = path .. "fire_auto.ogg" -- it sounds like shit tbh
+SWEP.ShootSoundSilenced = path_glock .. "fire_supp.ogg" -- for now, old uzi dont even have a suppressed sound
 SWEP.DistantShootSound = path .. "fire_dist.ogg"
-SWEP.DryFireSound =  path .. "mech_last.ogg"
+SWEP.DryFireSound =  path_glock .. "mech_last.ogg"
 
 SWEP.FiremodeSound = "arc9/firemode.ogg"
 

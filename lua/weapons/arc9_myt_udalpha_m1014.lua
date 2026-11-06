@@ -19,12 +19,12 @@ SWEP.Trivia = {
 SWEP.Credits = {
 }
 
-SWEP.Description = [[Semi-automatic shotgun designed for close-quarters urban warfare. Uses an innovative short-stroke gas system that eliminates complex mechanisms found on most gas-operated automatic weapons. Its main use is in destroying locked doors.".]]
+SWEP.Description = [[Semi-automatic shotgun designed for close-quarters urban warfare. Uses an innovative short-stroke gas system that eliminates complex mechanisms found on most gas-operated automatic weapons. Can be (forced) converted to pump-action.]]
 
 SWEP.ViewModel = "models/weapons/arc9/myt_uc/c_m1014.mdl"
 SWEP.WorldModel = "models/weapons/arc9/myt_uc/c_m1014.mdl"
 
-SWEP.Slot = 2
+SWEP.Slot = 3
 
 SWEP.MirrorVMWM = true
 SWEP.WorldModelMirror = "models/weapons/arc9/myt_uc/c_m1014.mdl"
@@ -47,14 +47,14 @@ SWEP.MirrorVMWMHeldOnly = false
 SWEP.DamageMax = 20 -- 5 pellets to kill
 SWEP.DamageMin = 10 -- land 10 pellets to kill
 
-SWEP.RangeMin = 100
-SWEP.RangeMax = 1600
+SWEP.RangeMin = 20 / ARC9.HUToM
+SWEP.RangeMax = 100 / ARC9.HUToM
 
 SWEP.Penetration = 1 -- Units of wood that can be penetrated by this gun.
 
 -------------------------- PHYS BULLET BALLISTICS
 
-SWEP.PhysBulletMuzzleVelocity = 1240 * 12
+SWEP.PhysBulletMuzzleVelocity = 350 / ARC9.HUToM
 SWEP.PhysBulletGravity = 1.5
 SWEP.PhysBulletDrag = 1.15
 

@@ -45,14 +45,14 @@ SWEP.MirrorVMWMHeldOnly = false
 SWEP.DamageMax = 30 -- 3 shot close range kill
 SWEP.DamageMin = 17 -- 5 shot long range kill
 
-SWEP.RangeMin = 600
-SWEP.RangeMax = 2000
+SWEP.RangeMin = 15 / ARC9.HUToM
+SWEP.RangeMax = 50 / ARC9.HUToM
 
 SWEP.Penetration = 2 -- Units of wood that can be penetrated by this gun.
 
 -------------------------- PHYS BULLET BALLISTICS
 
-SWEP.PhysBulletMuzzleVelocity = 1240 * 12
+SWEP.PhysBulletMuzzleVelocity = 375 / ARC9.HUToM
 SWEP.PhysBulletGravity = 1.5
 SWEP.PhysBulletDrag = 1.15
 

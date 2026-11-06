@@ -340,17 +340,12 @@ ATT.SortOrder = 2
 ATT.Category = "ucalpha_1014_barrel"
 ATT.ActivateElements = {"b_1", "has_bayonet"}
 
-ATT.Bash = true
 ATT.BashDamageType = DMG_SLASH
 ATT.BashDamage = 30
 ATT.BashLungeRange = 0
-ATT.BashRange = 104
+ATT.BashRange = 124
 ATT.PreBashTime = 0.05
 ATT.PostBashTime = 0.4
-
--- you cant fucking use bashwhilespring WITHOUT shootwhilesprint
-ATT.BashWhileSprint = true
-ATT.ShootWhileSprint = true
 
 ATT.Hook_TranslateAnimation = function(wep, curanim)
 	if	curanim == "bash" and !wep:GetUBGL()	then	return "bash_bayo"		end
