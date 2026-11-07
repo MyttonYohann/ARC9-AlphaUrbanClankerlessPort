@@ -395,9 +395,8 @@ SWEP.Animations = {
 			{s = path .. "breechclose.ogg",  t = 29/30},
 		},
 		RestoreAmmo = 1,
-		RefillProgress = 35/40,
-		MinProgress = 35/40,
-		MagSwapTime = 35/40,
+		RefillProgress = 29/30,
+		MagSwapTime = 29/30,
 	}, 
 	["reload_start_emp"] = {
 		Source = "reload_1pump_emp2",
@@ -634,9 +633,11 @@ SWEP.Hook_BlockHasAnimation = function (wep, anim) -- use normal bash fuction if
 end
 SWEP.HideBones = {"1014_shell1"} 
 
-SWEP.Bodge_Cycle = 0
-SWEP.Bodge_Reload = 0
-SWEP.Bodge_StoreCycle = 0
+
+--extended shotgun feature, reloading when uncycled and chambering upto +2
+SWEP.Bodge_Cycle = 0		-- check
+SWEP.Bodge_Reload = 0		-- anim state
+SWEP.Bodge_StoreCycle = 0	-- meant to use to store the cycle state between switching, and ubgl, ubgl func is still unimplemented
 SWEP.Hook_Think = function(wep) 
 	-- for reloading when the gun is not chambered (uncycled, holding down the attack button)
 	if wep.Bodge_Cycle == 1 and !wep:GetUBGL() then
@@ -654,7 +655,8 @@ SWEP.Hook_BlockAnimation = function(wep, curanim)
 	end	
 end
 SWEP.Hook_TranslateAnimation = function(wep, curanim)
-	if !wep:GetUBGL() then -- only checking the gun not the ubgl, probably redundant
+	-- only checking the gun not the ubgl, probably redundant
+	if wep:GetUBGL() then return end
 	
 	-- uncycled state
 	if wep:Clip1() == 0 then
@@ -681,9 +683,9 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 		if	wep:Clip1() == wep:GetValue("ClipSize") then
 			-- has_forend uses a different set
 			if wep:HasElement("force_pumpaction")	and !wep:HasElement("has_forend") then 
-			-- transition anim to + 1 when gun at max cap
-			-- start uncycled anim, clear chamber to add a + 1
+				-- transition anim to + 1 when gun at max cap
 				if curanim == "reload_insert"  	then 	return "reload_insert_emp"			end
+				-- start uncycled anim when the tube is fulled, clear chamber to load another bullet to +1
 				if curanim == "reload_start"	then	return "reload_start_emp2"			end
 			else
 				if curanim == "reload_insert" 	then 	return "reload_insert_emp2"			end	
@@ -692,6 +694,7 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 		end
 		if wep:Clip1() < wep:GetValue("ClipSize") + 1  then
 			-- has_forend uses a different set
+			-- i know the names are wrong, blame my organising convention
 			if wep:HasElement("force_pumpaction")	and !wep:HasElement("has_forend") then 
 				if	curanim == "reload_finish"	then 	return "reload_finish_empty"		end
 			else
@@ -701,7 +704,7 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	end
 
 	-- extended anim transition for empty reload
-	if	wep:Clip1() == 1 and !wep:HasElement("is_pumpaction") then -- only for semi, pump uses a different set
+	if	wep:Clip1() == 1 and !wep:HasElement("is_pumpaction") then -- only for semi, pump uses a different logic
 		if curanim == "reload_finish"		then return "reload_end_empty"	end	-- empty to end, skipping insert
 		if curanim == "reload_insert" 		then return "reload_emptoloop"	end	-- empty to insert loop
 	end
@@ -736,8 +739,9 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 		if curanim == "draw_empty"		then return "draw"					end
 		if curanim == "holster_empty"	then return "holster"				end
 	end
-	
-	-- unchambered ghostload
+
+	-- look mate, i know thats prolly not how ghost loading work, i care not	
+	-- unchambered ghostload, reloading when the tube is full, and there is a fired round in the chamber
 	if (wep.Bodge_Cycle == 1 or wep.Bodge_Reload == 1) and wep:HasElement("is_pumpaction") then
 		if	wep:Clip1() == wep:GetValue("ClipSize") + 1 then
 			if curanim == "reload_start" and wep:HasElement("force_pumpaction")	and !wep:HasElement("has_forend") then 
@@ -753,8 +757,6 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	end
 	if wep:Clip1() == wep:GetValue("ClipSize") + 2  then
 		if curanim == "reload_finish" 	then return "reload_end_ghost" 		end
-	end
-
 	end
 end
 

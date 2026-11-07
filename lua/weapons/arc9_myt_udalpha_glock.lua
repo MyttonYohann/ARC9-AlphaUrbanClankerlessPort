@@ -169,7 +169,7 @@ SWEP.HeatDelayTime = 0.2
 SWEP.HeatDissipation = 0.25
 SWEP.HeatFix = false
 SWEP.HeatLockout = false
-SWEP.HeatCap = 0.5
+SWEP.HeatCap = 0.5 -- own value for changing anim
 
 SWEP.Hook_BashHit = function(self, data)
 	local heat = self:GetHeatAmount() / self:GetProcessedValue("HeatCapacity", true)
@@ -185,14 +185,12 @@ SWEP.Hook_BashHit = function(self, data)
 	end
 end
 
-SWEP.OverheatAnim = 0
-
 SWEP.HeatDissipationHook = function(wep) -- temporarily 'freezes' the heat gauge
 	local heat = wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true)
 	if heat == 1 and wep:Clip1() != 0 then -- empty doesn't have a fix anim
 		return 0
 	end
-	--GetShootPos() is slightly more accurate, it checks when the view is in water, not just the character model but its more function
+
 	-- extremely fast heat dissipation when in water
 	if bit.band(util.PointContents(wep:GetPos()), CONTENTS_WATER) == CONTENTS_WATER then
 		return 4

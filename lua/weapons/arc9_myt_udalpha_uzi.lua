@@ -204,7 +204,7 @@ SWEP.HeatDissipationHook = function(wep) -- temporarily 'freezes' the heat gauge
 	if heat == 1 and wep:Clip1() != 0 then -- empty doesn't have a fix anim
 		return 0
 	end
-	--GetShootPos() is slightly more accurate, it checks when the view is in water, not just the character model but its more function
+	--GetShootPos() is slightly more accurate, it checks when the view is in water, not just the character model but gameplay reason
 	-- extremely fast heat dissipation when in water
 	if bit.band(util.PointContents(wep:GetPos()), CONTENTS_WATER) == CONTENTS_WATER then
 		return 4
