@@ -2,6 +2,7 @@
 {
 	"$basetexture"			"models\myt_uc\pist_4pistols\4pistols"
 	"$bumpmap" 			"models\myt_uc\pist_4pistols\4pistols_n"
+	"$nocull" 1
 
     "$color2"			"[1.4 1.4 1.4]"
 
