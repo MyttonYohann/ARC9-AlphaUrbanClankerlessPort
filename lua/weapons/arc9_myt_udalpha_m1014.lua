@@ -169,22 +169,23 @@ SWEP.BashWhileSprintHook = function(self)
 end
 
 SWEP.Hook_BashHit = function(self, data)
-	local entitypos = data.tr.Entity:GetPos()
+	local ent = data.tr.Entity
+	local entitypos = ent:GetPos()
 	local ownerpos = self:EyePos()
 	local owner = self:GetOwner()
-	if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) and !self:GetUBGL() then
+	if IsValid(ent) and (ent:IsNPC() or ent:IsPlayer() or ent:IsNextBot()) and !self:GetUBGL() then
 		if !self:HasElement("has_bayonet") then -- bayonet doesn do any of this stuff
 			-- knock back
-			data.tr.Entity:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 1000) + self:GetUp()*(40) )
+			ent:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 1000) + self:GetUp()*(40) )
 			-- flinch, mostly for zombies
-			if data.tr.Entity:IsNPC() then
-				data.tr.Entity:SetSchedule(SCHED_FLINCH_PHYSICS)
+			if ent:IsNPC() then
+				ent:SetSchedule(SCHED_FLINCH_PHYSICS)
 			end
-			-- knock back surrounding npcs, 100 degree angle from the hit position
-			for _,v in ipairs(ents.FindInCone(data.tr.HitPos, owner:EyeAngles():Forward(), self.BashRange * 0.75, math.cos( math.rad( 100 ) ) )) do
-				v:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 800) + self:GetUp()*(30) )
-				if data.tr.Entity:IsNPC() then
-					data.tr.Entity:SetSchedule(SCHED_FLINCH_PHYSICS)
+			-- knock back surrounding npcs, 80 degree angle from the hit position
+			for _,v in ipairs(ents.FindInCone(data.tr.HitPos, owner:EyeAngles():Forward(), self.BashRange * 0.75, math.cos( math.rad( 80 ) ) )) do
+				v:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 500) + self:GetUp()*(30) )
+				if ent:IsNPC() then
+					ent:SetSchedule(SCHED_FLINCH_PHYSICS)
 				end
 			end
 		end			
@@ -435,8 +436,7 @@ SWEP.Animations = {
 			{s = common .. "shotgun_insert_3.ogg",  t = 25/30},
 		},
 		RestoreAmmo = 1,
-		RefillProgress = 35/40,
-		MinProgress = 35/40,
+		RefillProgress = 29/30,
 	},   
 	["reload_insert"] = {
 		Source = "reload_2",
@@ -445,7 +445,7 @@ SWEP.Animations = {
 			{s = common .. "shotgun_insert_3.ogg",  t = 18/30},
 			--{s = common .. "cloth_4.ogg",  t = 0},
 		},
-		RefillProgress = 32 / 40,
+		RefillProgress = 28 / 30,
 	},
 	["reload_insert_emp"] = {
 		Source = "reload_2pump_end",
@@ -657,8 +657,8 @@ end
 SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	-- only checking the gun not the ubgl, probably redundant
 	if wep:GetUBGL() then return end
-	
-	-- uncycled state
+
+	-- uncycled state check
 	if wep:Clip1() == 0 then
 		if	curanim == "reload_start" or "reload_start_empty" then wep.Bodge_Reload = 1	end
 	end
@@ -672,18 +672,20 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 		end
 	end
 
-	-- normal state
+	-- normal state check
 	if (!wep:GetNeedsCycle() and curanim == "reload_start") or curanim == "fire" then -- check for fire anim instead of using Hook_PrimaryAttack because that also calls when melee
 		wep.Bodge_Cycle = 0
 		wep.Bodge_GhostLoad = 0
 	end
 
-	-- use empty reload finish IF gun is EITHER uncycled OR starts at 0 but does not ends at max tube cap
+	-- anim logic, mostly for manual action --
+	-- i know some names are wrong, blame my organising convention
+	-- use empty reload finish IF gun is uncycled OR starts at 0 but does not ends at max tube cap
 	if (wep.Bodge_Cycle == 1 or wep.Bodge_Reload == 1) and wep:HasElement("is_pumpaction") then
 		if	wep:Clip1() == wep:GetValue("ClipSize") then
 			-- has_forend uses a different set
 			if wep:HasElement("force_pumpaction")	and !wep:HasElement("has_forend") then 
-				-- transition anim to + 1 when gun at max cap
+				-- transition anim to + 1 when gun at max tube cap
 				if curanim == "reload_insert"  	then 	return "reload_insert_emp"			end
 				-- start uncycled anim when the tube is fulled, clear chamber to load another bullet to +1
 				if curanim == "reload_start"	then	return "reload_start_emp2"			end
@@ -694,7 +696,6 @@ SWEP.Hook_TranslateAnimation = function(wep, curanim)
 		end
 		if wep:Clip1() < wep:GetValue("ClipSize") + 1  then
 			-- has_forend uses a different set
-			-- i know the names are wrong, blame my organising convention
 			if wep:HasElement("force_pumpaction")	and !wep:HasElement("has_forend") then 
 				if	curanim == "reload_finish"	then 	return "reload_finish_empty"		end
 			else

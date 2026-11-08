@@ -11,14 +11,15 @@ SWEP.TrueName = "Glock 17"
 
 SWEP.Class = "Pistol"
 SWEP.Trivia = {
-	["Country of Origin"] = [[Who the fuck read these]],
+	["Country of Origin"] = [[Australia]], -- lol lmao even
+	["Manufacturer"] = [[Cock]],
 	["Calibre"] = "9x19mm Parabellum",
 }
 
 SWEP.Credits = {
 }
 
-SWEP.Description = [[Handgun originally designed by a curtain rod manufacturer to replace the Austrian military's aging arsenal of WW2 handguns. Its design has since become synonymous with the idea of handguns, as its reliable and cost-effective design combined with a switchless trigger safety mechanism gave it a reputation as a weapon of choice for cops and robbers alike around the world."]]
+SWEP.Description = [[Handgun originally designed by a curtain rod manufacturer to replace the Austrian military's aging arsenal of Second World War handguns. Its design has since become synonymous with the idea of handguns, as its reliable and cost-effective design combined with a switchless trigger safety mechanism gave it a reputation as a weapon of choice for cops and robbers alike around the world.]]
 SWEP.ViewModel = "models/weapons/arc9/myt_uc/c_glock.mdl"
 SWEP.WorldModel = "models/weapons/arc9/myt_uc/c_glock.mdl"
 
@@ -173,14 +174,15 @@ SWEP.HeatCap = 0.5 -- own value for changing anim
 
 SWEP.Hook_BashHit = function(self, data)
 	local heat = self:GetHeatAmount() / self:GetProcessedValue("HeatCapacity", true)
-	if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) and !self:GetUBGL() then	
+	local ent = data.tr.Entity
+	if IsValid(ent) and (ent:IsNPC() or ent:IsPlayer() or ent:IsNextBot()) and !self:GetUBGL() then	
 		-- burn damage when overheat
 		if !self:GetUBGL() and heat >= self.HeatCap then
-			data.tr.Entity:Ignite(math.Rand(2, 4))
+			ent:Ignite(math.Rand(2, 4))
 		end
-		-- disarm weapon, a bit buggy with zbase but thats zippy's problem
-		if data.tr.Entity:GetActiveWeapon() and math.Rand(1, 100) > 70 then
-			data.tr.Entity:DropWeapon()
+		-- disarm weapon, 30% chance ?
+		if IsValid(ent:GetActiveWeapon()) and math.Rand(1, 100) > 70 then
+			ent:DropWeapon()
 		end	
 	end
 end
@@ -389,7 +391,8 @@ SWEP.Animations = {
 	["reload"] = {
 		Source = "reload",
 		FireASAP = true,
-		MinProgress = 0.93,
+		MinProgress = 0.85,
+		RefillProgress = 18/30,
 		EventTable = {
 			{s =  path .. "magrelease.ogg",   t = 14 / 30},  
 			{s =  path .. "magout.ogg",   t = 18 / 30},  
@@ -403,7 +406,8 @@ SWEP.Animations = {
 	["reload_empty"] = {
 		Source = "reload_empty",
 		FireASAP = true,
-		MinProgress = 0.95,
+		MinProgress = 0.83,
+		RefillProgress = 15/30,
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
 		{ t = 0.1, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
@@ -418,7 +422,8 @@ SWEP.Animations = {
 	["reload_10"] = {
 		Source = "reload_10",
 		FireASAP = true,
-		MinProgress = 0.93,
+		MinProgress = 0.85,
+		RefillProgress = 18/30,
 		EventTable = {
 			{s =  path .. "magrelease.ogg",   t = 14 / 30},  
 			{s =  path .. "magout.ogg",   t = 17 / 30},  
@@ -432,7 +437,8 @@ SWEP.Animations = {
 	["reload_empty_10"] = {
 		Source = "reload_empty_10",
 		FireASAP = true,
-		MinProgress = 0.95,
+		MinProgress = 0.83,
+		RefillProgress = 15/30,
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
 		{ t = 0.1, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
@@ -447,7 +453,8 @@ SWEP.Animations = {
 	["reload_33"] = {
 		Source = "reload_33",
 		FireASAP = true,
-		MinProgress = 0.93,
+		MinProgress = 0.87,
+		RefillProgress = 0.65,
 		EventTable = {
 			{s =  path .. "magrelease.ogg",   t = 14 / 30},  
 			{s =  path .. "magout.ogg",   t = 18 / 30},  
@@ -462,7 +469,8 @@ SWEP.Animations = {
 	["reload_empty_33"] = {
 		Source = "reload_empty_33",
 		FireASAP = true,
-		MinProgress = 0.95,
+		MinProgress = 0.9,
+		RefillProgress = 14/30,
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
 		{ t = 0.1, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },
@@ -478,7 +486,8 @@ SWEP.Animations = {
 	["reload_100"] = {
 		Source = "reload_100",
 		FireASAP = true,
-		MinProgress = 0.93,
+		MinProgress = 0.85,
+		RefillProgress = 21/30,
 		EventTable = {
 			{s =  path .. "magrelease.ogg",   t = 14 / 30},  
 			{s =  path .. "magout.ogg",   t = 18 / 30},  
@@ -493,7 +502,8 @@ SWEP.Animations = {
 	["reload_empty_100"] = {
 		Source = "reload_empty_100",
 		FireASAP = true,
-		MinProgress = 0.95,
+		MinProgress = 0.9,
+		RefillProgress = 15/30,
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
 		{ t = 0.1, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.95, lhik = 1, rhik = 0, },

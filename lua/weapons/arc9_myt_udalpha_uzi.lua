@@ -174,25 +174,30 @@ SWEP.Hook_BashHit = function(self, data)
 	local heat = self:GetHeatAmount() / self:GetProcessedValue("HeatCapacity", true)
 	local ownerpos = self:EyePos()
 	local owner = self:GetOwner()
-	local entitypos = data.tr.Entity:GetPos()
+	local ent = data.tr.Entity
+	local entitypos = ent:GetPos()
 	
-	if IsValid(data.tr.Entity) and (data.tr.Entity:IsNPC() or data.tr.Entity:IsPlayer() or data.tr.Entity:IsNextBot()) and !self:GetUBGL() then
+	if IsValid(ent) and (ent:IsNPC() or ent:IsPlayer() or ent:IsNextBot()) and !self:GetUBGL() then
 		-- burn damage when overheat
 		if heat >= 0.5 then
-			data.tr.Entity:Ignite(math.Rand(2, 4))
+			ent:Ignite(math.Rand(2, 4))
 		end
+		-- melee disarm, pistol length only
+		if IsValid(ent:GetActiveWeapon()) and self:HasElement("pistol_length") and math.Rand(1, 100) > 60 then
+			ent:DropWeapon()
+		end	
 		-- rifle length specific code
 		if !self:HasElement("pistol_length") then
 			-- bash push back
-			data.tr.Entity:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 1000) + self:GetUp()*(40) )
-			if data.tr.Entity:IsNPC() then
-				data.tr.Entity:SetSchedule(SCHED_FLINCH_PHYSICS)
+			ent:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 1000) + self:GetUp()*(40) )
+			if ent:IsNPC() then
+				ent:SetSchedule(SCHED_FLINCH_PHYSICS)
 			end
-			-- knock back surrounding npcs, 100 degree angle from the hit position
-			for _,v in ipairs(ents.FindInCone(data.tr.HitPos, owner:EyeAngles():Forward(), self.BashRange * 0.75, math.cos( math.rad( 100 ) ) )) do
+			-- knock back surrounding npcs, 80 degree angle from the hit position
+			for _,v in ipairs(ents.FindInCone(data.tr.HitPos, owner:EyeAngles():Forward(), self.BashRange * 0.75, math.cos( math.rad( 80 ) ) )) do
 				v:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 800) + self:GetUp()*(30) )
-				if data.tr.Entity:IsNPC() then
-					data.tr.Entity:SetSchedule(SCHED_FLINCH_PHYSICS)
+				if ent:IsNPC() then
+					ent:SetSchedule(SCHED_FLINCH_PHYSICS)
 				end
 			end			
 		end	
