@@ -116,7 +116,7 @@ ATT.Firemodes = {
 	},
 	{
 		Mode = 1,
-		ActivateElements = {"fe_pump5"}, -- pretty sure this doesnt work
+		--UnInstalledElements = {"has_forend"},  pretty sure it doesnt work like this
 		ManualActionHook = function(wep) -- force manual action with special ammo, i know it looketh like shit
 			if wep:HasElement("force_pumpaction") then
 				return true

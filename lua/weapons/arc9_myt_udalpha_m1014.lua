@@ -19,7 +19,7 @@ SWEP.Trivia = {
 SWEP.Credits = {
 }
 
-SWEP.Description = [[Semi-automatic shotgun designed for close-quarters urban warfare. Uses an innovative short-stroke gas system that eliminates complex mechanisms found on most gas-operated automatic weapons. Can be (forced) converted to pump-action.]]
+SWEP.Description = [[Semi-automatic shotgun. Can be (forced) converted to pump-action.]]
 
 SWEP.ViewModel = "models/weapons/arc9/myt_uc/c_m1014.mdl"
 SWEP.WorldModel = "models/weapons/arc9/myt_uc/c_m1014.mdl"

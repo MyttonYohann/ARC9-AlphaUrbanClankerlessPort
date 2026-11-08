@@ -19,7 +19,7 @@ SWEP.Trivia = {
 SWEP.Credits = {
 }
 
-SWEP.Description = [[Handgun originally designed by a curtain rod manufacturer to replace the Austrian military's aging arsenal of Second World War handguns. Its design has since become synonymous with the idea of handguns, as its reliable and cost-effective design combined with a switchless trigger safety mechanism gave it a reputation as a weapon of choice for cops and robbers alike around the world.]]
+SWEP.Description = [[It's in every bloody game.]]
 SWEP.ViewModel = "models/weapons/arc9/myt_uc/c_glock.mdl"
 SWEP.WorldModel = "models/weapons/arc9/myt_uc/c_glock.mdl"
 
