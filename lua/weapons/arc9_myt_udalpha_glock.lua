@@ -199,6 +199,14 @@ SWEP.HeatDissipationHook = function(wep) -- temporarily 'freezes' the heat gauge
 	end
 end
 
+-- refer to m1014 for doc
+function SWEP:SprintLock()
+	if self:GetSprintAmount() > 0 then return true end
+	if self:GetIsNearWall() and !self:GetOwner():KeyDown(IN_USE) then return true end
+
+	return false
+end
+
 -------------------------- TRACERS
 
 SWEP.TracerNum = 1 -- Tracer every X
@@ -425,9 +433,9 @@ SWEP.Animations = {
 		MinProgress = 0.85,
 		RefillProgress = 18/30,
 		EventTable = {
-			{s =  path .. "magrelease.ogg",   t = 14 / 30},  
-			{s =  path .. "magout.ogg",   t = 17 / 30},  
-			{s =  path .. "magin.ogg",   t = 16 / 30},   
+			{s =  path .. "magrelease.ogg",   t = 13 / 30},  
+			{s =  path .. "magout.ogg",   t = 14 / 30},  
+			{s =  path .. "magin.ogg",   t = 13 / 30},   
 		},
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
