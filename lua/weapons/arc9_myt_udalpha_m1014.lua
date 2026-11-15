@@ -193,13 +193,12 @@ SWEP.Hook_BashHit = function(self, data)
 end
 
 -- override main code, for some reason sprint lock determines if you can shoot on nearwall. This lets you melee but not shoot when nearwall
-function SWEP:SprintLock()
+SWEP.SprintLock = function(self)
 	if self:GetSprintAmount() > 0 then return true end
 	if self:GetIsNearWall() and !self:GetOwner():KeyDown(IN_USE) then return true end
 
 	return false
 end
-
 
 -------------------------- TRACERS
 

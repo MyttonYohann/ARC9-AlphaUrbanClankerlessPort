@@ -200,7 +200,7 @@ SWEP.HeatDissipationHook = function(wep) -- temporarily 'freezes' the heat gauge
 end
 
 -- refer to m1014 for doc
-function SWEP:SprintLock()
+SWEP.SprintLock = function(self)
 	if self:GetSprintAmount() > 0 then return true end
 	if self:GetIsNearWall() and !self:GetOwner():KeyDown(IN_USE) then return true end
 

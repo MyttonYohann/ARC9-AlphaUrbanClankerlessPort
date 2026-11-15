@@ -217,7 +217,7 @@ SWEP.HeatDissipationHook = function(wep) -- temporarily 'freezes' the heat gauge
 end
 
 -- refer to m1014 for doc
-function SWEP:SprintLock()
+SWEP.SprintLock = function(self)
 	if self:GetSprintAmount() > 0 then return true end
 	if self:GetIsNearWall() and !self:GetOwner():KeyDown(IN_USE) then return true end
 
@@ -401,6 +401,7 @@ SWEP.Animations = {
 		Source = "reload",
 		FireASAP = true,
 		MinProgress = 0.93,
+		RefillProgress = 16/30,
 		EventTable = {
 			{s =  path .. "magout.ogg",   t = 10 / 30},  
 			{s =  path .. "magin.ogg",   t = 21 / 30},   
@@ -415,6 +416,7 @@ SWEP.Animations = {
 		FireASAP = true,
 		MinProgress = 0.95,
 		MagSwapTime = 30/30,
+		RefillProgress = 16/30,
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
 		{ t = 0.2, lhik = 0, rhik = 1, }, { t = 0.775, lhik = 0, rhik = 1, },{ t = 0.95, lhik = 1, rhik = 1, },
@@ -430,6 +432,7 @@ SWEP.Animations = {
 		Source = "reload_16",
 		FireASAP = true,
 		MinProgress = 0.93,
+		RefillProgress = 18/30,
 		EventTable = {
 			{s =  path .. "magout.ogg",   t = 10 / 30},  
 			{s =  path .. "magin.ogg",   t = 21 / 30},   
@@ -444,6 +447,7 @@ SWEP.Animations = {
 		FireASAP = true,
 		MinProgress = 0.95,
 		MagSwapTime = 30/30,
+		RefillProgress = 17/30,
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
 		{ t = 0.2, lhik = 0, rhik = 1, }, { t = 0.775, lhik = 0, rhik = 1, },{ t = 0.95, lhik = 1, rhik = 1, },
@@ -459,6 +463,7 @@ SWEP.Animations = {
 		Source = "reload_41",
 		FireASAP = true,
 		MinProgress = 0.93,
+		RefillProgress = 18/30,
 		EventTable = {
 			{s =  path .. "magout.ogg",   t = 10 / 30},  
 			{s =  path .. "magin.ogg",   t = 21 / 30},   
@@ -474,6 +479,7 @@ SWEP.Animations = {
 		FireASAP = true,
 		MinProgress = 0.95,
 		MagSwapTime = 30/30,
+		RefillProgress = 16/30,
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 1, },
 		{ t = 0.2, lhik = 0, rhik = 1, }, { t = 0.78, lhik = 0, rhik = 1, },{ t = 0.86, lhik = 1, rhik = 1, },
@@ -489,6 +495,7 @@ SWEP.Animations = {
 		Source = "reload_100",
 		FireASAP = true,
 		MinProgress = 0.93,
+		RefillProgress = 22/30,
 		EventTable = {
 			{s =  path .. "magout.ogg",   t = 13 / 30},  
 			{s =  path .. "magin.ogg",   t = 50 / 30},     
@@ -503,6 +510,7 @@ SWEP.Animations = {
 		FireASAP = true,
 		MinProgress = 0.95,
 		MagSwapTime = 30/30,
+		RefillProgress = 16/30,
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
 		{ t = 0.1, lhik = 0, rhik = 0, }, { t = 0.8, lhik = 0, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 0, },
