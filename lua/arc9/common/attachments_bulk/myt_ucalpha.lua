@@ -1309,6 +1309,14 @@ ATT.HeatDelayTimeMult = 1.15
 ATT.HeatDissipationMult = 0.75
 ATT.HeatPerShotMult = 33/25
 
+ATT.Element = {
+    AttPosMods = {
+        [3] = { -- slot index
+            Pos = Vector(0, -0.1, 5.8),
+        }
+    }
+}
+
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_barrel_long")
 
 ----------------------------------------------------------------------------------

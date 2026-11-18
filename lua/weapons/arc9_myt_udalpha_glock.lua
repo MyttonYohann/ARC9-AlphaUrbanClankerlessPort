@@ -378,6 +378,7 @@ SWEP.Animations = {
 	},
 	["holster"] = {
 		Source = "holster",
+		IKTimeLine = {	{ t = 0, lhik = 1, rhik = 1, },{ t = 0.4, lhik = 0, rhik = 1, },{ t = 1, lhik = 1, rhik = 1, },},
 	},
 	["holster_empty"] = {
 		Source = "holster_empty",
@@ -568,7 +569,7 @@ SWEP.AttachmentElements = {
 	
 	["i_tac"] = 	{ Bodygroups = { {5, 2}, },},
 	["b_vent"] = 	{ Bodygroups = { {6, 1}, },},
-	["b_long"] = 	{ Bodygroups = { {6, 2}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.1, 5.8), } }	},
+	["b_long"] = 	{ Bodygroups = { {6, 2}, },},
 }
 
 
@@ -577,7 +578,9 @@ SWEP.Hook_ModifyBodygroups = function(wep, data)
 	if wep:HasElement("rail_def") then model:SetBodygroup(2,1) end	
 	if wep:HasElement("s_26") then model:SetBodygroup(5,1) end	
 	if wep:HasElement("s_26") and wep:HasElement("i_tac") then model:SetBodygroup(5,3) end	
+	if wep:HasElement("s_26") then model:SetBodygroup(6,3) end	
 	if wep:HasElement("s_26") and wep:HasElement("b_vent") then model:SetBodygroup(6,4) end	
+	if wep:HasElement("s_26") and wep:HasElement("b_long") then model:SetBodygroup(6,2) end	
 
 	if wep:HasElement("rail_def") and wep:HasElement("i_tac") then model:SetBodygroup(2,0) end	
 end
