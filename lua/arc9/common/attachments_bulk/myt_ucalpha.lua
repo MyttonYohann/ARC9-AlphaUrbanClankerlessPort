@@ -485,6 +485,7 @@ ATT.RTScopeSubmatIndex = 0
 ATT.RTScopeMagnification = 2.5
 ATT.ScopeScreenRatio = 350/1080
 ATT.RTScopeReticle = Material("myt_uc/uc_acog_reticle.png")
+ATT.RTScopeNew_ReticleBlackBox = true
 ATT.RTScopeReticleScale = 1
 ATT.RTScopeColorable = true
 ATT.RTScopeShadowIntensity = 7
