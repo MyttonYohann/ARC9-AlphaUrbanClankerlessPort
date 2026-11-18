@@ -189,7 +189,7 @@ end
 
 SWEP.HeatDissipationHook = function(wep) -- temporarily 'freezes' the heat gauge
 	local heat = wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true)
-	if heat == 1 and wep:Clip1() != 0 then -- empty doesn't have a fix anim
+	if heat == 1 and wep:Clip1() <= 1 then -- empty doesn't have a fix anim, fix removes a bullet
 		return 0
 	end
 
@@ -322,7 +322,8 @@ SWEP.Animations = {
 		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.675, lhik = 0, rhik = 0, },{ t = 0.8, lhik = 1, rhik = 0, },
 		},
 		FireASAP = true, -- pretty sure this doenst work
-		MinProgress = 0.7,
+		MinProgress = 0.5,
+		RestoreAmmo = -1, -- lol
 	},
 	["bash"] = {
 		Source = {"melee", "melee2"},
@@ -591,7 +592,7 @@ SWEP.Attachments = {
 		DefaultIcon = Material("arc9/def_att_icons/optic.png"),
 		Category = {"optic_ucalpha", "eft_optic_medium", "ucalpha_glock_irons", "csgo_optic"},
 		Bone = "glock_parent",
-		Pos = Vector(0, -3.55, 1.9),
+		Pos = Vector(-0.05, -3.55, 1.9),
 		Ang = Angle(90, 0, -90),
 	},
 	{
