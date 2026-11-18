@@ -275,10 +275,8 @@ SWEP.MuzzleEffectQCA = 1
 
 SWEP.ShellModel = "models/shells/shell_9mm.mdl"
 SWEP.ShellCorrectAng = Angle(0, 0, 0)
-SWEP.ShellScale = 0.5
+SWEP.ShellScale = 1
 SWEP.ShellPhysBox = Vector(0.5, 0.5, 2)
-SWEP.NoShellEject = false
-SWEP.NoShellEjectManualAction = true
 
 SWEP.CamQCA = 3
 SWEP.CamOffsetAng = Angle(0, 90, 90)
@@ -322,6 +320,7 @@ SWEP.Animations = {
 		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.675, lhik = 0, rhik = 0, },{ t = 0.8, lhik = 1, rhik = 0, },
 		},
 		FireASAP = true, -- pretty sure this doenst work
+		EjectAt = 17 / 30,
 		MinProgress = 0.5,
 		RestoreAmmo = -1, -- lol
 	},
