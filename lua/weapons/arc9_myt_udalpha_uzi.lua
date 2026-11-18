@@ -365,7 +365,7 @@ SWEP.Animations = {
 			{s = common .. "shoulder.ogg",  t = 30/30},
 		},
 		IKTimeLine = {
-		{ t = 0, lhik = 0, rhik = 0, }, { t = 0.5, lhik = 0, rhik = 0, },{ t = 0.8, lhik = 1, rhik = 1, },
+		{ t = 0, lhik = 0, rhik = 0, }, { t = 0.6, lhik = 0, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 1, },
 		},
 		FireASAP = true,
 		MinProgress = 0.7,
@@ -428,6 +428,20 @@ SWEP.Animations = {
 	}, 
 	["reload_16"] = {
 		Source = "reload_16",
+		FireASAP = true,
+		MinProgress = 0.93,
+		RefillProgress = 18/30,
+		EventTable = {
+			{s =  path .. "magout.ogg",   t = 10 / 30},  
+			{s =  path .. "magin.ogg",   t = 21 / 30},   
+		},
+		IKTimeLine = {
+		{ t = 0, lhik = 1, rhik = 0, },
+		{ t = 0.2, lhik = 0, rhik = 0, }, { t = 0.7, lhik = 0, rhik = 0, },{ t = 0.9, lhik = 1, rhik = 0, },
+		},
+	},   
+	["reload_ae"] = {
+		Source = "reload_ae",
 		FireASAP = true,
 		MinProgress = 0.93,
 		RefillProgress = 18/30,
@@ -545,6 +559,7 @@ SWEP.AttachmentElements = {
 	["m_21"] = 		{ Bodygroups = { {2, 1}, },},
 	["m_42"] = 		{ Bodygroups = { {2, 2}, },},
 	["m_100"] = 	{ Bodygroups = { {2, 3}, },},
+	["m_ae"] = 		{ Bodygroups = { {2, 5}, },},
 
 	["s_wood"] = 	{ Bodygroups = { {3, 2}, },},
 	["s_poly"] = 	{ Bodygroups = { {3, 3}, },},

@@ -333,7 +333,11 @@ ATT = {}
 ATT.PrintName = [[21" Entrenched Barrel]]
 ATT.CompactName = [[B. Heat]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[bayonaise yo
+ATT.Description = [[Heatshield and Bayonet combo like back in the war. Bayonet adds quite a lot of length in exchange for faster and greater melee damage.
+
+Gains the ability to bash whilst sprinting.
+Bashing loses knockback.
+Sprint bash deals quadruple damage.
 ]]
 
 ATT.SortOrder = 2
@@ -374,12 +378,21 @@ ATT = {}
 ATT.PrintName = [[26" Competition Barrel]]
 ATT.CompactName = [[B. Comp]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[longest john
+ATT.Description = [[Hardened long barrel designed for target shooting. Has a reduced rate of fire in favour of better range.
 ]]
 
 ATT.SortOrder = 3
 ATT.Category = "ucalpha_1014_barrel"
 ATT.ActivateElements = {"b_2"}
+
+ATT.SpreadMult = 0.85
+ATT.RecoilMult = 0.9
+ATT.RangeMinMult = 2
+ATT.RangeMaxMult = 1.2
+
+ATT.SwayMult = 1.2
+ATT.AimDownSightsTimeMult = 1.1
+ATT.RPMMult = 180/220
 
 ATT.BarrelLengthAdd = 4
 
@@ -1357,6 +1370,31 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_mag_21")
 ----------------------------------------------------------------------------------
 ATT = {}
 
+ATT.PrintName = [[16-Round .41 Action Express Mag]]
+ATT.CompactName = [[M. 21]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[i misread something
+]]
+
+ATT.SortOrder = 16
+ATT.Category = "ucalpha_uzi_mag"
+ATT.ActivateElements = {"m_ae"}
+ATT.ClipSize = 16
+
+ATT.DamageMaxMult = 1.5
+ATT.DamageMinMult = 1.25
+ATT.RPMMult = 0.75
+
+ATT.Hook_TranslateAnimation = function(wep, curanim)
+	if	curanim == "reload" 		then	return "reload_ae"	end
+	if	curanim == "reload_empty"	then	return "reload_empty_16"	end	
+end
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_mag_ae")
+
+----------------------------------------------------------------------------------
+ATT = {}
+
 ATT.PrintName = [[42-Round Mag]]
 ATT.CompactName = [[M. 42]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
@@ -1406,13 +1444,21 @@ ATT = {}
 ATT.PrintName = [[Patrol]]
 ATT.CompactName = [[F. Patrol]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[slong
+ATT.Description = [[Elongated barrel and wooden handguard kit. Substantially improves range and recoil, at the cost of firerate.
 ]]
 
 ATT.SortOrder = 3
 ATT.Category = "ucalpha_uzi_frame"
 ATT.ActivateElements = {"f_patrol"}
 ATT.RPMMult = 400/600
+
+ATT.SpreadMult = 0.5
+ATT.RecoilMult = 0.75
+ATT.RangeMinMult = 1.25
+ATT.RangeMaxMult = 1.5
+
+ATT.SwayMult = 2
+ATT.AimDownSightsTimeMult = 1.25
 
 ATT.HeatDelayTimeMult = 0.9
 ATT.HeatDissipationMult = 0.9
@@ -1461,13 +1507,28 @@ ATT = {}
 ATT.PrintName = [[Micro]]
 ATT.CompactName = [[F. Micro]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[
+ATT.Description = [[Extremely compact frame with a significant increase to firerate. It is considered a true machine pistol.
+
+Gains the ability to bash whilst sprinting.
+Bashing loses knockback.
+Bashing gains a chance to disarm.
 ]]
 
 ATT.SortOrder = 1
 ATT.Category = "ucalpha_uzi_frame"
 ATT.ActivateElements = {"f_micro", "pistol_length"}
 ATT.RPMMult = 1200/600
+
+ATT.SpreadMult = 1.5
+ATT.RecoilUpMult = 3
+ATT.RecoilSideMult = 1.25
+ATT.RangeMinMult = 0.5
+ATT.RangeMaxMult = 0.5
+
+ATT.SwayMult = 2
+ATT.AimDownSightsTimeMult = 0.85
+
+ATT.BarrelLengthAdd = -8
 
 ATT.LHIK = true
 ATT.LHIK_Priority = 0.01
