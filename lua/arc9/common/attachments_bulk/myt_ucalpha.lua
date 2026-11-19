@@ -333,11 +333,11 @@ ATT = {}
 ATT.PrintName = [[21" Entrenched Barrel]]
 ATT.CompactName = [[B. Heat]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[Heatshield and Bayonet combo like back in the war. Bayonet adds quite a lot of length in exchange for faster and greater melee damage.
+ATT.Description = [[Heatshield and Bayonet combo like back in the war. Adds quite a lot of length in exchange for faster and greater melee damage.
 
-Gains the ability to bash whilst sprinting.
-Bashing loses knockback.
-Sprint bash deals quadruple damage.
+Gains the ability to <color=255,200,100>bash whilst sprinting</color>.
+Bashing <color=255,100,100>loses knockback</color>.
+Sprint bash deals <color=255,200,100>quadruple</color> damage.
 ]]
 
 ATT.SortOrder = 2
@@ -1386,6 +1386,9 @@ ATT.DamageMinMult = 1.25
 ATT.RPMMult = 0.75
 ATT.SpreadMult = 1.1
 ATT.RecoilMult = 1.25
+ATT.HeatDelayTimeMult = 0.75
+ATT.HeatDissipationMult = 0.75
+ATT.HeatPerShotMult = 2
 
 ATT.Hook_TranslateAnimation = function(wep, curanim)
 	if	curanim == "reload" 		then	return "reload_ae"	end
@@ -1511,9 +1514,9 @@ ATT.CompactName = [[F. Micro]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[Extremely compact frame with a significant increase to firerate. It is considered a true machine pistol.
 
-Gains the ability to bash whilst sprinting.
-Bashing loses knockback.
-Bashing gains a chance to disarm.
+Gains the ability to <color=255,200,100>bash whilst sprinting</color>.
+Bashing <color=255,100,100>loses knockback</color>.
+Bashing gains a <color=255,200,100>chance to disarm</color>.
 ]]
 
 ATT.SortOrder = 1
@@ -1556,7 +1559,7 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_frame_micro")
 
 ----------------------------------------------------------------------------------
 ----------------
--- Frame --
+-- Stock --
 ----------------
 ----------------------------------------------------------------------------------
 
@@ -1571,6 +1574,8 @@ ATT.Description = [[
 ATT.SortOrder = 3
 ATT.Category = "ucalpha_uzi_stock"
 ATT.ActivateElements = {"s_wood"}
+
+ATT.BashDamageMult = 1.35
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_stock_wood")
 
