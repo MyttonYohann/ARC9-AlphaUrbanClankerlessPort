@@ -1371,7 +1371,7 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_mag_21")
 ATT = {}
 
 ATT.PrintName = [[16-Round .41 Action Express Mag]]
-ATT.CompactName = [[M. 21]]
+ATT.CompactName = [[M. AE]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[i misread something
 ]]
@@ -1384,6 +1384,8 @@ ATT.ClipSize = 16
 ATT.DamageMaxMult = 1.5
 ATT.DamageMinMult = 1.25
 ATT.RPMMult = 0.75
+ATT.SpreadMult = 1.1
+ATT.RecoilMult = 1.25
 
 ATT.Hook_TranslateAnimation = function(wep, curanim)
 	if	curanim == "reload" 		then	return "reload_ae"	end
@@ -1450,7 +1452,7 @@ ATT.Description = [[Elongated barrel and wooden handguard kit. Substantially imp
 ATT.SortOrder = 3
 ATT.Category = "ucalpha_uzi_frame"
 ATT.ActivateElements = {"f_patrol"}
-ATT.RPMMult = 400/600
+ATT.RPMMult = 500/600
 
 ATT.SpreadMult = 0.5
 ATT.RecoilMult = 0.75

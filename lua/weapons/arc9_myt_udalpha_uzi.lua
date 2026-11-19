@@ -448,6 +448,7 @@ SWEP.Animations = {
 		EventTable = {
 			{s =  path .. "magout.ogg",   t = 10 / 30},  
 			{s =  path .. "magin.ogg",   t = 21 / 30},   
+			{s =  path_glock .. "magtap.ogg",   t = 42 / 30},   
 		},
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
