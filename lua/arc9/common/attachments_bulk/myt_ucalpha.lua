@@ -13,7 +13,7 @@ local ATT = {}
 ----------------
 ATT = {}
 
-ATT.PrintName = [[Nightprowler]]
+ATT.PrintName = [[Nightprowler Forend]]
 ATT.CompactName = [[F. PumpP]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[actual super 90
@@ -63,7 +63,7 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_pump_poly")
 
 ATT = {}
 
-ATT.PrintName = [[Woodsman]]
+ATT.PrintName = [[Woodsman Forend]]
 ATT.CompactName = [[F. PumpW]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[woo
@@ -93,7 +93,7 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_pump_wood")
 
 ATT = {}
 
-ATT.PrintName = [[Spasm]]
+ATT.PrintName = [[Dual Forend]]
 ATT.CompactName = [[F. SPAS]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[how
@@ -133,7 +133,7 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_pump_spas")
 
 ATT = {}
 
-ATT.PrintName = [[Railed]]
+ATT.PrintName = [[Railed Forend]]
 ATT.CompactName = [[F. Railed]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[get railed stupid
@@ -149,7 +149,7 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_pump_rail")
 
 ATT = {}
 
-ATT.PrintName = [[Wood]]
+ATT.PrintName = [[Wooden Forend]]
 ATT.CompactName = [[F. Wood]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[
@@ -167,7 +167,7 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_fe_wood")
 ----------------
 ATT = {}
 
-ATT.PrintName = [[Polymer]]
+ATT.PrintName = [[Polymer Stock]]
 ATT.CompactName = [[S. Polymer]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[Polyamourous
@@ -191,7 +191,7 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_stock_poly")
 
 ATT = {}
 
-ATT.PrintName = [[Woodsman]]
+ATT.PrintName = [[Woodsman Stock]]
 ATT.CompactName = [[S. Wood]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[tree
@@ -245,7 +245,7 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_1014_stock_heavy")
 
 ATT = {}
 
-ATT.PrintName = [[Heavy Wood Stock]]
+ATT.PrintName = [[Heavy Wooden Stock]]
 ATT.CompactName = [[S. HeavyW]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
 ATT.Description = [[
@@ -337,7 +337,7 @@ ATT.Description = [[Heatshield and Bayonet combo like back in the war. Adds quit
 
 Gains the ability to <color=255,200,100>bash whilst sprinting</color>.
 Bashing <color=255,100,100>loses knockback</color>.
-Sprint bash deals <color=255,200,100>quadruple</color> damage.
+Sprint Bash deals <color=255,200,100>quadruple</color> damage.
 ]]
 
 ATT.SortOrder = 2
@@ -1105,10 +1105,10 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_ammo_sg_frag")
 ----------------
 ATT = {}
 
-ATT.PrintName = [[Cyclone]]
+ATT.PrintName = [[Cyclone Slide]]
 ATT.CompactName = [[S. Auto]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[w speed
+ATT.Description = [[Automatic slide configuration capable of a very high rate of fire.
 ]]
 
 ATT.SortOrder = 1
@@ -1134,10 +1134,10 @@ ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_slide_auto")
 
 ATT = {}
 
-ATT.PrintName = [[Vented]]
+ATT.PrintName = [[Vented Slide]]
 ATT.CompactName = [[S. Vented]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[
+ATT.Description = [[Side vented custom slide. Improves firerate and straightens recoil.
 ]]
 
 ATT.SortOrder = 2
@@ -1146,21 +1146,39 @@ ATT.ActivateElements = {"s_vent"}
 ATT.RPMMult = 600/400
 ATT.HeatPerShotMult = 0.8
 
+ATT.RecoilUpMult = 1.1
+ATT.RecoilSideMult = 0.75
+
+ATT.SwayMult = 0.75
+ATT.AimDownSightsTimeMult = 0.95
+
+ATT.BarrelLengthAdd = -4
+
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_slide_vent")
 
 ----------------------------------------------------------------------------------
 
 ATT = {}
 
-ATT.PrintName = [[Compact]]
+ATT.PrintName = [[Compact Slide]]
 ATT.CompactName = [[S. G26]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[
+ATT.Description = [[Popular for concealed carry. Reduced length means less holster to clear and improved handling, but more muzzle rise and terrible effective range.
 ]]
 
 ATT.SortOrder = 3
 ATT.Category = "ucalpha_glock_slide"
 ATT.ActivateElements = {"s_26"}
+
+ATT.SpreadMult = 1.5
+ATT.RecoilMult = 1.25
+ATT.RangeMinMult = 0.75
+ATT.RangeMaxMult = 0.75
+
+ATT.SwayMult = 0.75
+ATT.AimDownSightsTimeMult = 0.85
+
+ATT.BarrelLengthAdd = -4
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_slide_compact")
 
@@ -1175,7 +1193,7 @@ ATT = {}
 ATT.PrintName = [[10-Round Mag]]
 ATT.CompactName = [[M. 10]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[
+ATT.Description = [[Low-capacity magazine with a shorter magwell. The lighter load makes the weapon even more ergonomic.
 ]]
 
 ATT.SortOrder = 10
@@ -1188,6 +1206,10 @@ ATT.Hook_TranslateAnimation = function(wep, curanim)
 	if	curanim == "reload_empty"	then	return "reload_empty_10"	end	
 end
 
+ATT.RecoilMult = 1.1
+ATT.SwayMult = 0.9
+ATT.AimDownSightsTimeMult = 0.9
+
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_mag_10")
 
 ----------------------------------------------------------------------------------
@@ -1197,7 +1219,7 @@ ATT = {}
 ATT.PrintName = [[33-Round Mag]]
 ATT.CompactName = [[M. 33]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[
+ATT.Description = [[Extended stick magazine. Heavier and throws off weapon balance, but does allow you to fire for longer.
 ]]
 
 ATT.SortOrder = 33
@@ -1210,6 +1232,8 @@ ATT.Hook_TranslateAnimation = function(wep, curanim)
 	if	curanim == "reload_empty"	then	return "reload_empty_33"	end	
 end
 
+ATT.SwayMult = 1.5
+
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_mag_33")
 
 ----------------------------------------------------------------------------------
@@ -1219,7 +1243,7 @@ ATT = {}
 ATT.PrintName = [[21-Round Mag]]
 ATT.CompactName = [[M. 21]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[
+ATT.Description = [[Custom extended magazine, jam a few more rounds in with minimal drawbacks.
 ]]
 
 ATT.SortOrder = 21
@@ -1227,6 +1251,7 @@ ATT.Category = "ucalpha_glock_mag"
 ATT.ActivateElements = {"m_21"}
 ATT.ClipSize = 21
 ATT.ReloadTimeMult = 1.1
+ATT.SwayMult = 1.2
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_glock_mag_21")
 
@@ -1237,7 +1262,7 @@ ATT = {}
 ATT.PrintName = [[100-Round Mag]]
 ATT.CompactName = [[M. 100]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[ballsack shredder
+ATT.Description = [[Twin-drum magazine ideal for suppressive fire. Bulky construction and high ammo capacity substantially increases weight and shifts the weapon's centre of balance.
 ]]
 
 ATT.SortOrder = 100
@@ -1256,6 +1281,10 @@ ATT.LHIK_Priority = 0.01
 ATT.Scale = 1
 ATT.ModelOffset = Vector(-18.8, -2, 6.8)
 ATT.ModelAngleOffset = Angle(0, 0, 0)
+
+ATT.SpeedMult = 0.95
+ATT.SwayMult = 3
+ATT.AimDownSightsTimeMult = 1.2
 
 ATT.Model = "models/weapons/arc9/myt_uc/atts/c_mini_100_lhik.mdl"
 
@@ -1288,9 +1317,9 @@ ATT = {}
 ATT.PrintName = [[Vented Barrel]]
 ATT.CompactName = [[B. Vented]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[auter
+ATT.Description = [[Compensator cuts allow heat to regulate. Worsens horizontal recoil
 
-vented barrel can't be audiably suppressed
+Vented barrel <color=255,100,100>cannot be audiably suppressed</color>.
 ]]
 
 ATT.SortOrder = 1
@@ -1299,6 +1328,7 @@ ATT.ActivateElements = {"b_vent"}
 
 ATT.ShootSoundSilenced = "arc9_ucalpha/glock/fire.ogg"
 ATT.Silencer = false
+ATT.RecoilSideMult = 1.5
 
 ATT.HeatDelayTimeMult = 0.75
 ATT.HeatDissipationMult = 2
@@ -1312,7 +1342,7 @@ ATT = {}
 ATT.PrintName = [[Long Barrel]]
 ATT.CompactName = [[B. Long]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[shlongson
+ATT.Description = [[Extraordinarily long extended barrel.
 ]]
 
 ATT.SortOrder = 2
@@ -1323,6 +1353,14 @@ ATT.HeatDelayTimeMult = 1.15
 ATT.HeatDissipationMult = 0.75
 ATT.HeatPerShotMult = 33/25
 
+ATT.RecoilSideMult = 0.8
+ATT.SpreadMult = 0.25
+ATT.RangeMinMult = 3
+ATT.RangeMaxMult = 3
+
+ATT.SwayMult = 2
+ATT.AimDownSightsTimeMult = 1.75
+ATT.BarrelLengthAdd = 32
 ATT.Element = {
     AttPosMods = {
         [3] = { -- slot index
@@ -1382,7 +1420,7 @@ ATT.ActivateElements = {"m_ae"}
 ATT.ClipSize = 16
 
 ATT.DamageMaxMult = 1.5
-ATT.DamageMinMult = 1.25
+ATT.DamageMinMult = 2
 ATT.RPMMult = 0.75
 ATT.SpreadMult = 1.1
 ATT.RecoilMult = 1.25
@@ -1515,11 +1553,12 @@ ATT = {}
 ATT.PrintName = [[Micro]]
 ATT.CompactName = [[F. Micro]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[Extremely compact frame with a significant increase to firerate. It is considered a true machine pistol.
+ATT.Description = [[Extremely compact frame with a significant increase to firerate. It is considered pistol-length.
 
 Gains the ability to <color=255,200,100>bash whilst sprinting</color>.
 Bashing <color=255,100,100>loses knockback</color>.
 Bashing gains a <color=255,200,100>chance to disarm</color>.
+Sprint Bash deals <color=255,200,100>double</color> damage.
 ]]
 
 ATT.SortOrder = 1
@@ -1533,7 +1572,7 @@ ATT.RecoilSideMult = 1.25
 ATT.RangeMinMult = 0.5
 ATT.RangeMaxMult = 0.5
 
-ATT.SwayMult = 2
+ATT.SwayMult = 0.9
 ATT.AimDownSightsTimeMult = 0.85
 
 ATT.BarrelLengthAdd = -8
@@ -1548,7 +1587,7 @@ ATT.PreBashTime = 0.25
 ATT.PostBashTime = 0.5
 ATT.Model = "models/weapons/arc9/myt_uc/atts/c_mini_lhik.mdl"
 ATT.DrawFunc = function(swep, model) 
-	if swep:GetElements()["m_100"] then
+	if swep:GetElements()["m_100"] then -- ball sack has a different grip, im pretty sure this was in arccw too but update broke it or they havent gone insane like me
 		model:SetModel("models/weapons/arc9/myt_uc/atts/c_mini_100_lhik.mdl")
 	else
 		model:SetModel("models/weapons/arc9/myt_uc/atts/c_mini_lhik.mdl")

@@ -3,7 +3,7 @@
 
 ### clankerless port of the PRERELEASE/ALPHA version of the hit ArcCW mod Urban Decay.
 
-with some minor face lifts
+with some minor face lifts, and stupid stuff
 
 This will only entails Decay for the forseeable future, it is very unlikely that I'd port Renewal or even my own one offs (maybe scar).
 
@@ -19,15 +19,16 @@ This will only entails Decay for the forseeable future, it is very unlikely that
  - Actual ghost load animations
 
 **Glock 17**
- - Remove Frame Attachment, G26 Frame is now tie to the 10-Round Mag
+ - Removed Frame Attachment, G26 Frame is now tie to the 10-Round Mag
  - Removed a lot of Slide attachment, but added a new Barrel slot
  - Added a 21-Round Mag attachment
  - 'Backport' (this was unfinished lol) some of Harry's animations like bash and unjam (no shade to Harrimator, and tbf to man, it's unfinished, but i like Partexedd's)
  - New reload anim, 33-Round and 10-Round has altered anim sets, reworked 100-Round's
 
 **UZI**
- - Remove Carbine Barrel, Civvy now has a wooden handguard
+ - Removed Carbine Barrel, Civvy now has a wooden handguard
  - 16-Round is now 21, 41-Round is now 42
+ - Added a high damage 16-Round option
  - Micro Frame does not disable stock attachment
  - New reload anim, with different type of bolt pull depend on mag types
  - Bashing animation, Micro Frame is considered pistol length
@@ -44,7 +45,8 @@ This will only entails Decay for the forseeable future, it is very unlikely that
 **Better/Extended Melee Handling**
  - Bashing whilst sprinting for Bayonet and Pistol
  - Increased damage with sprint bash (mult by 2 for pistol, mult by 4 for bayonet)
- - Non-Pistol and Non-Bayonet melee will push back
+ - Non-Pistol and Non-Bayonet melee will have knockback
+ - Bashing whilst in Nearwall, I have no idea why this wasnt a thing
  
 **Extended Shotgun Handling**
  - Reload when unchambered plays a different set depending on if the tube has ammo and if the chamber is loaded, it's a bit like hunt showdown
@@ -56,7 +58,7 @@ This will only entails Decay for the forseeable future, it is very unlikely that
  - Uses Left 4 Dead 2 (with a lot of initial facelift by sirgibsalot) assets again
  - Uses the old sounds rzenith made like pre covid
  - Calibre Slot is removed
- - ReloadInSIght is removed, mate im lazy tbh, i edit A LOT of animations
+ - ReloadInSIght is removed, mate im lazy tbh, i edited A LOT of animations
  - Dragon Breath can be used on every type of shotgun but it will force the gun to be manual action (the m1014 even has its own anim set !)
  - Zipties ! Magical floating rails begone
 
