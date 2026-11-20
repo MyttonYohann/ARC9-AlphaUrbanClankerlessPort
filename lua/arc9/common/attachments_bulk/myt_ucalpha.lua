@@ -1389,6 +1389,9 @@ ATT.RecoilMult = 1.25
 ATT.HeatDelayTimeMult = 0.75
 ATT.HeatDissipationMult = 0.75
 ATT.HeatPerShotMult = 2
+ATT.PenetrationMult = 5
+ATT.FirstShootSound = "arc9_ucalpha/uzi/fire_ae.ogg"
+ATT.ShootSound = "arc9_ucalpha/uzi/fire_ae.ogg"
 
 ATT.Hook_TranslateAnimation = function(wep, curanim)
 	if	curanim == "reload" 		then	return "reload_ae"	end
