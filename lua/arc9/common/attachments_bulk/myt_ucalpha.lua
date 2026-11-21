@@ -350,14 +350,38 @@ ATT.BashLungeRange = 0
 ATT.BashRange = 124
 ATT.PreBashTime = 0.05
 ATT.PostBashTime = 0.4
+ATT.HoldTypeSprint = "physgun"
 
 ATT.Hook_TranslateAnimation = function(wep, curanim)
 	if	curanim == "bash" and !wep:GetUBGL()	then	return "bash_bayo"		end
 end
 
+local function sprintcheck(self)
+    local owner = self:GetOwner()
+
+    if !owner:IsValid() or owner:IsNPC() then
+        return false
+    end
+    if owner:KeyDown(IN_ATTACK2) then return end
+
+    if self:GetInSights() then return false end
+    if self:GetCustomize() then return false end
+    if !owner:KeyDown(IN_SPEED) then return false end
+    if !owner:OnGround() or owner:GetMoveType() == MOVETYPE_NOCLIP then return false end
+    if !owner:KeyDown(IN_FORWARD + IN_BACK + IN_MOVELEFT + IN_MOVERIGHT) then return false end
+    if !owner:IsSprinting() then return false end
+    if owner.GetSliding and owner:GetSliding() then return false end
+    if owner:Crouching() then return false end
+	if self:GetUBGL() then return false end
+
+    if (self:GetAnimLockTime() > CurTime()) and self:GetProcessedValue("NoSprintWhenLocked", true) then
+        return false
+    end
+    return true
+end
+
 ATT.BashDamageHook = function(wep, dmg)
-	--if wep:GetOwner():KeyDown(IN_SPEED) and wep:GetOwner():KeyDown(IN_FORWARD + IN_BACK + IN_MOVELEFT + IN_MOVERIGHT) and !wep:GetUBGL() then
-	if wep:GetIsSprinting() and !wep:GetUBGL() then -- this does the same thing
+	if sprintcheck(wep) then
 		return dmg * 4
 	end
 end
@@ -532,7 +556,7 @@ local rpg_mech = rpg_path .. "mech-01.ogg", rpg_path .. "mech-02.ogg", rpg_path 
 ATT.PrintName = [[Sawnoff RPG]]
 ATT.CompactName = "RPG"
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[Real
+ATT.Description = [[Sawnoff and ziptied to a piece of clamp. Still a grenade innit. Causes devastating effect to yourself when firing.
 ]]
 ATT.Pros = {}
 ATT.Cons = {}
@@ -599,7 +623,7 @@ ATT.Hook_TranslateAnimation = function(wep, curanim)
 		if	curanim == "holster_ubgl"			then	return "holster_ubgl_empty"			end
 		if	curanim == "enter_ubgl" 			then	return "enter_ubgl_glempty"			end
 	end
-	-- new ubgl update bodge
+	-- new ubgl update bodge, they fixed it but i forgot which is the bodge
 	if wep:Clip1() == 0 and wep:Clip2() != 0	then	-- well realistically need only check for if clip2 not empty
 		if	curanim == "idle_ubgl_glempty" 		then	return "idle_ubgl"		end
 		if	curanim == "fire_ubgl_empty" 		then	return "fire_ubgl"		end	
@@ -699,15 +723,6 @@ ATT.PostBashTimeUBGL = 0.4
 
 ARC9.LoadAttachment(ATT, "myt_ucalpha_ubgl_rpg")
 
-
-
-
-
-
-
-
-
-
 ----------------------------------------------------------------------------------
 
 -----------
@@ -719,7 +734,7 @@ ATT = {}
 ATT.PrintName = [["DRGN" Dragon's Breath]]
 ATT.CompactName = [[A. DRGN]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[Novelty magnesium-based round that projects a spectacular jet of sparks and fire. Burning at over 3,000 °F, the blast isn't immediately lethal, but can easily set objects and people ablaze.
+ATT.Description = [[Novelty magnesium-based round that projects a spectacular jet of sparks and fire. Burning at over 1,800 °C, the blast isn't immediately lethal, but can easily set objects and people ablaze.
 
 Only compatible with manual action or forced manual cycle converted shotguns due to a weak pressure curve.]]
 
@@ -931,7 +946,7 @@ ATT = {}
 ATT.PrintName = [[Overloaded Buckshot]]
 ATT.CompactName = [[A. Overload]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[Buckshot with more gunpowder and pellets than usual
+ATT.Description = [[Buckshot with more gunpowder and pellets than usual.
 
 Only compatible with manual action or forced manual cycle converted shotguns due to a weak pressure curve.]]
 
@@ -958,7 +973,7 @@ ATT = {}
 ATT.PrintName = [[Explosive Slug]]
 ATT.CompactName = [[A. Frag]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[Single volatile pellet
+ATT.Description = [[Single volatile pellet with explosive property.
 
 Only compatible with manual action or forced manual cycle converted shotguns due to a weak pressure curve.]]
 
@@ -1071,8 +1086,6 @@ ATT.Hook_PhysBulletImpact = function(wep, data)
 		spark:SetCollide(false)
 		spark:SetBounce(0.8)
 	end
-
-	--sound.Play("^weapons/shotgun/shotgun_dbl_fire.wav", data.tr.HitPos, 95, 145, 0.7)
 
 	emitter:Finish()
 end
@@ -1219,7 +1232,7 @@ ATT = {}
 ATT.PrintName = [[33-Round Mag]]
 ATT.CompactName = [[M. 33]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[Extended stick magazine. Heavier and throws off weapon balance, but does allow you to fire for longer.
+ATT.Description = [[Extended stick magazine. Heavier and throws off weapon balance, but does allow for longer firing.
 ]]
 
 ATT.SortOrder = 33
@@ -1390,7 +1403,7 @@ ATT = {}
 ATT.PrintName = [[21-Round Mag]]
 ATT.CompactName = [[M. 21]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[
+ATT.Description = [[Low-capacity flush magazine increases ergonomic.
 ]]
 
 ATT.SortOrder = 21
@@ -1411,7 +1424,9 @@ ATT = {}
 ATT.PrintName = [[16-Round .41 Action Express Mag]]
 ATT.CompactName = [[M. AE]]
 ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
-ATT.Description = [[i misread something
+ATT.Description = [[High power calibre configuration.
+
+i misread something
 ]]
 
 ATT.SortOrder = 16

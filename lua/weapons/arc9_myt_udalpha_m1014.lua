@@ -162,11 +162,17 @@ SWEP.ShootWhileSprintHook = function(self)
 		return false
 	end
 end
+
 SWEP.BashWhileSprintHook = function(self)
 	if !self:HasElement("has_bayonet") then -- only sprint bash with bayonet
 		return false
 	end
 end
+
+SWEP.DynamicConditions = {
+    ["Recoil"] = true,
+    ["ShootWhileSprint"] = true,
+}
 
 SWEP.Hook_BashHit = function(self, data)
 	local ent = data.tr.Entity

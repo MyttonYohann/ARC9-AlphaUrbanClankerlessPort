@@ -350,25 +350,26 @@ SWEP.AttachmentElements = {
 	["s_2"] = 	{ Bodygroups = { {2, 2}, },},   
 	
 	["b_alofs"] = 	{ Bodygroups = { {6, 1}, },},   
-	["b_short"] = 	{ Bodygroups = { {3, 1}, },},   
+	["b_short"] = 	{ Bodygroups = { {3, 1}, },	AttPosMods = { [1] = { Pos = Vector(0, -3.55, 0), } }	},
 
 	["fg_def"] = 	{ Bodygroups = { {5, 1}, },}, 
 	["rail_def"] = 	{ Bodygroups = { {4, 1}, },},   
 
-	["b_1"] = 	{ Bodygroups = { {1, 3}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 28.5), } }		},
-	["b_2"] = 	{ Bodygroups = { {1, 2}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 32.5), } }		},
-	["b_3"] = 	{ Bodygroups = { {1, 1}, },	AttPosMods = { [3] = { Pos = Vector(0, -0.5, 17.5), } }		},
 }
 
 SWEP.Hook_ModifyBodygroups = function(wep, data)
 	local model = data.model  
+
+	if wep:HasElement("b_short") then model:SetBodygroup(3,1) end
+	if wep:HasElement("s_1") and !wep:HasElement("b_short") then model:SetBodygroup(3,2) end
+
 	-- ziptied
 	if wep:HasElement("rail_def") then model:SetBodygroup(7,1) end
 	if wep:HasElement("fg_def") then model:SetBodygroup(7,2) end
 	if wep:HasElement("fg_def") and wep:HasElement("rail_def") then model:SetBodygroup(7,3) end
-	
-	if wep:HasElement("b_short") then model:SetBodygroup(3,1) end
-	if wep:HasElement("s_1") and !wep:HasElement("b_short") then model:SetBodygroup(3,2) end
+
+	if wep:HasElement("rail_def") and  wep:HasElement("b_short") then model:SetBodygroup(4,2) end
+	if wep:HasElement("rail_def") and  wep:HasElement("b_short") then model:SetBodygroup(7,8) end
 
 	if wep:HasElement("b_alofs") then model:SetBodygroup(7,4) end
 	if wep:HasElement("b_alofs") and wep:HasElement("rail_def") then model:SetBodygroup(7,5) end

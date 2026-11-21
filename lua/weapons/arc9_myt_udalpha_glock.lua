@@ -151,6 +151,10 @@ SWEP.PreBashTime = 0.25
 SWEP.PostBashTime = 0.55
 SWEP.BashWhileSprint = true
 SWEP.ShootWhileSprint = true
+SWEP.DynamicConditions = {
+    ["Recoil"] = true,
+    ["ShootWhileSprint"] = true,
+}
 -- you cant fucking use bashwhilespring WITHOUT shootwhilesprint
 SWEP.ShootWhileSprintHook = function(self)
 	if !self:GetOwner():KeyDown(IN_USE) then

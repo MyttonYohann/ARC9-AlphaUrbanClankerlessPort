@@ -151,6 +151,10 @@ SWEP.PostBashTime = 0.4
 SWEP.BashWhileSprint = true
 SWEP.ShootWhileSprint = false
 -- you cant fucking use bashwhilespring WITHOUT shootwhilesprint
+SWEP.DynamicConditions = {
+    ["Recoil"] = true,
+    ["ShootWhileSprint"] = true,
+}
 SWEP.ShootWhileSprintHook = function(self)
 	-- sprint bash, only for pistol length
 	if !self:GetOwner():KeyDown(IN_USE) and self:HasElement("pistol_length") then
@@ -166,7 +170,7 @@ end
 
 SWEP.Overheat = true
 SWEP.HeatPerShot = 1/38
-SWEP.HeatDelayTime = 0.2
+SWEP.HeatDelayTime = 0.5
 SWEP.HeatDissipation = 0.4
 SWEP.HeatFix = false
 SWEP.HeatLockout = false
@@ -214,9 +218,12 @@ local function OverHeatFire(wep, owner)
 	if not IsValid(owner) then return end
  
 	local vm = owner:GetViewModel()
+	local wpos = owner:GetPos()
+	local pos = owner:EyePos()
+
 	local fire = ents.Create("arc9_ucalpha_fire_small")
-			fire:SetPos( vm:GetAttachment(2).Pos + wep:GetForward() * 0 + wep:GetUp() * 60 + wep:GetRight() * -1 )
-			SafeRemoveEntityDelayed(fire, 0.2)	 
+	fire:SetPos( vm:GetAttachment(2).Pos + wep:GetForward() * 0 + (wep:GetUp() * (pos:Distance(wpos))) + wep:GetRight() * -1 )
+	SafeRemoveEntityDelayed(fire, 0.2)	 
 end
 
 SWEP.Hook_Think = function(wep)
@@ -242,12 +249,22 @@ SWEP.Hook_Think = function(wep)
 	end
 end
 
+SWEP.Hook_Draw = function(self, vm)
+	local heat = wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true)
+	
+	if heat < self.HeatCap then
+
+	end
+end
 
 
 
-
-
-
+SWEP.RPMHook = function(wep, stat)
+	local heat = wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true)
+	if wep.RPM > 600 then
+		return Lerp(heat, stat, stat * 0.5)
+	end
+end
 
 SWEP.HeatDissipationHook = function(wep) -- temporarily 'freezes' the heat gauge
 	local heat = wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true)
