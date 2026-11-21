@@ -154,7 +154,7 @@ SWEP.SpeedMultCrouch = 1
 SWEP.Bash = true
 SWEP.PrimaryBash = false
 
-SWEP.BashDamage = 20
+SWEP.BashDamage = 30
 SWEP.BashLungeRange = 0
 SWEP.BashRange = 80
 SWEP.PreBashTime = 0.18
@@ -166,22 +166,20 @@ SWEP.Hook_BashHit = function(self, data)
 	local ownerpos = self:EyePos()
 	local owner = self:GetOwner()
 	if IsValid(ent) and (ent:IsNPC() or ent:IsPlayer() or ent:IsNextBot()) and !self:GetUBGL() then
-		if !self:HasElement("has_bayonet") then -- bayonet doesn do any of this stuff
-			-- knock back
-			ent:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 1000) + self:GetUp()*(40) )
-			-- flinch, mostly for zombies
+		-- knock back
+		ent:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 1000) + self:GetUp()*(40) )
+		-- flinch, mostly for zombies
+		if ent:IsNPC() then
+			ent:SetSchedule(SCHED_FLINCH_PHYSICS)
+		end
+		-- knock back surrounding npcs, 80 degree angle from the hit position
+		for _,v in ipairs(ents.FindInCone(data.tr.HitPos, owner:EyeAngles():Forward(), self.BashRange * 0.75, math.cos( math.rad( 80 ) ) )) do
+			v:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 500) + self:GetUp()*(30) )
 			if ent:IsNPC() then
 				ent:SetSchedule(SCHED_FLINCH_PHYSICS)
 			end
-			-- knock back surrounding npcs, 80 degree angle from the hit position
-			for _,v in ipairs(ents.FindInCone(data.tr.HitPos, owner:EyeAngles():Forward(), self.BashRange * 0.75, math.cos( math.rad( 80 ) ) )) do
-				v:SetVelocity( ((entitypos - ownerpos):GetNormalized() * 500) + self:GetUp()*(30) )
-				if ent:IsNPC() then
-					ent:SetSchedule(SCHED_FLINCH_PHYSICS)
-				end
-			end
-		end			
-	end
+		end
+	end			
 end
 
 -- override main code, for some reason sprint lock determines if you can shoot on nearwall. This lets you melee but not shoot when nearwall
@@ -328,7 +326,9 @@ SWEP.Animations = {
 			{s = common .. "shoulder.ogg",  t = 0.4},
 		},
 		FireASAP = true,
-		MinProgress = 32/40,
+		RefillProgress = 20/30,
+		MinProgress = 27/30,
+		MagSwapTime = 20/30,
 	},  
 	["bash"] = {
 		Source = {"melee"},
@@ -338,8 +338,9 @@ SWEP.Animations = {
 SWEP.Hook_BlockHasAnimation = function (wep, anim) -- use normal bash fuction if in UBGL
 	if anim == "bash" and wep:GetUBGL() then return false end
 end
-SWEP.HideBones = {"1014_shell1"} 
-
+SWEP.BulletBones = {
+    [0] = "m79_grenade",
+}
 -------------------------- ATTACHMENTS
 
 SWEP.DefaultBodygroups = "00000000000000"
@@ -365,6 +366,9 @@ SWEP.Hook_ModifyBodygroups = function(wep, data)
 	if wep:HasElement("rail_def") then model:SetBodygroup(7,1) end
 	if wep:HasElement("fg_def") then model:SetBodygroup(7,2) end
 	if wep:HasElement("fg_def") and wep:HasElement("rail_def") then model:SetBodygroup(7,3) end
+	
+	if wep:HasElement("b_short") then model:SetBodygroup(3,1) end
+	if wep:HasElement("s_1") and !wep:HasElement("b_short") then model:SetBodygroup(3,2) end
 
 	if wep:HasElement("b_alofs") then model:SetBodygroup(7,4) end
 	if wep:HasElement("b_alofs") and wep:HasElement("rail_def") then model:SetBodygroup(7,5) end

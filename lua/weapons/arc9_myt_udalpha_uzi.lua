@@ -170,6 +170,7 @@ SWEP.HeatDelayTime = 0.2
 SWEP.HeatDissipation = 0.4
 SWEP.HeatFix = false
 SWEP.HeatLockout = false
+SWEP.HeatCap = 0.5
 SWEP.Hook_BashHit = function(self, data)
 	local heat = self:GetHeatAmount() / self:GetProcessedValue("HeatCapacity", true)
 	local ownerpos = self:EyePos()
@@ -179,7 +180,7 @@ SWEP.Hook_BashHit = function(self, data)
 	
 	if IsValid(ent) and (ent:IsNPC() or ent:IsPlayer() or ent:IsNextBot()) and !self:GetUBGL() then
 		-- burn damage when overheat
-		if heat >= 0.5 then
+		if heat >= self.HeatCap then
 			ent:Ignite(math.Rand(2, 4))
 		end
 		-- melee disarm, pistol length only
@@ -203,6 +204,50 @@ SWEP.Hook_BashHit = function(self, data)
 		end	
 	end
 end
+
+
+
+
+
+
+local function OverHeatFire(wep, owner)
+	if not IsValid(owner) then return end
+ 
+	local vm = owner:GetViewModel()
+	local fire = ents.Create("arc9_ucalpha_fire_small")
+			fire:SetPos( vm:GetAttachment(2).Pos + wep:GetForward() * 0 + wep:GetUp() * 60 + wep:GetRight() * -1 )
+			SafeRemoveEntityDelayed(fire, 0.2)	 
+end
+
+SWEP.Hook_Think = function(wep)
+	local heat = wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true)
+	local fire = EffectData()
+	local vm = wep.Owner:GetViewModel()
+	
+	if heat < wep.HeatCap then
+		wep.FirstTimeBodge = 0
+	end
+	if heat >= wep.HeatCap then
+		if CLIENT then return end
+		OverHeatFire(wep, wep:GetOwner())
+		if wep.FirstTimeBodge == 0 then
+			wep:EmitSound("ambient/fire/gascan_ignite1.wav", 100, 100, 0.75)
+			wep.FirstTimeBodge = 1
+			fire:SetOrigin( vm:GetAttachment(2).Pos + wep:GetForward() * 0 + wep:GetUp() * 0 + wep:GetRight() * 0)
+			fire:SetMagnitude(5)
+			fire:SetScale(0.5)
+			fire:SetRadius(0.5)
+			util.Effect("Sparks", fire)
+		end
+	end
+end
+
+
+
+
+
+
+
 
 SWEP.HeatDissipationHook = function(wep) -- temporarily 'freezes' the heat gauge
 	local heat = wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true)
@@ -511,7 +556,7 @@ SWEP.Animations = {
 		RefillProgress = 22/30,
 		EventTable = {
 			{s =  path .. "magout.ogg",   t = 13 / 30},  
-			{s =  path .. "magin.ogg",   t = 50 / 30},     
+			{s =  path .. "magin.ogg",   t = 50 / 30},	 
 		},
 		IKTimeLine = {
 		{ t = 0, lhik = 1, rhik = 0, },
@@ -537,11 +582,11 @@ SWEP.Animations = {
 	},  
 }
 SWEP.BulletBones = { -- the bone that represents bullets in gun/mag
-    [0] = "",
-    [1] = {"uzi_b1", "uzi_bb"},
-    [2] = "uzi_b2",
+	[0] = "",
+	[1] = {"uzi_b1", "uzi_bb"},
+	[2] = "uzi_b2",
 }
-SWEP.HideBones = {"uzi_magb"} 
+SWEP.HideBones = {"uzi_magb", "uzi_bb"} 
 
 SWEP.Hook_TranslateAnimation = function(wep, curanim)
 	local heat = wep:GetHeatAmount() / wep:GetProcessedValue("HeatCapacity", true)
