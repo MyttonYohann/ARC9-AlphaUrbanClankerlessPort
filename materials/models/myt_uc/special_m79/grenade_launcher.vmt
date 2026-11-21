@@ -1,0 +1,26 @@
+"VertexLitGeneric"
+{
+	"$basetexture"			"models\myt_uc\special_m79\grenade_launcher_3"
+	"$bumpmap" 			"models\myt_uc\special_m79\grenade_launcher_normal"
+
+//	"$halflambert" 					"1"
+//	"$basemapalphaphongmask" 		"1"
+	"$phong"                        "1"	
+	"$phongalbedotint"              "1"	
+	"$phongexponenttexture"			"models\myt_uc\_detail\exponent"
+	"$phongexponent"                "16"	
+	"$phongboost"                   "20"
+	"$phongfresnelranges"           "[0.75 1.5 3]"
+
+	"$basetexturealphaenvmapmask"	"1"
+	"$envmap"			"env_cubemap"
+	"$envmaptint"			"[0.5 0.5 0.5]"
+	"$envmapfresnel"			"0.5"	
+
+	"$color2"	"[0.9 0.9 0.9]"
+
+	"$detail" "models\myt_uc\_detail\dt_metal1"
+	"$detailscale" "12"
+	"$detailblendfactor" "1"
+	"$detailblendmode" "0"	
+}

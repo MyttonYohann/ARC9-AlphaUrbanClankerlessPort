@@ -1654,3 +1654,83 @@ ATT.ActivateElements = {"s_folded"}
 ARC9.LoadAttachment(ATT, "myt_ucalpha_uzi_stock_folded")
 
 ----------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+--- M79 ---
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+----------------
+-- Barrel --
+----------------
+--------------------------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[Alofs Configuration]]
+ATT.CompactName = [[B. Alofs]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[nope, china lake still too expensive
+]]
+
+ATT.SortOrder = 10
+ATT.Category = "ucalpha_m79_barrel"
+ATT.ActivateElements = {"b_alofs"}
+
+ATT.ClipSize = 3
+ATT.ChamberSize = 1
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_m79_barrel_alofs")
+--------------------------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[Sawnoff Barrel]]
+ATT.CompactName = [[B. Short]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[Penzannce Limited
+]]
+
+ATT.SortOrder = 1
+ATT.Category = "ucalpha_m79_barrel"
+ATT.ActivateElements = {"b_short"}
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_m79_barrel_short")
+--------------------------------------------------------------------------------------------------
+----------------
+-- Stock --
+----------------
+--------------------------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[Polymer Stock]]
+ATT.CompactName = [[S. Poly]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[
+]]
+
+ATT.SortOrder = 2
+ATT.Category = "ucalpha_m79_stock"
+ATT.ActivateElements = {"s_1"}
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_m79_stock_poly")
+--------------------------------------------------------------------------------------------------
+
+ATT = {}
+
+ATT.PrintName = [[Sawnoff Stock]]
+ATT.CompactName = [[B. Short]]
+ATT.Icon = Material("myt_uc/att_blank.png", "mips smooth")
+ATT.Description = [[The Red Admiral
+]]
+
+ATT.SortOrder = 1
+ATT.Category = "ucalpha_m79_stock"
+ATT.ActivateElements = {"s_2"}
+
+ARC9.LoadAttachment(ATT, "myt_ucalpha_m79_stock_short")
